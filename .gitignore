@@ -3,7 +3,7 @@ ignore.md
 # Learning logs
 log/
 
-# Mentor rules & workspace agent customizations
+# rules & workspace agent customizations
 GEMINI.md
 gemini.md
 .agents/
