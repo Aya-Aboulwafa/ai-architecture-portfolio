@@ -3,7 +3,7 @@
 * **Status:** Under Review
 * **Date:** 2026-10-23
 * **Deciders:** Aya Aboulwafa 
-* **Governing Principle:** [AP-02: Robust LLM Guardrails](file:///home/astrid/Projects/ai-architecture-portfolio/docs/architecture-principles.md#ap-02-robust-llm-guardrails--defense-in-depth), [AP-03: Privacy by Design & PDPL](file:///home/astrid/Projects/ai-architecture-portfolio/docs/architecture-principles.md#ap-03-privacy-by-design--pdpl-compliance)
+* **Governing Principle:** [AP-02: Robust LLM Guardrails](../docs/architecture-principles.md#ap-02-robust-llm-guardrails--defense-in-depth), [AP-03: Privacy by Design & PDPL](../docs/architecture-principles.md#ap-03-privacy-by-design--pdpl-compliance)
 
 ---
 

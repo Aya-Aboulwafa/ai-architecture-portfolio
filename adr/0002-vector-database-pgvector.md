@@ -3,7 +3,7 @@
 * **Status:** Under Review
 * **Date:** 2026-10-23
 * **Deciders:** Aya Aboulwafa 
-* **Governing Principle:** [AP-01: Strict User Context Isolation](file:///home/astrid/Projects/ai-architecture-portfolio/docs/architecture-principles.md#ap-01-strict-user-context-isolation), [AP-05: Zero-Trust API Security & Decoupled Architecture](file:///home/astrid/Projects/ai-architecture-portfolio/docs/architecture-principles.md#ap-05-zero-trust-api-security--decoupled-architecture)
+* **Governing Principle:** [AP-01: Strict User Context Isolation](../docs/architecture-principles.md#ap-01-strict-user-context-isolation), [AP-05: Zero-Trust API Security & Decoupled Architecture](../docs/architecture-principles.md#ap-05-zero-trust-api-security--decoupled-architecture)
 
 ---
 

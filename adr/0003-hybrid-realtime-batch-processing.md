@@ -3,7 +3,7 @@
 * **Status:** Under Review
 * **Date:** 2026-10-23
 * **Deciders:** Aya Aboulwafa 
-* **Governing Principle:** [AP-04: Elastic Scalability for Seasonal Campaign Surges](file:///home/astrid/Projects/ai-architecture-portfolio/docs/architecture-principles.md#ap-04-elastic-scalability-for-seasonal-campaign-surges)
+* **Governing Principle:** [AP-04: Elastic Scalability for Seasonal Campaign Surges](../docs/architecture-principles.md#ap-04-elastic-scalability-for-seasonal-campaign-surges)
 
 ---
 
