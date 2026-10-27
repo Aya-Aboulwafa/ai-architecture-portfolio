@@ -1257,36 +1257,35 @@ flowchart TB
 
         <!-- Core Abstract Callout -->
         <div class="callout callout-abstract">
-          <div class="callout-title">💡 الفكرة الجوهرية للـ Session الثانية</div>
+          <div class="callout-title">💡 الفكرة الجوهرية للـ Session التانية</div>
           <p style="margin-bottom: 0;">
-            الانتقال من التخطيط المعماري العام إلى <strong>التصميم الهندسي التفصيلي لمنصة ذكاء اصطناعي مبنية على الأحداث (<code>Event-Driven AI Architecture</code>)</strong>؛ من خلال استكمال الزوايا المعمارية (<code>Context</code>, <code>Deployment</code>, <code>Information</code>, <code>Operational Viewpoints</code>)، وتحديد عقود البيانات (<code>API &amp; Data Contracts</code>)، وفصل قاعدة بيانات الـ <code>Application</code> عن منصة بيانات العملاء (<code>CDP</code>)، وبناء خط أنابيب بيانات متكامل (<code>CDC</code> &rarr; <code>Kafka</code> &rarr; <code>CDP</code> &rarr; <code>Airflow</code> &rarr; <code>Feature Store</code> &amp; <code>Qdrant Vector DB</code>)، مع مراقبة شاملة في الـ <code>Production</code> (<code>Grafana</code>, <code>Langfuse</code>, <code>Loki</code>, <code>Prometheus</code>).
+            في الـ Session التانية بنكمّل تطبيق عملي على الـ <strong>Marketing Automation System</strong>؛ بنشوف إزاي نفصّل باقي الـ <strong>Viewpoints</strong> (<code>Context</code>, <code>Deployment</code>, <code>Information</code>, <code>Operational</code>)، وإزاي نظبط الـ <strong>Connections Table</strong> والـ <strong>Data &amp; API Contracts</strong>، ونفهم الفرق العملي بين الـ <strong>Application Database</strong> والـ <strong>CDP</strong>، وإزاي الـ <strong>Data</strong> بتمشي خطوة بخطوة من الـ <strong>CDC</strong> لـ <strong>Kafka</strong> لـ <strong>CDP</strong> لـ <strong>Airflow</strong> لحد الـ <strong>Feature Store</strong> والـ <strong>Vector DB (Qdrant)</strong>، وإزاي نراقب الـ <strong>Application</strong> والـ <strong>AI Models</strong> في الـ <strong>Production</strong> بـ (<code>Grafana</code>, <code>Langfuse</code>, <code>Loki</code>, <code>Prometheus</code>).
           </p>
         </div>
 
         <!-- PART 1 -->
         <div id="s2-part-1" class="part-banner">
-          📘 الجزء الأول: الزوايا المعمارية، السياسات، والعقود (Architectural Viewpoints, Policies &amp; Contracts)
+          📘 الجزء الأول: تكملة الـ Viewpoints والـ Policies والـ Contracts
         </div>
 
         <section id="s2-sec-1">
           <h2>🌐 1. زاوية السياق وبوابة النظام (<code>Context Viewpoint &amp; API Gateway</code>)</h2>
-          <p>لما بنبص للـ <code>System</code> من زاوية الـ <strong><code>Context Viewpoint</code></strong> (علاقة النظام بالـ <code>Users</code> والقنوات الخارجية):</p>
+          <p>لما بنبص للـ <code>System</code> من زاوية الـ <strong><code>Context Viewpoint</code></strong>:</p>
           <ul>
-            <li><strong>دور الـ <code>API Gateway / VPN Gateway</code>:</strong>
+            <li><strong>الـ <code>API Gateway</code>:</strong>
               <ul>
-                <li>أي <code>API Request</code> داخل للـ <code>System</code> (سواء من <code>Mobile App</code> أو <code>Website</code> أو <code>WhatsApp Channel</code>) لازم يمر أولاً عبر <strong><code>API Gateway</code></strong>.</li>
-                <li>كل <code>API</code> لازم يكون مطبق عليه <strong><code>Authentication &amp; Authorization</code></strong> (مثل التحقق من هويات الـ <code>Users</code> باستخدام <code>JWT Tokens</code> وتأمين الاتصال عبر <code>TLS 1.2+</code>).</li>
+                <li>أي <code>API</code> في الـ <code>System</code> لازم يكون فيه <strong><code>Authentication &amp; Authorization</code></strong> (زي <code>JWT</code> و <code>TLS 1.2+</code>)، وعشان كدة أي Request جاي من بره لازم يعدي الأول على الـ <code>API Gateway</code>.</li>
               </ul>
             </li>
-            <li><strong>التمثيل المعماري (<code>Context Diagram</code>):</strong>
+            <li><strong>الـ <code>Diagram</code>:</strong>
               <ul>
-                <li>يفضل رسم <code>Diagram</code> خاص بالـ <code>Context Viewpoint</code> يوضح حدود النظام (<code>System Boundary</code>)، والـ <code>Channels</code> الخارجية، ونقطة الدخول الموحدة عبر الـ <code>API Gateway</code>.</li>
+                <li>الـ <code>Context Viewpoint</code> ممكن يبقى ليه <code>Diagram</code> خاص بيه يوضّح حدود الـ <code>System</code> وعلاقته بالـ <code>Users</code> والـ <code>Channels</code> الخارجية (<code>Mobile App</code> / <code>Website</code> / <code>WhatsApp</code>).</li>
               </ul>
             </li>
           </ul>
 
           <div class="diagram-box">
-            <div class="diagram-title">مخطط زاوية السياق وبوابة الـ API Gateway (Context Viewpoint)</div>
+            <div class="diagram-title">مخطط الـ Context Viewpoint والـ API Gateway</div>
             <pre class="mermaid">
 flowchart LR
     User(["👤 Online User"]) --> Channels["📱 Channels\n(Mobile App / Website / WhatsApp)"]
@@ -1298,39 +1297,39 @@ flowchart LR
 
         <section id="s2-sec-2">
           <h2>🚀 2. زاوية النشر وتخطيط السعة (<code>Deployment Viewpoint &amp; Capacity Planning</code>)</h2>
-          <p>في الـ <strong><code>Deployment Viewpoint</code></strong> بنترجم التصميم البرمجي إلى بنية تحتية وهاردوير فعلي:</p>
+          <p>في الـ <strong><code>Deployment Viewpoint</code></strong> بنركّز على نقطتين أساسيتين:</p>
           <ul>
-            <li><strong>تخطيط السعة (<code>Capacity Planning</code>):</strong> حساب حجم الترافيك المتوقع، وعدد الـ <code>Concurrent Requests</code>، وحجم البيانات لتحديد الموارد المطلوبة بدقة.</li>
-            <li><strong>الحد الأدنى لمكونات الهاردوير (<code>Minimum Hardware Components</code>):</strong> تحديد الـ <code>Minimum Specs</code> اللازمة لتشغيل كل <code>Service</code> (عدد الـ <code>vCPUs</code>، حجم الـ <code>RAM</code>، مساحة الـ <code>Storage / NVMe</code>، ووحدات الـ <code>GPU</code> المطلوبة لعمليات الـ <code>Model Inference</code> والـ <code>Embedding</code>).</li>
+            <li><strong><code>Capacity Planning</code>:</strong> تخطيط السعة وحساب الـ <code>System</code> هيحتاج Resources قد إيه بناءً على حجم الترافيك والشغل.</li>
+            <li><strong><code>Minimum Hardware Components</code>:</strong> بنحدد إيه أقل مكونات <code>Hardware</code> مطلوبة عشان تشغّل الـ <code>System</code> والـ <code>AI Models</code> بتاعتنا من غير مشاكل (<code>CPU</code>, <code>RAM</code>, <code>Storage</code>, <code>GPUs</code>).</li>
           </ul>
         </section>
 
         <section id="s2-sec-3">
-          <h2>🔗 3. جدول الاتصالات والشبكات (<code>Connections Table</code>)</h2>
+          <h2>🔗 3. جدول الاتصالات (<code>Connections Table - TBD</code>)</h2>
           <div class="figure-card">
             <img src="assets/session-2/01-connections-table.png" alt="Connections Table" onclick="openLightbox(this.src)" />
-            <div class="figure-caption">نموذج جدول الاتصالات (Connections Table) من المحاضرة (اضغط لتكبير الصورة)</div>
+            <div class="figure-caption">شكل الـ Connections Table من المحاضرة (اضغط لتكبير الصورة)</div>
           </div>
           <ul>
-            <li><strong>أهمية الـ <code>Connections Table</code>:</strong> بيبقى مفيد وأساسي جداً خصوصاً في الشرح والتنسيق مع الـ <strong><code>DevOps Team</code></strong> والـ <strong><code>Security Team</code></strong> عشان الكل يبقى عارف كل <code>Connection</code> جوه الـ <code>System</code> ماشي إزاي، وعلى أي <code>Port</code>، وإيه نوع الـ <code>Authentication</code>، وهل هو <code>Public</code> ولا <code>Private VPN</code>.</li>
+            <li><strong>ليه بنعمل <code>Connections Table</code>؟</strong> الجدول ده بيبقى مفيد جداً خصوصاً في الشرح والتنسيق مع الـ <strong><code>DevOps Team</code></strong>، وعشان نبقى عارفين كل <strong><code>Connection</code></strong> جوه الـ <code>System</code> ماشي إزاي، منين لفين (<code>Source</code> &rarr; <code>Destination</code>)، وبأي <code>Protocol</code> و <code>Port</code>، وإيه نوع الـ <code>Authentication</code>، وهل هو <code>Public</code> ولا <code>Private VPN</code>.</li>
           </ul>
 
-          <h3>نموذج تطبيقي لـ <code>Connections Table</code>:</h3>
+          <h3>شكل الـ <code>Connections Table</code>:</h3>
           <div class="table-wrapper">
             <table>
               <thead>
                 <tr>
-                  <th>Source (<code>المصدر</code>)</th>
-                  <th>Destination (<code>الوجهة</code>)</th>
-                  <th>Protocol (<code>البروتوكول</code>)</th>
-                  <th>Port(s) (<code>المنفذ</code>)</th>
-                  <th>Authentication (<code>التوثيق</code>)</th>
-                  <th>Exposure (<code>Public / Private VPN</code>)</th>
+                  <th>Source</th>
+                  <th>Destination</th>
+                  <th>Protocol</th>
+                  <th>Port(s)</th>
+                  <th>Authentication</th>
+                  <th>Exposure (Public / Private VPN)</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><strong><code>Mobile App / Website</code></strong></td>
+                  <td><strong><code>Mobile App</code></strong></td>
                   <td><code>E-commerce Service</code></td>
                   <td><code>HTTPS (TCP)</code> through Gateway</td>
                   <td><code>443</code></td>
@@ -1340,17 +1339,17 @@ flowchart LR
                 <tr>
                   <td><strong><code>E-commerce DB</code></strong></td>
                   <td><code>Debezium (CDC)</code></td>
-                  <td><code>TCP (MySQL/Postgres Binlog)</code></td>
+                  <td><code>TCP (Binlog)</code></td>
                   <td><code>3306</code> / <code>5432</code></td>
-                  <td><code>DB Service Account + TLS</code></td>
-                  <td><strong>Private</strong> (Internal Network / VPN)</td>
+                  <td><code>DB Credentials + TLS</code></td>
+                  <td><strong>Private</strong> (Internal VPN)</td>
                 </tr>
                 <tr>
                   <td><strong><code>Debezium / Services</code></strong></td>
                   <td><code>Kafka Event Backbone</code></td>
-                  <td><code>TCP (Kafka Protocol)</code></td>
-                  <td><code>9092</code> / <code>9093</code></td>
-                  <td><code>SASL/SCRAM</code> or <code>mTLS</code></td>
+                  <td><code>TCP (Kafka)</code></td>
+                  <td><code>9092</code></td>
+                  <td><code>SASL / mTLS</code></td>
                   <td><strong>Private</strong> (Internal Cluster)</td>
                 </tr>
                 <tr>
@@ -1358,16 +1357,8 @@ flowchart LR
                   <td><code>Vector DB (Qdrant)</code></td>
                   <td><code>gRPC</code> / <code>HTTP</code></td>
                   <td><code>6333</code> / <code>6334</code></td>
-                  <td><code>API Key + Internal TLS</code></td>
-                  <td><strong>Private</strong> (Internal AI Subnet)</td>
-                </tr>
-                <tr>
-                  <td><strong><code>AI/ML Layer</code></strong></td>
-                  <td><code>Groq Cloud / External LLM</code></td>
-                  <td><code>HTTPS (TCP)</code></td>
-                  <td><code>443</code></td>
-                  <td><code>Bearer API Key + TLS 1.3</code></td>
-                  <td><strong>Outbound Egress</strong> (Encrypted)</td>
+                  <td><code>API Key + TLS</code></td>
+                  <td><strong>Private</strong> (Internal Network)</td>
                 </tr>
               </tbody>
             </table>
@@ -1375,63 +1366,62 @@ flowchart LR
         </section>
 
         <section id="s2-sec-4">
-          <h2>📜 4. سياسة البيانات وعقود الـ API (<code>Data Policy &amp; API / Data Contracts</code>)</h2>
+          <h2>📜 4. سياسة البيانات وعقود الـ API (<code>Data Policy &amp; API / Data Contract</code>)</h2>
 
-          <h3>أ) سياسة الاحتفاظ بالبيانات (<code>Data Retention Policy</code>)</h3>
+          <h3>أ) الـ <code>Data Policy</code></h3>
           <ul>
-            <li><strong>قاعدة حفظ البيانات (<code>5-Year Retention</code>):</strong> كل الـ <code>Data</code> الخاصة بالـ <code>Users</code> وتفاعلاتهم هتكون متخزنة لمدة <strong>5 سنوات على الأقل (<code>Minimum 5 Years</code>)</strong>.</li>
-            <li>يخدم ذلك الالتزام بالقوانين والتدقيق (<code>Compliance &amp; Auditing</code>)، وتوفير سجل تاريخي غني (<code>Historical Data</code>) لتدريب نماذج الذكاء الاصطناعي (<code>ML Models</code> مثل الـ <code>CLV</code> والـ <code>Churn</code> والـ <code>Seasonality</code>).</li>
+            <li>كل الـ <code>Data</code> بتاعة الـ <strong><code>Users</code></strong> هتكون متخزنة لمدة <strong>5 سنوات على الأقل</strong> (وده بيفرق معانا في القوانين والـ Compliance وكمان بيوفّر داتا تاريخية نقدر ندرّب عليها الـ <code>ML Models</code>).</li>
           </ul>
 
-          <h3>ب) عقود الـ API والبيانات (<code>API &amp; Data Contracts</code>)</h3>
+          <h3>ب) الـ <code>API &amp; Data Contract</code></h3>
           <ul>
-            <li><strong>دور الـ <code>API &amp; Data Contract</code>:</strong> يوضح بالتفصيل كل الـ <code>API Endpoints</code> اللي الـ <code>System</code> محتاجها، وشكل الـ <code>Request / Response Payload</code>، والـ <code>Data Schemas</code>.</li>
+            <li>بيوضّح كل الـ <strong><code>API Endpoints</code></strong> والـ <code>Data Schemas</code> اللي الـ <code>System</code> محتاجها عشان الـ <code>Services</code> تكلّم بعضها.</li>
           </ul>
 
           <div class="callout callout-tip">
-            <div class="callout-title">💡 نصيحة معمارية مهمة: فصل عقود الـ API في Docs مستقلة</div>
+            <div class="callout-title">💡 نصيحة عملية في التوثيق</div>
             <p style="margin-bottom: 0;">
-              يفضل دايماً إن الـ <strong><code>API &amp; Data Contracts</code></strong> تكون موجودة في <strong><code>Docs</code> منفصلة</strong> ومستقلة عن وثيقة التصميم المعماري الأساسية (<code>ADD</code>)، لأن الـ <code>Endpoints</code> والـ <code>Contracts</code> بطبيعتها <strong>متغيرة باستمرار أثناء العمل والتطوير (<code>Iterative Development</code>)</strong>.
+              بيبقى كويس جداً لو الـ <strong><code>API &amp; Data Contract</code></strong> موجود في <strong><code>Docs</code> منفصلة</strong> عن دوكيومنت الـ Architecture الأساسية، لأنها بطبيعتها <strong>متغيرة باستمرار أثناء العمل (<code>Iterative Work</code>)</strong>.
             </p>
           </div>
         </section>
 
         <section id="s2-sec-5">
-          <h2>🗄️ 5. زاوية البيانات: الفرق بين <code>Application DB</code> ومنصة <code>CDP</code> (<code>Information Viewpoint</code>)</h2>
-          <p>في الـ <strong><code>Information Viewpoint</code></strong>، من أهم القرارات المعمارية هو الفصل التام بين قاعدة بيانات التطبيق الأساسية (<strong><code>Application Database</code></strong>) ومنصة بيانات العملاء (<strong><code>CDP - Customer Data Platform</code></strong>):</p>
+          <h2>🗄️ 5. زاوية البيانات: الـ <code>Application Database</code> مقابل الـ <code>CDP</code> (<code>Information Viewpoint</code>)</h2>
+          <p>في الـ <strong><code>Information Viewpoint</code></strong>، مهم جداً نفرّق بين الـ <code>Application Database</code> العادية وبين الـ <strong><code>CDP (Customer Data Platform)</code></strong>:</p>
 
           <div class="table-wrapper">
             <table>
               <thead>
                 <tr>
-                  <th>وجه المقارنة</th>
+                  <th>المقارنة</th>
                   <th>🏢 <code>Application Database</code> (<code>E-commerce DB</code>)</th>
                   <th>📊 <code>CDP (Customer Data Platform)</code></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>الغرض الأساسي</strong></td>
-                  <td>شايلة الحاجات الأساسية اللي بتشغل الـ <code>Application</code> لحظياً (<code>OLTP</code>).</td>
-                  <td>تجميع وتتبع (<code>Track</code>) كل ما يخص الـ <code>User Behavior</code> وبناء ملف موحد للعميل (<code>Unified Customer Profile</code>).</td>
+                  <td><strong>دورها إيه؟</strong></td>
+                  <td>بيبقى عليها الحاجات الأساسية اللي تشغّل الـ <strong><code>Application</code></strong> (زي الـ <code>Products</code> والـ <code>Orders</code> والـ <code>Users</code>).</td>
+                  <td>مسؤولة إنها تعمل <strong><code>Track</code> للـ <code>User Behavior</code></strong> وتجمع كل تفاعلات الـ <code>User</code> في مكان واحد.</td>
                 </tr>
                 <tr>
-                  <td><strong>نوع الـ <code>Data</code> المخزنة</strong></td>
-                  <td>تحتوي على الـ <code>Schema</code> والـ <code>Functions</code> والبيانات التشغيلية الأساسية فقط (<code>Users</code>, <code>Products</code>, <code>Orders</code>).</td>
+                  <td><strong>بتخزن إيه بالظبط؟</strong></td>
+                  <td>بيبقى فيها الـ <strong><code>Schema</code></strong> والـ <strong><code>Functions</code></strong> الأساسية وبس.</td>
                   <td>
-                    • <code>User Behavior</code>: الـ <code>Clicks</code>، الوقت المقضي في كل <code>Page</code> (<code>Dwell Time</code>)، والـ <code>Actions</code> اللي عملها على الـ <code>System</code> (<code>Carts</code>, <code>Orders</code>, <code>Logins</code>, <code>Feedback</code>).<br />
-                    • <code>User Info</code>: <code>Name</code>, <code>Phone Number</code>, <code>IP Address</code>, إلخ.
+                    • <strong>تراك <code>User Behavior</code>:</strong> معرفة الـ <code>Clicks</code> بتاعته، ووقته على كل <code>Page</code> قد إيه (<code>Dwell Time</code>)، والـ <code>Actions</code> بتاعته وعمل إيه على الـ <code>System</code> (<code>Carts</code>, <code>Orders</code>, <code>Logins</code>, <code>Feedback</code>).<br />
+                    • <strong><code>Fetch User Info</code>:</strong> زي الـ <code>Name</code> - <code>Phone Number</code> - <code>IP</code> - <code>etc.</code>
                   </td>
                 </tr>
                 <tr>
-                  <td><strong>علاقتها بـ <code>ML Models</code></strong></td>
-                  <td>⚠️ <strong>لا يُنصح أبداً بتخزين <code>Data</code> خاصة بالـ <code>ML Models</code> هنا</strong> عشان منعملش حمل (<code>Load</code>) يبطئ الـ <code>Application</code>.</td>
-                  <td>المصدر الرئيسي والآمن لتغذية الـ <code>Airflow DAGs</code>، والـ <code>Feature Store</code>، وتدريب الـ <code>ML Models</code>.</td>
+                  <td><strong>علاقتها بـ داتا الـ <code>ML Models</code></strong></td>
+                  <td>⚠️ <strong>لا يُنصح بتخزين <code>Data</code> خاصة بـ <code>ML Models</code> هنا</strong> عشان منأثرش على سرعة الـ <code>Application</code>.</td>
+                  <td>هي المكان الأساسي اللي بناخد منه داتا عشان نعمل <strong><code>Train</code></strong> للـ <code>Models</code> أو نغذّي الـ <code>Airflow</code> والـ <code>Feature Store</code>.</td>
                 </tr>
                 <tr>
-                  <td><strong>طريقة انتقال الـ <code>Data</code></strong></td>
-                  <td>أي تعديل فيها بيتسحب لحظياً ويروح إلى <strong><code>Kafka</code></strong> عن طريق <strong><code>CDC</code></strong>.</td>
-                  <td>الـ <code>Data</code> بتتخزن فيها عن طريق <strong><code>ETL Job</code></strong> أو <code>Stream Sink</code> بعد ما يتعمل عليها <strong><code>Preprocessing</code></strong> وتنظيف.</td>
+                  <td><strong>الـ <code>Data</code> بتمشي إزاي؟</strong></td>
+                  <td>الداتا والتعديلات اللي فيها بتروح على طول لـ <strong><code>Kafka</code></strong> (عن طريق الـ <code>CDC</code>).</td>
+                  <td>الداتا بتتخزن فيها بالـ <strong><code>ETL Job</code></strong> بعد ما يتعمل عليها <strong><code>Preprocessing</code></strong> معين وكذا.</td>
                 </tr>
               </tbody>
             </table>
@@ -1439,251 +1429,228 @@ flowchart LR
         </section>
 
         <section id="s2-sec-6">
-          <h2>⚙️ 6. زاوية التشغيل، المراقبة، والتصريح الأمني (<code>Operational Viewpoint, Observability &amp; Security Clearance</code>)</h2>
+          <h2>⚙️ 6. زاوية التشغيل، والـ <code>Observability</code>، والـ <code>Security Clearance</code></h2>
 
-          <h3>أ) زاوية التشغيل وأرقام الأداء القياسية (<code>Operational Viewpoint &amp; Release SLAs</code>)</h3>
-          <p>الـ <strong><code>Operational Viewpoint</code></strong> بيحدد القواعد والأرقام القياسية (<code>Performance SLAs / Quality Gates</code>) اللي <strong>مينفعش يقل عنها أي <code>Release</code> جديد</strong>. بالتالي، الـ <strong><code>Testing / QA Team</code></strong> بيحتاج مع كل <code>Release</code> يختبر الأرقام دي أو يعمل لها <strong><code>Automation</code></strong> داخل الـ <code>CI/CD Pipeline</code>:</p>
+          <h3>أ) الـ <code>Operational Viewpoint</code></h3>
+          <p>هنا بنحط <strong>القواعد أو الأرقام القياسية اللي مينفعش يقل عنها كل <code>Release</code></strong>؛ فالـ <strong><code>Testing Team</code></strong> هيحتاج في كل <code>Release</code> يختبر الكلام ده أو يعمله <strong><code>Automation</code></strong> عشان يتأكد إن الـ <code>System</code> محافظ على كفاءته:</p>
           <ol>
-            <li><strong><code>P50 Latency</code>:</strong> تكون <strong>أقل من <code>100ms</code></strong> (أي أن 50% من الـ <code>Requests</code> ترد في أقل من 100 ملي ثانية).</li>
-            <li><strong><code>P95 Latency</code>:</strong> تكون في حدود <strong><code>500ms</code></strong> كحد أقصى (أي أن 95% من الـ <code>Requests</code> ترد في أقل من نصف ثانية).</li>
-            <li><strong><code>Throughput</code>:</strong> قدرة الـ <code>System</code> على استيعاب <strong><code>1000 RPS</code> (<code>Requests Per Second</code>)</strong>.</li>
+            <li>زي إن الـ <strong><code>P50 Latency</code></strong> تكون <strong>أقل من <code>100ms</code></strong>.</li>
+            <li>أو إن الـ <strong><code>P95 Latency</code></strong> تكون <strong><code>500ms</code></strong>.</li>
+            <li>أو إن الـ <strong><code>Throughput</code></strong> يكون <strong><code>1000 RPS</code></strong> (<code>Requests Per Second</code>).</li>
           </ol>
 
-          <h3>ب) منظومة المراقبة في بيئة الإنتاج (<code>Observability Stack in Production</code>)</h3>
-          <p>الـ <strong><code>Observability</code></strong> هي اللي بتساعدنا نتأكد إن الـ <code>Application</code> وموديلز الـ <code>AI</code> شغالين كويس وبكفاءة في الـ <strong><code>Production</code></strong>، وتتكون من 4 أدوات متكاملة:</p>
+          <h3>ب) الـ <code>Observability</code> (إزاي أتأكد إن الـ <code>Application</code> شغال كويس في الـ <code>Production</code>؟)</h3>
+          <p>الـ <strong><code>Observability</code></strong> هي اللي بتساعدني أتأكد إن الـ <code>Application</code> والـ <code>Models</code> شغالين كويس في الـ <strong><code>Production</code></strong>، وبنستخدم فيها 4 أدوات أساسية:</p>
 
           <div class="diagram-box">
-            <div class="diagram-title">منظومة المراقبة المتكاملة في بيئة الإنتاج (Production Observability &amp; AI Eval Stack)</div>
+            <div class="diagram-title">أدوات الـ Observability في الـ Production</div>
             <pre class="mermaid">
 flowchart TB
-    Prod["🚀 Production Environment\n(Microservices, Kafka, AI/ML Models)"] --> Metrics["📈 Prometheus\n(Metrics Collection & Alert Rules)"]
-    Prod --> Logs["📜 Loki\n(Multi-Service Log Aggregation)"]
-    Prod --> Traces["🧠 Langfuse\n(LLM Tracing, Tokens & RAG Evaluation)"]
+    Prod["🚀 Production Application & AI Models"] --> Prometheus["📈 Prometheus\nبيبعت Alerts لـ Channels مختلفة"]
+    Prod --> Loki["📜 Loki\nبيظهر الـ Logs لكذا Service مع بعض"]
+    Prod --> Langfuse["🧠 Langfuse\nTracing, Chunks, Tokens, F1, LLM-as-a-Judge & RAGAS"]
 
-    Metrics --> Grafana["📊 Grafana Dashboard\n(Server Utilization, Latency, RPS & Logs View)"]
-    Logs --> Grafana
-    Metrics --> Alerts["🔔 Alert Channels\n(Slack, Telegram, Emails)"]
-    Traces --> Eval["⚖️ AI Quality Evals\n(LLM-as-a-Judge, RAGAS, F1 Score)"]
+    Prometheus --> Grafana["📊 Grafana Dashboard\nبتوضح الـ Utilization وبتراقب الـ Server والـ Logs"]
+    Loki --> Grafana
+    Prometheus --> Alerts["🔔 Slack / Telegram / Emails"]
             </pre>
           </div>
 
           <ol>
-            <li><strong><code>Grafana</code> (لوحة المراقبة الموحدة):</strong> عبارة عن <code>Dashboard</code> تفاعلية بتوضح الـ <strong><code>Resource Utilization</code></strong> (استهلاك الـ <code>CPU</code>, <code>RAM</code>, <code>GPU</code>)، وبتراقب حالة الـ <code>Servers</code> والـ <code>Logs</code> والـ <code>Latency</code> في مكان واحد.</li>
-            <li><strong><code>Langfuse</code> (مراقبة وتقييم الـ <code>LLMs</code> والـ <code>AI Agents</code>):</strong>
+            <li><strong><code>Grafana</code>:</strong> عبارة عن <strong><code>Dashboard</code></strong> بتوضّح الـ <strong><code>Utilization</code></strong>، وبتراقب الـ <strong><code>Server</code></strong> والـ <strong><code>Logs</code></strong> وكذا.</li>
+            <li><strong><code>Langfuse</code>:</strong> دي خاصة بمتابعة وتقييم الـ <code>LLMs</code> والـ <code>AI</code>، بنشوف منها:
               <ul>
-                <li>الـ <strong><code>Tracing</code></strong> الكامل لكل خطوة في الـ <code>AI Pipeline</code>.</li>
-                <li>الـ <strong><code>Chunks Retrieved</code></strong> من الـ <code>Vector DB</code> والـ <strong><code>Model Output</code></strong> النهائي.</li>
-                <li>المقاييس مثل <strong><code>F1 Score</code></strong>، وعدد الـ <strong><code>Tokens</code></strong> (<code>Input Tokens</code> &amp; <code>Output Tokens</code>)، والـ <strong><code>Metadata</code></strong>.</li>
-                <li>التقييم الأوتوماتيكي المستمر باستخدام <strong><code>LLM-as-a-Judge</code></strong> وإطار عمل <strong><code>RAGAS</code></strong> لعمل <code>Evaluation</code> لجودة الـ <code>Retrieval</code> والـ <code>Generation</code>.</li>
+                <li>الـ <strong><code>Tracing</code></strong> - الـ <strong><code>Chunks Retrieved</code></strong> - الـ <strong><code>Output</code></strong> - الـ <strong><code>F1 Score</code></strong> - الـ <strong><code>Tokens</code></strong> - الـ <strong><code>Input Tokens</code></strong> - والـ <strong><code>Metadata</code></strong>.</li>
+                <li>وكمان بنعمل بيها تقييم للموديل عن طريق <strong><code>LLM-as-a-Judge</code></strong> و <strong><code>RAGAS for Evaluation</code></strong>.</li>
               </ul>
             </li>
-            <li><strong><code>Loki</code> (تجميع السجلات المركزي):</strong> بيظهر ويجمع الـ <strong><code>Logs</code></strong> الخاصة بأكتر من <code>Service</code> مع بعض في نفس الوقت لتتبع <code>Events</code> أو أخطاء معينة عبر الـ <code>System</code> كله.</li>
-            <li><strong><code>Prometheus</code> (المقاييس والتنبيهات الفورية):</strong> يجمع الـ <code>Time-series Metrics</code> ويبعت <strong><code>Alerts</code></strong> فورية على <code>Channels</code> مختلفة مثل <strong><code>Slack</code></strong>، و <strong><code>Telegram</code></strong>، و <strong><code>Emails</code></strong>.</li>
+            <li><strong><code>Loki</code>:</strong> بيظهر ويجمّع الـ <strong><code>Logs</code></strong> لكذا <strong><code>Service</code></strong> مع بعض عن <code>Events</code> معينة.</li>
+            <li><strong><code>Prometheus</code>:</strong> بيراقب الـ <code>Metrics</code> وبيبعت <strong><code>Alerts</code></strong> لـ <code>Channels</code> مختلفة زي: <strong><code>Slack</code> - <code>Telegram</code> - <code>Emails</code></strong>.</li>
           </ol>
 
-          <h3>ج) التصريح والفحص الأمني (<code>Security Clearance</code>)</h3>
+          <h3>ج) الـ <code>Security Clearance</code></h3>
           <ul>
-            <li><strong>متى وأين يتم الـ <code>Security Clearance</code>؟</strong> بيتعمل على بيئة ما قبل الإنتاج (<strong><code>Pre-prod / Staging Environment</code></strong>) أو من خلال <strong><code>Security Survey / Audit</code></strong> شامل للتأكد من إغلاق كافة الثغرات وصلاحية الـ <code>Guardrails</code> قبل السماح بالـ <code>Deployment</code> على الـ <code>Production</code>.</li>
+            <li>الـ <strong><code>Security Clearance</code></strong> بيتعمل على الـ <strong><code>Pre-prod Environment</code></strong> أو عن طريق <strong><code>Survey / Security Audit</code></strong> قبل ما نطلع على الـ <code>Production</code>.</li>
           </ul>
         </section>
 
         <!-- PART 2 -->
         <div id="s2-part-2" class="part-banner">
-          🧠 الجزء الثاني: اللبنات الأساسية لأنظمة الـ AI وتدفق البيانات (AI System Building Blocks &amp; Data Pipeline)
+          🧠 الجزء الثاني: الـ AI System Building Blocks ورحلة الـ Data
         </div>
 
         <section id="s2-sec-blocks">
-          <h2>🧱 1. اللبنات الخمس الأساسية لأي نظام ذكاء اصطناعي (<code>AI System Building Blocks</code>)</h2>
+          <h2>🧱 1. إيه الحاجات اللي لازم تكون موجودة في أي سيستم بيستخدم <code>AI Feature</code>؟ (<code>AI System Building Blocks</code>)</h2>
           <div class="figure-card">
             <img src="assets/session-2/02-ai-system-building-blocks.png" alt="AI System Building Blocks" onclick="openLightbox(this.src)" />
-            <div class="figure-caption">اللبنات الخمس الأساسية لأي نظام AI (اضغط لتكبير الصورة)</div>
+            <div class="figure-caption">AI System Building Blocks (اضغط لتكبير الصورة)</div>
           </div>
-          <p>أي <code>System</code> في الـ <code>Production</code> بيستخدم <code>AI Feature</code> لازم يغطي النقاط والمكونات الـ 5 الأساسية دي:</p>
+          <p>دي النقاط المهمة اللي لازم تكون موجودة في الـ <code>System</code> مادام مستخدم <strong><code>AI Feature</code></strong>:</p>
           <ol>
-            <li><strong><code>Data pipelines and feature stores</code>:</strong> خطوط أنابيب نقل ومعالجة الـ <code>Data</code> (<code>Kafka</code>, <code>CDC</code>, <code>Airflow</code>) ومخازن الـ <code>Features</code> (<code>Feast</code>).</li>
-            <li><strong><code>Model layer (Foundation, Fine-tuned, Classical ML)</code>:</strong> طبقة النماذج سواء كانت <code>Foundation LLMs</code>، أو موديلز معمول لها <code>Fine-tuning</code>، أو <code>Classical ML Models</code> (مثل <code>RFM</code>, <code>CLV</code>, <code>Churn</code>, <code>Two-Tower Ranking</code>).</li>
-            <li><strong><code>Training vs. Inference Infrastructure</code>:</strong> الفصل بين البنية التحتية المخصصة للـ <code>Training</code> (اللي بتحتاج <code>Batch GPU Jobs</code>) والبنية المخصصة للـ <code>Inference</code> اللحظي (<code>Groq Cloud</code> أو <code>vLLM</code> على <code>GCP GPU Hyperscaler</code>).</li>
-            <li><strong><code>Serving, APIs and Orchestration</code>:</strong> طريقة تقديم الموديل كـ <code>API</code> وتنسيق العمل بين الموديلز والـ <code>Data</code> (<code>Airflow</code>, <code>FastAPI / gRPC</code>).</li>
-            <li><strong><code>MLOps / LLMOps and Observability</code>:</strong> أتمتة دورة حياة الموديل ومراقبته المستمرة (<code>Langfuse</code>, <code>Prometheus</code>, <code>Grafana</code>).</li>
+            <li><strong><code>Data pipelines and feature stores</code></strong></li>
+            <li><strong><code>Model layer (foundation, fine-tuned, classical ML)</code></strong></li>
+            <li><strong><code>Training vs inference infrastructure</code></strong></li>
+            <li><strong><code>Serving, APIs and orchestration</code></strong></li>
+            <li><strong><code>MLOps / LLMOps and observability</code></strong></li>
           </ol>
         </section>
 
         <section id="s2-sec-models">
-          <h2>🎯 2. كيف تختار الـ <code>AI Model</code> المناسب وتعمل له <code>Benchmarking</code>؟</h2>
-          <p>عند اختيار أي <code>Model</code> في الـ <code>AI Layer</code>، بنمشي على القواعد العملية التالية:</p>
+          <h2>🎯 2. إزاي بنختار الـ <code>Model</code> ونعمل له <code>Benchmarking</code>؟</h2>
           <ul>
-            <li><strong>البحث في خلفية تدريب الموديل (<code>Model Pre-training Research</code>):</strong> لازم تعمل <code>Search</code> كويس عشان تعرف الـ <code>Model</code> ده متدرب على إيه أكتر، وإيه نقاط قوته وضعفه.</li>
-            <li><strong>الحاجة للـ <code>Fine-Tuning</code> حسب المجال (<code>Domain-Specific Fine-Tuning</code>):</strong> بعض الـ <code>Business Domains</code> المتخصصة بتحتاج <strong><code>Fine-tuning</code></strong> لأن الموديل العام مش هيفهم تفاصيل الـ <code>Domain</code> لوحده.</li>
+            <li><strong>اعمل <code>Search</code> على الـ <code>Model</code> متدرب على إيه أكتر:</strong> شوف الداتا اللي الموديل اتدرب عليها ونقاط قوته قبل ما تختاره.</li>
+            <li><strong>الـ <code>Fine-tuning</code>:</strong> بعض الـ <strong><code>Business Domains</code></strong> بتكون متخصصة وممكن تحتاج <strong><code>Fine-tuning</code></strong> عشان تفهم مصطلحات وسياق الشغل ده.</li>
           </ul>
 
           <div class="callout callout-warning">
-            <div class="callout-title">⚠️ قاعدة مهمة في تقييم الموديلز (Domain Benchmarking)</div>
+            <div class="callout-title">⚠️ نقطة مهمة جداً في الـ Benchmarking</div>
             <p style="margin-bottom: 0;">
-              الـ <strong><code>Benchmarking</code></strong> الصح بيبقى <strong>على حسب احتياجاتك وتجربتك والـ <code>Business Domain</code> بتاعك</strong> (باستخدام <code>Evaluation Dataset</code> من داتا المشروع نفسه)، <strong>مش مجرد الاعتماد على <code>Global Benchmark</code> عالمي أو عام!</strong>
+              الـ <strong><code>Benchmarking</code></strong> بيبقى <strong>على حسب احتياجاتك وتجربتك والـ <code>Domain</code> بتاعك</strong>، مش <code>Benchmark</code> عالمي أو عام!
             </p>
           </div>
 
-          <h3>الأبعاد الثلاثة لاختيار الموديل (<code>The 3 Dimensions of Model Selection</code>):</h3>
+          <h3>الـ <code>Dimensions</code> اللي بتحدد على أساسها الـ <code>Model</code>:</h3>
           <ol>
-            <li><strong>اللغة (<code>Language</code>):</strong> هل الـ <code>Model</code> بيدعم اللغة المطلوبة (مثلاً العربية واللهجات المحلية بجانب الإنجليزية) بدقة عالية؟</li>
-            <li><strong>مجال العمل وبيئة التشغيل (<code>Business Domain &amp; Operating Environment</code>):</strong> الـ <code>Model</code> هيشتغل وهيعمل <code>Operate</code> فين؟ في <strong>جهة حكومية (<code>Government</code>)</strong>، ولا <strong>بنك (<code>Bank</code>)</strong>، ولا <strong><code>E-commerce</code></strong>؟ (لأن ده بيفرض قيود صارمة على الـ <code>Data Privacy</code>، وهل مسموح نستخدم <code>Cloud API</code> ولا لازم <code>On-Premise / Private GPU</code>).</li>
-            <li><strong>المهمة المطلوبة (<code>Target Task</code>):</strong> إيه الـ <code>Task</code> المطلوبة منه تحديداً؟ (<code>Segmentation</code>، <code>Churn Prediction</code>، <code>Sentiment Analysis</code>، <code>Embedding</code>، أو <code>Text Generation</code>).</li>
+            <li><strong>اللغة (<code>Language</code>):</strong> الموديل هيتعامل مع عربي ولا إنجليزي ولا لهجات معينة؟</li>
+            <li><strong>الـ <code>Business Domain</code> وبيئة التشغيل:</strong> هو هيشتغل أو هيـ <strong><code>Operate</code></strong> فين؟ في <strong>جهة حكومية (<code>Government</code>)</strong> ولا <strong>بنك (<code>Bank</code>)</strong> ولا إيه؟ (عشان ده بيحكم الـ <code>Security</code> والـ <code>Hosting</code>).</li>
+            <li><strong>الـ <code>Task</code> المطلوبة منه إيه:</strong> إيه المهمة اللي هينفذها بالظبط؟</li>
           </ol>
 
           <div class="callout callout-tip">
-            <div class="callout-title">💡 نصيحة عند رسم الـ Architecture Diagrams بمساعدة الـ AI</div>
+            <div class="callout-title">💡 رسم الـ Diagram مع الـ AI</div>
             <p style="margin-bottom: 0;">
-              الـ <code>Diagram</code> المعماري ممكن تستعين بالـ <code>AI</code> عشان يساعدك في رسمه بسرعة، <strong>ولكن أنت كـ <code>Architect</code> لازم تعمل <code>Guide</code> وتوجيه دقيق للـ <code>AI</code></strong> وتراجع كل سهم وكل مكون بنفسك، لأن القرار المعماري مسؤوليتك أنت.
+              الـ <strong><code>Diagram</code></strong> ممكن تعمله مع الـ <strong><code>AI</code></strong> ويساعدك فيه، <strong>ولكن أنت لازم تـ <code>Guide</code> الـ <code>AI</code></strong> وتوجّهه خطوة بخطوة لأنك أنت اللي فاهم الـ <code>Architecture</code> والـ <code>Business</code>.
             </p>
           </div>
         </section>
 
         <section id="s2-sec-pipeline">
           <h2>🔄 3. رحلة الـ <code>Data</code> والـ <code>Embeddings</code> والـ <code>Vector DB</code> (<code>CDC</code> &rarr; <code>Kafka</code> &rarr; <code>CDP</code> &rarr; <code>Qdrant</code>)</h2>
-          <p>عشان نبني <code>Real-time &amp; Batch AI Pipeline</code> قوي، الـ <code>Data</code> بتمشي في الخطوات المتسلسلة دي:</p>
 
           <div class="diagram-box">
-            <div class="diagram-title">مسار تدفق البيانات من الـ Application DB إلى الـ CDP و Qdrant Vector DB</div>
+            <div class="diagram-title">رحلة الـ Data من الـ Database لحد الـ CDP والـ Qdrant Vector DB</div>
             <pre class="mermaid">
 flowchart LR
-    AppDB[("🗄️ Application DB\n(E-commerce DB)")] -->|"binlog\n(Record by Record)"| CDC["🔄 CDC Tool\n(Debezium)"]
-    CDC -->|"CDC Events"| Kafka["⚡ Apache Kafka\n(Event Backbone)"]
-    Services["🧩 Services & Feedback\n(Cart, Checkout, Login, CSAT)"] -->|"Domain Events"| Kafka
-    Kafka -->|"Stream / ETL\n+ Preprocessing"| CDP[("📊 CDP\n(Customer Data Platform)")]
-    CDP --> Airflow["⏱️ Apache Airflow\n(DAG Orchestrator)"]
-    Airflow -->|"Hourly / Batch\nEmbedding DAG"| Embed["🧬 Embedding Model\n(+ Preprocessing & Reranker)"]
-    Embed -->|"Upsert Vectors"| Qdrant[("🎯 Vector DB (Qdrant)\nCosine / ANN Search -> Top-K")]
+    DB[("🗄️ Database\n(Application DB)")] -->|"Record by Record"| CDC["🔄 CDC Tool\n(Debezium)"]
+    CDC --> Kafka["⚡ Kafka\n(Database + Services + Events + Feedbacks)"]
+    Kafka --> CDP[("📊 CDP\nكل الداتا بتتجمع في مكان واحد")]
+    CDP --> Airflow["⏱️ Airflow\n(DAG Orchestrator)"]
+    Airflow --> Embed["🧬 Embedding Model\n(+ Preprocessing / Reranker / Generative)"]
+    Embed --> Qdrant[("🎯 Vector DB (Qdrant)\nCosine Search -> Top-K")]
             </pre>
           </div>
 
           <ol>
-            <li><strong>أداة الـ <code>CDC (Change Data Capture)</code> مثل <code>Debezium</code>:</strong> بتراقب الـ <code>binlog</code> بتاع الـ <code>Database</code> وتسحب التغييرات <strong><code>Record by Record</code></strong> وتوديها مباشرة إلى <code>Kafka</code> بدون ما تبطئ الـ <code>Application Database</code>.</li>
-            <li><strong>منصة <code>Apache Kafka (Event Backbone)</code>:</strong> بتجمع الـ <code>Data</code> من الـ <code>Database</code> (عن طريق <code>CDC</code>)، ومن الـ <code>Services</code> المختلفة، والـ <code>Domain Events</code> (<code>Cart</code>, <code>Checkout</code>, <code>Login</code>)، والـ <code>User Feedbacks</code>.</li>
-            <li><strong>منصة بيانات العملاء <code>CDP (Customer Data Platform)</code>:</strong> بتستقبل الـ <code>Data</code> المجمعة عشان تكون كلها في مكان موحد، ومن الـ <code>CDP</code> نقدر ناخد الـ <code>Data</code> ونوديها للـ <strong><code>Airflow</code></strong> أو نستخدمها في الـ <code>Model Training</code>.</li>
-            <li><strong>مرحلة الـ <code>Embedding Model</code> والـ <code>Reranker</code>:</strong>
+            <li><strong>الـ <code>CDC Tool</code> للـ <code>Data</code> (زي <code>Debezium</code>):</strong> بتسحب <strong><code>Record by Record</code></strong> من الـ <code>Data</code> اللي في الـ <code>Database</code> وتوديه على طول لـ <strong><code>Kafka</code></strong>.</li>
+            <li><strong><code>Kafka</code>:</strong> بتجمع الـ <code>Data</code> من الـ <strong><code>Database</code></strong>، أو الـ <strong><code>Services</code></strong>، أو الـ <strong><code>Events</code></strong> والـ <strong><code>Feedbacks</code></strong>.</li>
+            <li><strong>الـ <code>CDP</code>:</strong> بعدها الـ <code>Data</code> كلها بتكون متجمعة في مكان واحد اللي هو الـ <strong><code>CDP</code></strong>، واللي منه الـ <code>Data</code> ممكن تروح للـ <strong><code>Airflow</code></strong> مثلاً.</li>
+            <li><strong>الـ <code>Embedding Model</code>:</strong>
               <ul>
-                <li>لازم نختار <strong><code>Embedding Model</code></strong> مناسب لطبيعة النصوص والمنتجات.</li>
-                <li>ممكن نعمل <strong><code>Preprocessing</code></strong> قبل مرحلة الـ <code>Embedding</code>، ونستخدم <strong><code>Reranker</code></strong> لترتيب النتائج بعد الاسترجاع.</li>
-                <li>وممكن نولد الـ <code>Embedding</code> باستخدام <strong><code>Generative Model</code></strong> لو بنتعامل مع <code>Complex Context Text</code>.</li>
+                <li>لازم تشوف وتختار <strong><code>Embedding Model</code></strong> مناسب للداتا بتاعتك.</li>
+                <li>ممكن تعمل <strong><code>Preprocessing</code></strong> قبل مرحلة الـ <code>Embedding</code>، أو تستخدم حاجة زي الـ <strong><code>Reranker</code></strong>.</li>
+                <li>وممكن تعمل <code>Embedding</code> بـ <strong><code>Generative Model</code></strong> لو شغال على <code>Context Text</code> مثلاً.</li>
               </ul>
             </li>
-            <li><strong>قاعدة البيانات المتجهة <code>Vector DB (Qdrant)</code>:</strong> الـ <code>Data</code> بعد ما يتعمل لها <code>Embedding</code> بتتخزن كـ <code>Vectors</code> جوه <strong><code>Qdrant</code></strong>، والـ <code>Qdrant</code> بتقدر تعمل جواها <strong><code>Cosine Similarity / ANN Search</code></strong> بسرعة فائقة وترجع لنا الـ <strong><code>Top-K Candidates</code></strong>.</li>
+            <li><strong>الـ <code>Vector DB</code> (زي <code>Qdrant</code>):</strong> الـ <strong><code>Qdrant</code></strong> بنخزن فيها الـ <code>Embeddings</code>، وبتقدر تعمل جواها الـ <strong><code>Cosine Search</code> (<code>ANN Search</code>)</strong> وتدينا الـ <strong><code>Top-K</code></strong>.</li>
           </ol>
         </section>
 
         <!-- PART 3 -->
         <div id="s2-part-3" class="part-banner">
-          🗺️ الجزء الثالث: شرح المعمارية الكاملة للنظام المستهدف (To-Be Event-Driven Architecture &amp; Use Cases)
+          🗺️ الجزء الثالث: شرح الـ To-Be Diagram وتطبيق الـ Functional Use Cases
         </div>
 
         <section id="s2-sec-tobe">
-          <h2>🏗️ 1. قراءة تفصيلية في مخطط الـ <code>To-Be Architecture Diagram</code></h2>
+          <h2>🏗️ 1. شرح الـ <code>To-Be Architecture Diagram</code></h2>
           <div class="figure-card">
             <img src="assets/session-2/03-to-be-event-driven-architecture.png" alt="To-Be Event-Driven AI Architecture" onclick="openLightbox(this.src)" />
-            <div class="figure-caption">المخطط المعماري المتكامل للنظام المستهدف (To-Be Event-Driven AI Architecture — اضغط لتكبير الصورة)</div>
+            <div class="figure-caption">الـ To-Be Architecture Diagram (اضغط لتكبير الصورة)</div>
           </div>
 
           <div class="callout callout-info">
-            <div class="callout-title">📌 مفتاح قراءة المخطط المعماري (To-Be Diagram Legend)</div>
-            <ul style="margin-bottom: 0;">
-              <li><strong>المكونات باللون الأبيض/الرمادي:</strong> تمثل مكونات النظام الأساسي (<code>Core E-Commerce, Channels, Gateway, Databases</code>).</li>
-              <li><strong>المكونات والأسهم باللون البرتقالي (<code>Orange</code>):</strong> تمثل الإضافات الجديدة في الـ <strong><code>To-Be Architecture</code></strong> الخاصة بمنصة البيانات المبنية على الأحداث (<code>Event-Driven Data Platform</code>) وربطها بطبقات الـ <code>AI/ML</code>.</li>
-            </ul>
+            <div class="callout-title">📌 إزاي نقرأ الـ To-Be Diagram؟</div>
+            <p style="margin-bottom: 0;">
+              كل الأجزاء المرسومة <strong>باللون البرتقالي (<code>Orange</code>)</strong> في الـ <code>Diagram</code> هي الإضافات الجديدة في الـ <strong><code>To-Be</code></strong> (<code>Event-Driven Data Platform</code> + <code>AI/ML Layer</code>).
+            </p>
           </div>
 
-          <h3>تفصيل المكونات والتدفقات داخل الـ <code>Diagram</code>:</h3>
-          <ol>
-            <li><strong>القنوات، الـ <code>Dashboards</code>، وقواعد البيانات التشغيلية (الجانب الأيسر):</strong>
+          <h3>تفاصيل المكونات اللي في الـ <code>Diagram</code>:</h3>
+          <ul>
+            <li><strong>الواجهات والـ <code>Databases</code> الأساسية:</strong>
               <ul>
-                <li><strong><code>Online User</code></strong> يتفاعل عبر قناتين: <strong><code>Mobile / Website</code></strong> و <strong><code>WhatsApp Channel</code></strong>، ويمر الاتصال عبر <strong><code>API VPN Gateway</code></strong> مؤمناً بـ <code>JWT</code>.</li>
-                <li><strong><code>Customer Insights Dashboard</code></strong> تتصل بـ <strong><code>Analytics Engine</code></strong> التي تقرأ من الـ <code>CDP</code>.</li>
-                <li><strong><code>E-commerce Service</code></strong> يتعامل مع 3 قواعد بيانات أساسية: <strong><code>E-commerce DB</code></strong>، و <strong><code>Products DB</code></strong>، و <strong><code>Campaigns DB</code></strong>.</li>
+                <li>فيها الـ <code>Channels</code> بتاعة الـ <code>User</code> (<code>Mobile / Website</code> و <code>WhatsApp</code>)، وفيها الـ <strong><code>Dashboard</code></strong> بتاعة الـ <code>Customer Insights</code> مع الـ <code>Analytics Engine</code>.</li>
+                <li>وفيها الـ <code>E-commerce DB</code>، و <strong><code>Database Products</code></strong>، و <strong><code>Database Campaign</code></strong>.</li>
               </ul>
             </li>
-            <li><strong>خط أنابيب الأحداث والـ <code>CDP</code> (<code>CDC</code> &rarr; <code>Kafka</code> &rarr; <code>Preprocessing</code> &rarr; <code>CDP</code>):</strong>
+            <li><strong>مسار الـ <code>CDC &gt;&gt; Kafka &gt;&gt; Preprocessing &gt;&gt; CDP</code>:</strong>
               <ul>
-                <li>مسار التغييرات: <code>E-commerce DB</code> &rarr; <code>Debezium (CDC)</code> &rarr; <code>Kafka Event Backbone</code> (<code>topics: cart, checkout, login, feedback, cdc.*</code>).</li>
-                <li>يرسل <strong><code>Feedback Service</code></strong> تقييمات العملاء وتحليل المشاعر (<code>Ratings + Text CSAT Sentiment</code>) إلى <code>Kafka</code>.</li>
-                <li>تصب هذه الأحداث في <strong><code>Customer Interactions and Profiles (CDP)</code></strong> الذي يجمع الـ <code>Data</code> من عدة مصادر في مكان واحد، مما يتيح لنا عمل <code>Model Training</code> أو استخراج الـ <code>Features</code>.</li>
+                <li>الداتا بتخرج من الـ <code>E-commerce DB</code> بـ <code>Debezium (CDC)</code> وتروح على <strong><code>Kafka</code></strong>، وبعدما يتعمل لها <strong><code>Preprocessing</code></strong> بتروح على الـ <strong><code>CDP</code></strong>.</li>
+                <li>الـ <strong><code>CDP</code></strong> بياخد <code>Data</code> من كذا مكان (وكمان الـ <strong><code>Campaign</code></strong> بتودّي على الـ <code>CDP</code> كذلك)، فبالتالي أقدر أعمل منه <strong><code>Train</code></strong> للـ <code>Models</code> أو أياً كان اللي هحتاجه منه.</li>
               </ul>
             </li>
-            <li><strong>معالجة السلة المتروكة لحظياً عبر <code>Apache Flink</code> (<code>Real-Time Stream Processing</code>):</strong>
+            <li><strong>الـ <code>Airflow</code> والـ <code>Feature Store (Feast)</code> والـ <code>Flink</code>:</strong>
               <ul>
-                <li>يقرأ <strong><code>Flink</code></strong> الأحداث لحظياً من <code>Kafka</code> لاكتشاف سلة المشتريات المتروكة (<strong><code>Abandoned-cart detection</code></strong> عبر <code>Timer</code>: إذا لم يتم الـ <code>Checkout</code> بعد فترة محددة).</li>
-                <li>يرسل إشارة فورية (<code>Abandoned Cart</code> &rarr; <code>NBA</code>) إلى الـ <strong><code>Recommendation Engine</code></strong> الذي يرسل بدوره <strong><code>Abandon Cart Notification</code></strong> للـ <code>User</code> عبر <strong><code>WhatsApp</code></strong>.</li>
+                <li>الـ <strong><code>Airflow</code></strong> هو <strong><code>DAG Orchestrator</code></strong>: بياخد الـ <code>Data</code> من الـ <strong><code>CDP</code></strong>، وبياخد الـ <strong><code>Output</code></strong> من الـ <strong><code>Model</code></strong> ويوديها للـ <strong><code>Feature Store (Feast)</code></strong>.</li>
+                <li>الـ <strong><code>DAG</code></strong> ممكن يشتغل في الـ <strong><code>Real-time</code> أو <code>Batch</code></strong> (كل دقيقة، أو كل ساعة، أو كذا).</li>
+                <li>وممكن تعمل <strong><code>DAG</code> كل ساعة يعمل <code>Embedding</code></strong> للداتا الجديدة ويحدّث الـ <code>Qdrant</code>.</li>
+                <li>وفيه <strong><code>Flink</code></strong> بيراقب الـ <code>Abandoned Cart</code> (لو الـ <code>User</code> حط حاجة في الـ Cart ومعملش <code>Checkout</code> بعد كام دقيقة) فيبعت للـ <code>Recommendation Engine</code> عشان يبعت له <code>Notification</code> على الـ <code>WhatsApp</code>.</li>
               </ul>
             </li>
-            <li><strong>التنسيق والجدولة عبر <code>Apache Airflow</code> ومخزن السمات <code>Feature Store (Feast)</code>:</strong>
+            <li><strong>الـ <code>Vector DB (Qdrant)</code> والـ <code>AI/ML Layer</code> والـ <code>Cloud GPUs</code>:</strong>
               <ul>
-                <li><strong><code>Airflow (DAG Orchestrator)</code>:</strong> يأخذ الـ <code>Data</code> من الـ <code>CDP</code>، ويشغل الـ <code>Models</code>، ويأخذ الـ <code>Output</code> من الـ <code>Model</code> ليوديه إلى الـ <strong><code>Feature Store (Feast)</code></strong>.</li>
-                <li>الـ <code>DAG</code> ممكن يشتغل <strong><code>Near Real-time</code></strong> أو <strong><code>Batch</code></strong> (كل دقيقة، أو كل ساعة، أو كل يوم)، وممكن نعمل <code>DAG</code> كل ساعة يعمل <strong><code>Embedding Refresh</code></strong> في <code>Qdrant</code>.</li>
-                <li><strong><code>Feature Store (Feast)</code>:</strong> يخزن الـ <code>RFM / CLV / Churn Features</code> في طبقتين: <strong><code>Offline (Batch)</code></strong> للتدريب، و <strong><code>Online (Real-time)</code></strong> لخدمة الـ <code>Recommendation Engine</code> لحظياً.</li>
+                <li>الـ <code>Data</code> بتروح على الـ <strong><code>Vector DB (Qdrant)</code></strong> بعد ما يتعمل لها <strong><code>Embedding</code></strong>.</li>
+                <li>والـ <strong><code>Vector DB</code></strong> بتعمل <strong><code>Search</code></strong> وتدينا الـ <strong><code>Top-K</code></strong> (<code>~500 Candidates</code> يترتبوا بالـ <code>Online Features</code> اللي في الـ <code>Feature Store</code>).</li>
+                <li>وجوه الـ <strong><code>AI/ML Layer</code></strong> عندنا موديلز الـ <code>AI for Security and Guardrails</code>، والـ <code>RFM, CLV, Segmentation Models</code>، والـ <code>Two-tower Retrieval + Ranking Model</code>، والـ <code>Churn Detection Model</code>، والـ <code>Sentiment Analysis Service</code>، ومتوصلين بـ <strong><code>Groq Cloud</code></strong> (<code>GPT-OSS 20B / 120B</code> &amp; <code>Embedding Models</code>) و <strong><code>GCP GPU Hyperscaler</code></strong> (<code>vLLM</code> عليه <code>Qwen 7B</code> و <code>Llama 70B</code>).</li>
               </ul>
             </li>
-            <li><strong>طبقة الذكاء الاصطناعي والبنية التحتية للحوسبة (<code>AI/ML Layer</code>, <code>Groq Cloud</code>, <code>GCP GPU Hyperscaler</code>):</strong>
-              <ul>
-                <li><strong><code>AI/ML Layer</code>:</strong> تضم <code>AI for Security and Guardrails</code>، و <code>RFM, CLV, Segmentation Models</code>، و <code>Two-Tower Retrieval + Ranking Model</code>، و <code>Churn Detection Model (Domain-specific)</code>، و <code>Sentiment Analysis Service</code>.</li>
-                <li><strong><code>Groq Cloud</code>:</strong> يُستخدم لتشغيل موديلز <code>GPT-OSS 20B</code>، و <code>GPT-OSS 120B</code>، بالإضافة إلى <strong><code>Embedding Models (Transformer-based)</code></strong>.</li>
-                <li><strong><code>GCP GPU Hyperscaler</code>:</strong> يشغل محرك <strong><code>vLLM</code></strong> لخدمة النماذج المفتوحة مثل <strong><code>Qwen 7B</code></strong> و <strong><code>Llama 70B</code></strong>.</li>
-              </ul>
-            </li>
-          </ol>
+          </ul>
         </section>
 
         <section id="s2-sec-usecase">
-          <h2>🎯 2. تطبيق عملي على <code>Functional Use Case</code>: تخصيص الصفحة الرئيسية (<code>Homepage Personalization</code>)</h2>
-          <p>إزاي المعمارية دي بتشتغل فعلياً لما نطبقها على <code>Use Case</code> الـ <strong><code>Homepage Personalization</code></strong>؟</p>
+          <h2>🎯 2. تطبيق على <code>Functional Use Case</code>: الـ <code>Homepage Personalization</code></h2>
+          <p>إزاي بننفّذ الـ <strong><code>Homepage Personalization</code></strong> جوه الـ <code>Architecture</code> دي؟</p>
 
           <div class="diagram-box">
-            <div class="diagram-title">مخطط التفاعل الزمني لسيناريو تخصيص الصفحة الرئيسية (Homepage Personalization Sequence)</div>
+            <div class="diagram-title">مخطط خطوات الـ Homepage Personalization</div>
             <pre class="mermaid">
 sequenceDiagram
     autonumber
     actor User as 👤 User
-    participant App as 🖥️ E-commerce Service
+    participant App as 🖥️ E-commerce App & DB
     participant Kafka as ⚡ CDC & Kafka
     participant CDP as 📊 CDP & Airflow DAG
-    participant AI as 🧠 AI Layer & Feast
-    participant Qdrant as 🎯 Qdrant (Vector DB)
-    participant Rec as 🚀 Recommendation Engine
+    participant AI as 🧠 AI Layer & Segmentation
+    participant Qdrant as 🎯 Vector DB (Qdrant)
 
-    Note over User,AI: أ) ما يحدث في الـ Background (تجميع السلوك وتحديث الـ Embeddings)
-    User->>App: يسجل حساب / يبحث (Search) / يتصفح (Clicks & Dwell Time) / يشتري منتج
-    App->>Kafka: إرسال التفاعلات والـ Transactions عبر CDC & Domain Events
-    Kafka->>CDP: تجميع السلوك في الـ CDP وتشغيل Airflow DAGs
-    CDP->>AI: تحديث الـ Segmentation & User Vectors والـ Online Features (Feast)
-    AI->>Qdrant: Upsert User & Item Embeddings
+    Note over User,AI: في الـ Background (تجميع داتا وسلوك الـ User)
+    User->>App: يسجل معلومات / بيحب إيه / يعمل Search / يقعد في كل Page وقت معين
+    App->>Kafka: تسحب الداتا بـ CDC & Events وتوديها لـ Kafka
+    Kafka->>CDP: تتجمع في الـ CDP وبعدين يسحبها Airflow
+    CDP->>AI: تروح للـ AI Layer والـ Feature Store والـ Segmentation
+    AI->>Qdrant: تحديث الـ Embeddings جوه Qdrant
 
-    Note over User,Rec: ب) عند فتح الـ Homepage (Real-Time / Batch Personalization)
-    User->>App: يفتح الـ Homepage
-    App->>Rec: طلب توصيات مخصصة للـ User
-    Rec->>Qdrant: Query User Vector -> ANN Search (Top-K)
-    Qdrant-->>Rec: إرجاع ~500 Candidates
-    Rec->>AI: قراءة Online Features من Feast + ترتيب النتائج (Ranking Model)
-    Rec-->>App: إرجاع Personalized Products + "Frequently Bought Together"
-    App-->>User: عرض Homepage مخصصة لحظياً (أقل من 100ms–500ms)
+    Note over User,Qdrant: عند فتح الـ Homepage وعرض الاقتراحات
+    User->>App: يفتح الـ Homepage أو يشتري منتج
+    App->>AI: طلب Recommendations (عبر DAG Airflow أو مباشرة للـ AI Layer)
+    AI->>Qdrant: Search -> يرجع الـ Top-K
+    AI-->>App: إرجاع المنتجات المخصصة (أو في الـ E-commerce DB)
+    App-->>User: عرض Homepage مخصصة + "الناس اللي اشترت المنتج ده غالباً اشترت معاه كذا وكذا"
             </pre>
           </div>
 
-          <h3>تفاصيل مسارات العمل في <code>Homepage Personalization</code>:</h3>
+          <h3>تفاصيل الـ <code>Homepage Personalization</code>:</h3>
           <ol>
-            <li><strong>المسار المجدول (<code>Batch / Scheduled via Airflow DAG</code>):</strong>
+            <li><strong>إزاي بتشتغل؟ (طريقتين للتنفيذ):</strong>
               <ul>
-                <li>ممكن نعملها بـ <strong><code>Airflow DAG</code></strong> يشتغل دورياً ويشغل الـ <code>Recommendation System</code> والـ <code>Segmentation Models</code>، فيرجع النتائج الجاهزة إلى الـ <code>E-commerce Database</code> أو الـ <code>Feature Store</code> لعرضها فوراً.</li>
+                <li><strong>الطريقة الأولى:</strong> ممكن نعملها بـ <strong><code>DAG Airflow</code></strong> يشتغل ويشغّل الـ <strong><code>Recommendation System</code></strong>، فيرجّع النتائج جاهزة للـ <strong><code>E-commerce Database</code></strong>.</li>
+                <li><strong>الطريقة الثانية:</strong> أو إنه يروح مباشرة للـ <strong><code>AI Layer</code></strong> والـ <strong><code>Segmentation</code></strong> والـ <code>Recommendation Engine</code>.</li>
               </ul>
             </li>
-            <li><strong>المسار اللحظي (<code>Real-time via AI Layer &amp; Qdrant</code>):</strong>
+            <li><strong>إيه اللي بيحصل في الـ <code>Background</code>؟</strong>
               <ul>
-                <li>يروح الطلب مباشرة للـ <strong><code>Recommendation Engine</code></strong> والـ <strong><code>AI Layer</code></strong>:</li>
-                <li>لو الـ <code>User</code> جديد تماماً (<code>Cold Start</code>)، بيطبق <code>Fixed Rules</code> مبدئية.</li>
-                <li>لو الـ <code>User</code> له بصمة وتفاعلات، بيبعت الـ <code>User Vector</code> إلى <strong><code>Qdrant</code></strong> ليعمل <code>ANN Search (Top-K)</code> ويرجع حوالي <strong><code>~500 Candidates</code></strong>، ثم يرتبهم (<code>Rank</code>) باستخدام الـ <strong><code>Online Features</code></strong> من <code>Feast</code>.</li>
-              </ul>
-            </li>
-            <li><strong>ماذا يحدث في الـ <code>Background</code> أثناء تصفح الـ <code>User</code>؟</strong>
-              <ul>
-                <li>لما الـ <code>User</code> بيسجل في الموقع، أو بيكتب بعض المعلومات عن اهتماماته، أو بيروح يعمل <strong><code>Search</code></strong> على منتجات معينة، أو بيقعد في كل <code>Page</code> وقت معين (<code>Dwell Time</code> &amp; <code>Clicks</code>):</li>
-                <li>كل الداتا دي بتروح في الـ <strong><code>Background</code></strong> إلى <strong><code>Kafka</code></strong> (عبر الـ <code>CDC</code> والـ <code>Domain Events</code>) &rarr; ومنها إلى الـ <strong><code>CDP</code></strong> &rarr; ثم يسحبها <strong><code>Airflow</code></strong> &rarr; ويدخلها على الـ <strong><code>AI Layer</code></strong>.</li>
-                <li><strong>مثال تطبيقي (<code>Cross-Selling / Collaborative Filtering</code>):</strong> لو الـ <code>User</code> اشترى منتج معين، النظام يقترح له تلقائياً: <em>"الناس اللي اشترت المنتج ده غالباً اشترت معاه كذا وكذا"</em> (<code>Frequently Bought Together / Next-Best Action</code>).</li>
+                <li>لما الـ <strong><code>User</code></strong> يسجل في الموقع، بيكتب بعض المعلومات عنه أو بيحب إيه، أو راح عمل <strong><code>Search</code></strong> على إيه، أو قعد في كل <strong><code>Page</code></strong> قد إيه (<code>Clicks &amp; Dwell Time</code>).</li>
+                <li>بعدها الداتا دي كلها بتروح في الـ <strong><code>Background</code></strong> لـ <strong><code>Kafka</code></strong> بـ <strong><code>CDC</code></strong> &rarr; وبعدين <strong><code>Airflow</code></strong> (عن طريق الـ <code>CDP</code>) &rarr; وبعدين تروح للـ <strong><code>AI Layer</code></strong>.</li>
+                <li><strong>مثال عملي للاقتراحات:</strong> ممكن نقترح للـ <code>User</code> مثلاً لو اشترى منتج معين: <strong>"إن الناس اللي اشترت المنتج ده غالباً اشترت معاه كذا وكذا"</strong> (<code>Frequently Bought Together / Next-Best Action</code>).</li>
               </ul>
             </li>
           </ol>
