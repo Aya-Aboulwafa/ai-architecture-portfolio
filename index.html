@@ -170,16 +170,57 @@
       grid-template-columns: 320px 1fr;
       gap: 2.25rem;
       align-items: start;
+      transition: all 0.25s ease;
     }
 
-    @media (max-width: 1024px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-      .sidebar {
-        position: static !important;
-        max-height: none !important;
-      }
+    body.sidebar-collapsed .layout {
+      grid-template-columns: 1fr;
+    }
+
+    body.sidebar-collapsed .sidebar {
+      display: none;
+    }
+
+    /* Floating Re-open Sidebar Pill (visible when sidebar is collapsed) */
+    .floating-toc-btn {
+      position: fixed;
+      top: 5.3rem;
+      right: 1.25rem;
+      z-index: 95;
+      display: none;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      background: var(--bg-card);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      box-shadow: var(--shadow);
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .floating-toc-btn:hover {
+      background: var(--accent);
+      color: #0f172a;
+      transform: translateY(-2px);
+    }
+
+    body.sidebar-collapsed .floating-toc-btn {
+      display: inline-flex;
+    }
+
+    /* Sidebar Backdrop for Mobile/Tablet Drawer */
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 140;
     }
 
     /* Sidebar TOC with Nested Sessions */
@@ -193,18 +234,83 @@
       box-shadow: var(--shadow);
       max-height: calc(100vh - 6.5rem);
       overflow-y: auto;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    }
+
+    @media (max-width: 1024px) {
+      .layout {
+        grid-template-columns: 1fr !important;
+      }
+      .sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: min(340px, 88vw);
+        max-height: 100vh !important;
+        border-radius: 1rem 0 0 1rem;
+        z-index: 150;
+        display: block !important;
+        transform: translateX(0);
+      }
+      body.sidebar-collapsed .sidebar {
+        transform: translateX(105%);
+        pointer-events: none;
+      }
+      body:not(.sidebar-collapsed) .sidebar-backdrop {
+        display: block;
+      }
+      .floating-toc-btn {
+        top: auto;
+        bottom: 1.5rem;
+        right: 1.25rem;
+      }
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border);
     }
 
     .sidebar-title {
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       font-weight: 800;
       color: var(--accent);
-      margin-bottom: 0.9rem;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding-bottom: 0.65rem;
-      border-bottom: 1px solid var(--border);
+      gap: 0.45rem;
+    }
+
+    .sidebar-close-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      border-radius: 0.45rem;
+      padding: 0.25rem 0.55rem;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: all 0.15s ease;
+    }
+
+    .sidebar-close-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-sidebar-toggle {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: rgba(56, 189, 248, 0.4);
+      color: var(--accent);
     }
 
     .session-group {
@@ -631,10 +737,16 @@
 
   <!-- Top Navigation -->
   <nav class="navbar">
-    <a href="#" class="navbar-brand" onclick="switchSession('session-1'); return false;">
-      <span>🏗️ AI Architecture</span>
-      <span class="badge-tag" id="navActiveBadge">Session 1 &amp; 2</span>
-    </a>
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <button class="btn btn-sidebar-toggle" id="navbarSidebarBtn" onclick="toggleSidebar()" aria-label="فتح أو قفل قائمة المحاضرات والفهرس" title="فتح / قفل الفهرس الجانبي">
+        <span id="navbarSidebarIcon">✕</span>
+        <span id="navbarSidebarText">إخفاء الفهرس</span>
+      </button>
+      <a href="#" class="navbar-brand" onclick="switchSession('session-1'); return false;">
+        <span>🏗️ AI Architecture</span>
+        <span class="badge-tag" id="navActiveBadge">Session 1 &amp; 2</span>
+      </a>
+    </div>
     <div class="nav-actions">
       <a href="https://www.youtube.com/watch?v=HUWlckeVwbM&t=6211s" target="_blank" rel="noopener" class="btn btn-yt">
         🎥 تسجيل Session 1
@@ -648,18 +760,33 @@
     </div>
   </nav>
 
+  <!-- Floating Quick-Open TOC Pill (appears when sidebar is closed) -->
+  <button class="floating-toc-btn" onclick="toggleSidebar()" aria-label="إظهار الفهرس الجانبي">
+    <span>📑</span>
+    <span>فتح قائمة المحاضرات والفهرس</span>
+  </button>
+
+  <!-- Backdrop for Mobile/Tablet Drawer -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar(true)"></div>
+
   <!-- Main Grid Layout -->
   <div class="layout">
 
     <!-- Sticky Sidebar Menu with All Sessions & Nested TOCs -->
-    <aside class="sidebar">
-      <div class="sidebar-title">📚 محاضرات الكورس والفهرس</div>
+    <aside class="sidebar" id="mainSidebar" aria-label="قائمة المحاضرات والفهرس">
+      <div class="sidebar-header">
+        <div class="sidebar-title">📚 محاضرات الكورس والفهرس</div>
+        <button class="sidebar-close-btn" onclick="toggleSidebar(true)" title="قفل القائمة الجانبية">
+          <span>✕</span>
+          <span>قفل</span>
+        </button>
+      </div>
 
       <!-- SESSION 1 MENU GROUP -->
       <div class="session-group active open" id="menu-group-session-1">
         <button class="session-header-btn" onclick="handleSessionMenuClick('session-1')">
           <span>📌 المحاضرة 1: الأساس النظري وأطر العمل</span>
-          <span class="session-chevron">▼</span>
+          <span class="session-chevron" onclick="event.stopPropagation(); toggleSessionAccordion('session-1')" title="فتح / طي فهرس المحاضرة">▼</span>
         </button>
         <ul class="toc-list">
           <li><a href="#s1-part-1" class="toc-part" onclick="goToSection('session-1', 's1-part-1'); return false;">📘 الجزء الأول: الأساس النظري</a></li>
@@ -683,7 +810,7 @@
       <div class="session-group open" id="menu-group-session-2">
         <button class="session-header-btn" onclick="handleSessionMenuClick('session-2')">
           <span>📌 المحاضرة 2: الزوايا المعمارية ومنصة الأحداث (CDC, Kafka, CDP)</span>
-          <span class="session-chevron">▼</span>
+          <span class="session-chevron" onclick="event.stopPropagation(); toggleSessionAccordion('session-2')" title="فتح / طي فهرس المحاضرة">▼</span>
         </button>
         <ul class="toc-list">
           <li><a href="#s2-part-1" class="toc-part" onclick="goToSection('session-2', 's2-part-1'); return false;">📘 الجزء الأول: الزوايا والعقود</a></li>
@@ -1709,6 +1836,35 @@ sequenceDiagram
       }
     }
 
+    function toggleSidebar(forceClose) {
+      const body = document.body;
+      if (forceClose === true) {
+        body.classList.add('sidebar-collapsed');
+      } else if (forceClose === false) {
+        body.classList.remove('sidebar-collapsed');
+      } else {
+        body.classList.toggle('sidebar-collapsed');
+      }
+      updateSidebarToggleUI();
+    }
+
+    function updateSidebarToggleUI() {
+      const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+      const iconEl = document.getElementById('navbarSidebarIcon');
+      const textEl = document.getElementById('navbarSidebarText');
+      if (iconEl && textEl) {
+        iconEl.textContent = isCollapsed ? '☰' : '✕';
+        textEl.textContent = isCollapsed ? 'إظهار الفهرس' : 'إخفاء الفهرس';
+      }
+    }
+
+    function toggleSessionAccordion(sessionId) {
+      const grp = document.getElementById('menu-group-' + sessionId);
+      if (grp) {
+        grp.classList.toggle('open');
+      }
+    }
+
     function handleSessionMenuClick(sessionId) {
       const grp = document.getElementById('menu-group-' + sessionId);
       if (currentSession === sessionId) {
@@ -1723,17 +1879,27 @@ sequenceDiagram
       if (currentSession !== sessionId) {
         switchSession(sessionId, true);
       }
+      // On mobile/tablet screens, auto-close the drawer after clicking a section link
+      if (window.innerWidth <= 1024) {
+        toggleSidebar(true);
+      }
       const target = document.getElementById(elementId);
       if (target) {
         setTimeout(() => {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 30);
+        }, 40);
       }
     }
 
     // Initialize Mermaid while both panes are visible so all SVGs compute proper bounding boxes,
     // then hide the non-active session pane.
     document.addEventListener('DOMContentLoaded', async () => {
+      // On mobile/tablet, start with sidebar drawer closed so content is immediately visible
+      if (window.innerWidth <= 1024) {
+        document.body.classList.add('sidebar-collapsed');
+      }
+      updateSidebarToggleUI();
+
       mermaid.initialize({
         startOnLoad: false,
         theme: 'dark',
@@ -1793,7 +1959,12 @@ sequenceDiagram
     }
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'Escape') {
+        closeLightbox();
+        if (window.innerWidth <= 1024 && !document.body.classList.contains('sidebar-collapsed')) {
+          toggleSidebar(true);
+        }
+      }
     });
   </script>
 </body>
