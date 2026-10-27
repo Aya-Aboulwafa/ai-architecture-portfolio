@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Architecture — Session 1: Fundamentals, Frameworks & Practical Case Study</title>
-  <meta name="description" content="ملخص شامل للسيشن الأولى من كورس AI Architecture: الأساس النظري، أطر العمل المعمارية (TOGAF, Zachman, C4)، وتطبيق عملي على Marketing Automation System." />
+  <title>AI Architecture Course Notes — Aya Aboulwafa</title>
+  <meta name="description" content="ملخصات شاملة وتفاعلية لكورس AI Architecture: الأساس النظري، أطر العمل المعمارية (TOGAF, Zachman, C4)، الزوايا المعمارية، منصة الأحداث (CDC, Kafka, CDP, Airflow, Qdrant)، والمراقبة في الإنتاج." />
 
-  <!-- Google Fonts: Readex Pro / Cairo & JetBrains Mono -->
+  <!-- Google Fonts: Cairo & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -92,6 +92,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
 
     [data-theme="light"] .navbar {
@@ -121,7 +123,8 @@
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.65rem;
+      flex-wrap: wrap;
     }
 
     .btn {
@@ -160,12 +163,12 @@
 
     /* Layout Container */
     .layout {
-      max-width: 1320px;
+      max-width: 1360px;
       margin: 0 auto;
       padding: 2.5rem 1.5rem 5rem;
       display: grid;
-      grid-template-columns: 290px 1fr;
-      gap: 2.5rem;
+      grid-template-columns: 320px 1fr;
+      gap: 2.25rem;
       align-items: start;
     }
 
@@ -175,48 +178,113 @@
       }
       .sidebar {
         position: static !important;
+        max-height: none !important;
       }
     }
 
-    /* Sidebar TOC */
+    /* Sidebar TOC with Nested Sessions */
     .sidebar {
       position: sticky;
       top: 5.2rem;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 1rem;
-      padding: 1.35rem;
+      padding: 1.25rem;
       box-shadow: var(--shadow);
       max-height: calc(100vh - 6.5rem);
       overflow-y: auto;
     }
 
     .sidebar-title {
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       font-weight: 800;
       color: var(--accent);
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.9rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding-bottom: 0.6rem;
+      padding-bottom: 0.65rem;
       border-bottom: 1px solid var(--border);
+    }
+
+    .session-group {
+      margin-bottom: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      background: rgba(15, 23, 42, 0.25);
+      transition: border-color 0.2s ease;
+    }
+
+    [data-theme="light"] .session-group {
+      background: var(--bg-elevated);
+    }
+
+    .session-group.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.25);
+    }
+
+    .session-header-btn {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 0.9rem;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.93rem;
+      font-weight: 800;
+      text-align: right;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .session-header-btn:hover {
+      background: rgba(56, 189, 248, 0.1);
+    }
+
+    .session-group.active .session-header-btn {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(129, 140, 248, 0.18));
+      color: var(--accent);
+    }
+
+    .session-chevron {
+      font-size: 0.75rem;
+      transition: transform 0.25s ease;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .session-group.open .session-chevron {
+      transform: rotate(180deg);
+      color: var(--accent);
     }
 
     .toc-list {
       list-style: none;
-      display: flex;
+      display: none;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: 0.25rem;
+      padding: 0.5rem 0.65rem 0.75rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+
+    .session-group.open .toc-list {
+      display: flex;
     }
 
     .toc-list a {
       display: block;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       color: var(--text-secondary);
       text-decoration: none;
-      padding: 0.35rem 0.6rem;
-      border-radius: 0.45rem;
+      padding: 0.32rem 0.55rem;
+      border-radius: 0.4rem;
       transition: all 0.15s ease;
       line-height: 1.45;
     }
@@ -229,7 +297,7 @@
     .toc-part {
       font-weight: 700;
       color: var(--text-primary) !important;
-      margin-top: 0.5rem;
+      margin-top: 0.35rem;
       background: rgba(56, 189, 248, 0.08);
     }
 
@@ -250,6 +318,49 @@
       .navbar {
         padding: 0.75rem 1rem;
       }
+    }
+
+    .session-pane.hidden-pane {
+      display: none;
+    }
+
+    /* Session Switcher Pills inside Main Content Top */
+    .session-tabs-bar {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .session-tab-pill {
+      flex: 1;
+      min-width: 220px;
+      padding: 0.85rem 1.15rem;
+      border-radius: 0.85rem;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: right;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+
+    .session-tab-pill:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .session-tab-pill.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.16), rgba(129, 140, 248, 0.16));
+      border-color: var(--accent);
+      color: var(--text-primary);
+      box-shadow: 0 4px 15px -3px rgba(56, 189, 248, 0.2);
     }
 
     /* Hero Header */
@@ -520,13 +631,13 @@
 
   <!-- Top Navigation -->
   <nav class="navbar">
-    <a href="#" class="navbar-brand">
+    <a href="#" class="navbar-brand" onclick="switchSession('session-1'); return false;">
       <span>🏗️ AI Architecture</span>
-      <span class="badge-tag">Session 1</span>
+      <span class="badge-tag" id="navActiveBadge">Session 1 &amp; 2</span>
     </a>
     <div class="nav-actions">
       <a href="https://www.youtube.com/watch?v=HUWlckeVwbM&t=6211s" target="_blank" rel="noopener" class="btn btn-yt">
-        🎥 مشاهدة تسجيل المحاضرة
+        🎥 تسجيل Session 1
       </a>
       <a href="https://github.com/Aya-Aboulwafa/ai-architecture-portfolio" target="_blank" rel="noopener" class="btn">
         💻 GitHub Repo
@@ -540,397 +651,447 @@
   <!-- Main Grid Layout -->
   <div class="layout">
 
-    <!-- Sticky Sidebar Table of Contents -->
+    <!-- Sticky Sidebar Menu with All Sessions & Nested TOCs -->
     <aside class="sidebar">
-      <div class="sidebar-title">📑 فهرس محتويات السيشن</div>
-      <ul class="toc-list">
-        <li><a href="#part-1" class="toc-part">📘 الجزء الأول: الأساس النظري</a></li>
-        <li><a href="#sec-1">1. الأدوات الأساسية للـ Architect</a></li>
-        <li><a href="#sec-2">2. شخصية وثقافة الـ Architect</a></li>
-        <li><a href="#sec-3">3. مشروع Marketing Automation</a></li>
-        <li><a href="#sec-4">4. جمع وتحليل متطلبات البيزنس</a></li>
-        <li><a href="#sec-5">5. أطر العمل (TOGAF, Zachman, C4)</a></li>
-        <li><a href="#sec-6">6. تطوير المعمارية وأهمية الـ POC</a></li>
-        <li><a href="#sec-7">7. الـ Views & Perspectives</a></li>
-        <li><a href="#sec-8">8. المعمارية مع منهجية Agile</a></li>
-        <li><a href="#part-2" class="toc-part">🛠️ الجزء الثاني: التطبيق العملي</a></li>
-        <li><a href="#sec-add">أولاً: وثيقة التصميم المعماري (ADD)</a></li>
-        <li><a href="#sec-views">ثانياً: تطبيق الـ Views (Security & Deployment)</a></li>
-        <li><a href="#sec-diagrams">ثالثاً: الرسم المعماري (As-Is & To-Be)</a></li>
-        <li><a href="#sec-summary">✅ ملخص خطوات العمل العملي</a></li>
-      </ul>
+      <div class="sidebar-title">📚 محاضرات الكورس والفهرس</div>
+
+      <!-- SESSION 1 MENU GROUP -->
+      <div class="session-group active open" id="menu-group-session-1">
+        <button class="session-header-btn" onclick="handleSessionMenuClick('session-1')">
+          <span>📌 المحاضرة 1: الأساس النظري وأطر العمل</span>
+          <span class="session-chevron">▼</span>
+        </button>
+        <ul class="toc-list">
+          <li><a href="#s1-part-1" class="toc-part" onclick="goToSection('session-1', 's1-part-1'); return false;">📘 الجزء الأول: الأساس النظري</a></li>
+          <li><a href="#s1-sec-1" onclick="goToSection('session-1', 's1-sec-1'); return false;">1. الأدوات الأساسية للـ Architect</a></li>
+          <li><a href="#s1-sec-2" onclick="goToSection('session-1', 's1-sec-2'); return false;">2. شخصية وثقافة الـ Architect</a></li>
+          <li><a href="#s1-sec-3" onclick="goToSection('session-1', 's1-sec-3'); return false;">3. مشروع Marketing Automation</a></li>
+          <li><a href="#s1-sec-4" onclick="goToSection('session-1', 's1-sec-4'); return false;">4. جمع وتحليل متطلبات البيزنس</a></li>
+          <li><a href="#s1-sec-5" onclick="goToSection('session-1', 's1-sec-5'); return false;">5. أطر العمل (TOGAF, Zachman, C4)</a></li>
+          <li><a href="#s1-sec-6" onclick="goToSection('session-1', 's1-sec-6'); return false;">6. تطوير المعمارية وأهمية الـ POC</a></li>
+          <li><a href="#s1-sec-7" onclick="goToSection('session-1', 's1-sec-7'); return false;">7. الـ Views &amp; Perspectives</a></li>
+          <li><a href="#s1-sec-8" onclick="goToSection('session-1', 's1-sec-8'); return false;">8. المعمارية مع منهجية Agile</a></li>
+          <li><a href="#s1-part-2" class="toc-part" onclick="goToSection('session-1', 's1-part-2'); return false;">🛠️ الجزء الثاني: التطبيق العملي</a></li>
+          <li><a href="#s1-sec-add" onclick="goToSection('session-1', 's1-sec-add'); return false;">أولاً: وثيقة التصميم المعماري (ADD)</a></li>
+          <li><a href="#s1-sec-views" onclick="goToSection('session-1', 's1-sec-views'); return false;">ثانياً: تطبيق الـ Views (Security &amp; Deployment)</a></li>
+          <li><a href="#s1-sec-diagrams" onclick="goToSection('session-1', 's1-sec-diagrams'); return false;">ثالثاً: الرسم المعماري (As-Is &amp; To-Be)</a></li>
+          <li><a href="#s1-sec-summary" onclick="goToSection('session-1', 's1-sec-summary'); return false;">✅ ملخص خطوات العمل العملي</a></li>
+        </ul>
+      </div>
+
+      <!-- SESSION 2 MENU GROUP -->
+      <div class="session-group open" id="menu-group-session-2">
+        <button class="session-header-btn" onclick="handleSessionMenuClick('session-2')">
+          <span>📌 المحاضرة 2: الزوايا المعمارية ومنصة الأحداث (CDC, Kafka, CDP)</span>
+          <span class="session-chevron">▼</span>
+        </button>
+        <ul class="toc-list">
+          <li><a href="#s2-part-1" class="toc-part" onclick="goToSection('session-2', 's2-part-1'); return false;">📘 الجزء الأول: الزوايا والعقود</a></li>
+          <li><a href="#s2-sec-1" onclick="goToSection('session-2', 's2-sec-1'); return false;">1. Context Viewpoint &amp; API Gateway</a></li>
+          <li><a href="#s2-sec-2" onclick="goToSection('session-2', 's2-sec-2'); return false;">2. Deployment &amp; Capacity Planning</a></li>
+          <li><a href="#s2-sec-3" onclick="goToSection('session-2', 's2-sec-3'); return false;">3. جدول الاتصالات (Connections Table)</a></li>
+          <li><a href="#s2-sec-4" onclick="goToSection('session-2', 's2-sec-4'); return false;">4. Data Policy &amp; API Contracts</a></li>
+          <li><a href="#s2-sec-5" onclick="goToSection('session-2', 's2-sec-5'); return false;">5. Information View: App DB vs. CDP</a></li>
+          <li><a href="#s2-sec-6" onclick="goToSection('session-2', 's2-sec-6'); return false;">6. Operational, Observability &amp; Security</a></li>
+          <li><a href="#s2-part-2" class="toc-part" onclick="goToSection('session-2', 's2-part-2'); return false;">🧠 الجزء الثاني: لبنات الـ AI والداتا</a></li>
+          <li><a href="#s2-sec-blocks" onclick="goToSection('session-2', 's2-sec-blocks'); return false;">1. AI System Building Blocks</a></li>
+          <li><a href="#s2-sec-models" onclick="goToSection('session-2', 's2-sec-models'); return false;">2. اختيار الموديل والـ Benchmarking</a></li>
+          <li><a href="#s2-sec-pipeline" onclick="goToSection('session-2', 's2-sec-pipeline'); return false;">3. رحلة الداتا (CDC &rarr; Kafka &rarr; Qdrant)</a></li>
+          <li><a href="#s2-part-3" class="toc-part" onclick="goToSection('session-2', 's2-part-3'); return false;">🗺️ الجزء الثالث: المعمارية الكاملة</a></li>
+          <li><a href="#s2-sec-tobe" onclick="goToSection('session-2', 's2-sec-tobe'); return false;">1. شرح مخطط الـ To-Be Architecture</a></li>
+          <li><a href="#s2-sec-usecase" onclick="goToSection('session-2', 's2-sec-usecase'); return false;">2. تطبيق: Homepage Personalization</a></li>
+        </ul>
+      </div>
+
     </aside>
 
     <!-- Article Content -->
     <main class="content">
 
-      <!-- Hero Header -->
-      <header class="hero-header">
-        <div class="tags-row">
-          <span class="tag-pill">#ai-architecture</span>
-          <span class="tag-pill">#system-design</span>
-          <span class="tag-pill">#togaf</span>
-          <span class="tag-pill">#c4-model</span>
-          <span class="tag-pill">#security</span>
-          <span class="tag-pill">#mlops</span>
-        </div>
-        <h1>🏗️ AI Architecture — Session 1: Fundamentals, Frameworks & Practical Case Study</h1>
-        <div class="meta-info">
-          <span>✍️ إعداد وتلخيص: <strong>Aya Aboulwafa</strong></span>
-          <span>📅 التاريخ: أكتوبر 2026</span>
-          <span>🎥 <a href="https://www.youtube.com/watch?v=HUWlckeVwbM&t=6211s" target="_blank" style="color: var(--accent);">رابط تسجيل السيشن على YouTube</a></span>
-        </div>
-      </header>
-
-      <!-- Core Abstract Callout -->
-      <div class="callout callout-abstract">
-        <div class="callout-title">💡 مصادر السيشن والفكرة الجوهرية</div>
-        <p style="margin-bottom: 0.6rem;">
-          🎥 <strong>تسجيل السيشن الأولى (YouTube):</strong>
-          <a href="https://www.youtube.com/watch?v=HUWlckeVwbM&t=6211s" target="_blank" style="color: var(--accent); font-weight: 700;">AI Architecture — Session 1 Recording</a>
-        </p>
-        <p style="margin-bottom: 0;">
-          <strong>الفكرة الجوهرية للـ Session:</strong>
-          الـ <strong>AI Architecture</strong> مش مجرد اختيار موديل أو كتابة كود، بل هو <strong>الربط بين أهداف البيزنس (Business Goals) والتصميم التقني (Technical Design)</strong> من خلال فهم المشكلة الحالية (<code>As-Is</code>)، وتحديد الشكل المستهدف (<code>To-Be</code>)، ودراسة الـ <code>Trade-offs</code>، وتطبيق معايير الجودة (<code>Quality Attributes / Perspectives</code>) مثل الـ Security والـ Performance على كل زاوية من زوايا النظام (<code>Views</code>).
-        </p>
+      <!-- Quick Session Switcher Bar -->
+      <div class="session-tabs-bar">
+        <button class="session-tab-pill active" id="tab-btn-session-1" onclick="switchSession('session-1')">
+          <span>🏗️ المحاضرة الأولى (Session 1): الأساس النظري وأطر العمل</span>
+          <span class="badge-tag">Session 1</span>
+        </button>
+        <button class="session-tab-pill" id="tab-btn-session-2" onclick="switchSession('session-2')">
+          <span>⚡ المحاضرة الثانية (Session 2): منصة الأحداث والـ Production AI</span>
+          <span class="badge-tag">Session 2</span>
+        </button>
       </div>
 
-      <!-- PART 1 -->
-      <div id="part-1" class="part-banner">
-        📘 الجزء الأول: الأساس النظري وعقلية الـ Architect (Theoretical Foundation)
-      </div>
+      <!-- ========================================================= -->
+      <!-- SESSION 1 PANE                                            -->
+      <!-- ========================================================= -->
+      <article id="pane-session-1" class="session-pane">
 
-      <section id="sec-1">
-        <h2>🛠️ 1. الأدوات الأساسية لأي Software / AI Architect</h2>
-        <p>وأنت بتعمل الـ Architecture لأي سيستم هتحتاج 3 أدوات أساسية تشتغل بيهم بالتوازي:</p>
-        <ol>
-          <li><strong>أداة للرسم المعماري (Diagramming Tool):</strong> مثل <code>draw.io</code>، أو <code>Mermaid</code>، أو <code>Structurizr</code> لرسم الـ System Views.</li>
-          <li><strong>أداة للتوثيق (Wiki / Documentation Tool):</strong> مثل <code>Word</code>، أو <code>Notion</code>، أو <code>Confluence</code>، أو <code>Obsidian</code> لكتابة الـ Architecture Design Document (ADD) والـ Requirements.</li>
-          <li><strong>بيئة التطوير (IDE):</strong> لبناء الـ <code>POC (Proof of Concept)</code> والـ <code>Skeleton System</code> وتجربة القرارات عملياً.</li>
-        </ol>
-      </section>
+        <!-- Hero Header -->
+        <header class="hero-header">
+          <div class="tags-row">
+            <span class="tag-pill">#ai-architecture</span>
+            <span class="tag-pill">#system-design</span>
+            <span class="tag-pill">#togaf</span>
+            <span class="tag-pill">#c4-model</span>
+            <span class="tag-pill">#security</span>
+            <span class="tag-pill">#mlops</span>
+          </div>
+          <h1>🏗️ AI Architecture — Session 1: Fundamentals, Frameworks &amp; Practical Case Study</h1>
+          <div class="meta-info">
+            <span>✍️ إعداد وتلخيص: <strong>Aya Aboulwafa</strong></span>
+            <span>📅 التاريخ: أكتوبر 2026</span>
+            <span>🎥 <a href="https://www.youtube.com/watch?v=HUWlckeVwbM&t=6211s" target="_blank" style="color: var(--accent);">رابط تسجيل السيشن على YouTube</a></span>
+          </div>
+        </header>
 
-      <section id="sec-2">
-        <h2>🧠 2. شخصية وثقافة الـ Architect (The Architect Personality & Culture)</h2>
-        <div class="figure-card">
-          <img src="assets/session-1/01-architect-personality.png" alt="The Architect Personality & Culture" onclick="openLightbox(this.src)" />
-          <div class="figure-caption">شخصية وثقافة الـ Architect الناجح (اضغط لتكبير الصورة)</div>
-        </div>
-        <p>عشان تكون Architect ناجح، الموضوع بيبدأ بالـ Mindset وطريقة التفكير والتعامل مع التيم والـ Stakeholders:</p>
-        <ul>
-          <li><strong>متواضع ومتقبل للآراء (<code>Humble</code>):</strong> يضع مصلحة المشروع وأفضل حل فوق فكرته الشخصية؛ لازم تتقبل كل الآراء وتجربها عملياً عشان تعرف <strong>"ليه آه وليه لأ"</strong> بناءً على التجربة العملية والدليل مش مجرد انطباعات.</li>
-          <li><strong>فضولي ودائم التعلم (<code>Curious</code>):</strong> يواكب التقنيات الجديدة ويفهم الـ Domains المختلفة.</li>
-          <li><strong>عملي وواقعي (<code>Pragmatic</code>):</strong> يختار أبسط تصميم يحقق المطلوب في المرحلة الحالية (<code>MVP</code>) بدون تعقيد غير مبرر (<code>Over-engineering</code>).</li>
-          <li><strong>غير متعصب لتكنولوجيا معينة (<code>Technology Agnostic</code>):</strong> منفصل عن تفضيلاته الشخصية؛ يختار الأداة بناءً على مدى ملاءمتها للمشكلة.</li>
-          <li><strong>يفكر بمنطق المقايضات (<code>Trade-off Thinker</code>):</strong> مفيش تصميم مثالي (<code>No design is perfect</code>)، كل اختيار له تكلفة (<code>Cost</code>) ومميزات وعيوب؛ دورك تحدد الـ <strong>Trade-offs</strong> وإيه الـ Tools اللي هتستخدمها <strong>وليه اخترتها تحديداً</strong>.</li>
-          <li><strong>متواصل قوي (<code>Strong Communicator - Viewpoints</code>):</strong> لازم يبقى عندك <strong>Viewpoint</strong> على حسب أنت بتكلم مين فهتكلمه إزاي؛ تشرح نفس الـ Design للمهندسين (<code>Engineers</code>) بتفاصيل تقنية، وللإدارة (<code>Executives</code>) بلغة البيزنس والتكلفة والعائد.</li>
-          <li><strong>تعاوني (<code>Collaborative</code>):</strong> يستمع أولاً، ويؤثر في الفريق بدون فرض سلطة (<code>Influences without authority</code>).</li>
-          <li><strong>مسؤول عن قراراته (<code>Accountable</code>):</strong> يتحمل نتيجة قراراته المعمارية ويثبت صحتها من خلال عمل <code>POC</code> و <code>Skeleton</code>.</li>
-        </ul>
-      </section>
-
-      <section id="sec-3">
-        <h2>🎯 3. مشروع عملي: أتمتة التسويق بالذكاء الاصطناعي (Marketing Automation with AI & Agents)</h2>
-        <div class="figure-card">
-          <img src="assets/session-1/02-marketing-automation-usecases.png" alt="Marketing Automation with AI & Agents" onclick="openLightbox(this.src)" />
-          <div class="figure-caption">محاور مشروع أتمتة التسويق بالذكاء الاصطناعي (Functional, KPIs, Non-Functional)</div>
-        </div>
-        <p>كمثال تطبيقي حقيقي، لما بنبص لمشروع <strong>Marketing Automation</strong> مدعوم بالـ AI والـ Agents، بنقسم الرؤية إلى 3 محاور:</p>
-
-        <h3>أ) حالات الاستخدام الوظيفية (<code>Functional Use Cases</code>)</h3>
-        <ul>
-          <li><strong>تخصيص الصفحة الرئيسية والمنتجات (<code>Homepage / Products Page Personalization</code>):</strong> بالاعتماد على الـ <code>Feature Stores</code> لعرض محتوى مخصص لكل شريحة أو مستخدم.</li>
-          <li><strong>أفضل خطوة تالية (<code>Next-Best Action</code>):</strong> توقع وتوجيه العميل للأكشن الأنسب له لحظياً.</li>
-          <li><strong>التعامل مع المستخدمين الجدد (<code>New Users / Cold Start</code>):</strong> إزاي نقدم تجربة ذكية ليوزر لسه معندناش ليه History كافي.</li>
-          <li><strong>التسويق عبر الـ Agents (<code>Agentic Marketing - Campaign Automation</code>):</strong> إزاي تخلي الـ Agent يعمل الـ Campaign ويديرها من البداية للنهاية.</li>
-        </ul>
-
-        <h3>ب) مؤشرات الأداء والأهداف (<code>KPIs / Objectives - L2 connected to goals</code>)</h3>
-        <ul>
-          <li>لازم يكون عندك نوعين من الـ KPIs تتكلم بيهم مع الـ Client وتربطهم بأهدافه:
-            <ol>
-              <li><strong>Business KPIs:</strong> مثل زيادة معدل التحويل والمبيعات (<code>Increase sales take-rate by 80%</code>)، ورفع رضا العملاء (<code>Increase CSAT to 70%</code>).</li>
-              <li><strong>Technical KPIs & Feedback Loop:</strong> مثل تتبع الـ Feedback والـ Quality والـ Latency في أدوات المراقبة زي <strong><code>Langfuse</code></strong> عشان تحسن الموديل باستمرار.</li>
-            </ol>
-          </li>
-        </ul>
-
-        <h3>ج) المتطلبات غير الوظيفية (<code>Non-Functional Use Cases / Quality Attributes</code>)</h3>
-        <ul>
-          <li><strong>سرعة الاستجابة (<code>Latency</code>):</strong> هل الـ Use Case محتاجة <code>Real-time</code> (لحظي وأنت فاتح الصفحة)، ولا <code>Near real-time</code>، ولا <code>Batch</code> (كل فترة في الخلفية)؟</li>
-          <li><strong>قابلية التوسع (<code>Scalability</code>):</strong> استيعاب عدد المستخدمين وأوقات ذروة الحملات (<code>Peak campaigns</code>).</li>
-          <li><strong>قابلية التفسير والتحكم (<code>Explainability & Business Control</code>):</strong> قدرة البيزنس على فهم "ليه الـ AI أخذ القرار ده" والتحكم في القواعد.</li>
-          <li><strong>الأمان والامتثال والقوانين (<code>Security, Compliance & Privacy</code>):</strong> لازم تبقى عارف قوانين البلد اللي هتعمل فيها البروجكت (مثل <strong><code>PDPL</code></strong> في السعودية/مصر أو <strong><code>GDPR</code></strong> في أوروبا)، ولازم يبقى عندك إجابة واضحة لأي سؤال يسأله الـ Client عن السيستم.</li>
-        </ul>
-      </section>
-
-      <section id="sec-4">
-        <h2>📋 4. جمع وتحليل متطلبات البيزنس (The Business Requirements)</h2>
-        <div class="figure-card">
-          <img src="assets/session-1/03-business-requirements.png" alt="The Business Requirements" onclick="openLightbox(this.src)" />
-          <div class="figure-caption">خطوات جمع وتحليل متطلبات البيزنس</div>
-        </div>
-        <p>ما بعد تعريف البروجكت، بنبدأ نحدد الـ <strong>Business Requirements</strong> بدقة:</p>
-        <ol>
-          <li><strong>سيناريو وقصة المشروع (<code>Project Story & Scenario</code>):</strong> إيه القصة الكاملة للمشروع والمشكلة اللي بنحلها؟</li>
-          <li><strong>المعنيون والشخصيات (<code>Stakeholders / Personas</code>):</strong>
-            <ul>
-              <li>السيستم هيشتغل إزاي مع الآخرين؟ هل هيتكامل مع سيستم تاني ولا هيستخدمه أشخاص مختلفين؟</li>
-              <li>تحديد كل <strong><code>Persona</code></strong> والصلاحيات (<code>Permissions / Roles</code>) الخاصة بكل منها.</li>
-            </ul>
-          </li>
-          <li><strong>تقييم حالات الاستخدام وإغلاق الفجوات (<code>Use Cases Assessment & Closing the Gaps</code>):</strong>
-            <ul>
-              <li>لازم تحلل البروجكت وتفكر فيه بعمق وتقفل كل الأسئلة المفتوحة (<code>1–n rounds</code> من الميتينجز في الـ Planning Call) لحد ما الدنيا كلها تكون واضحة.</li>
-            </ul>
-          </li>
-          <li><strong>الجداول الزمنية والـ Spikes (<code>Timelines: Ready for Implementation vs. Spikes</code>):</strong>
-            <ul>
-              <li>هل ندي Timelines دلوقتي؟ لازم نفرق بين المهام الواضحة الجاهزة للتنفيذ (<code>Ready for implementation</code>) والمهام اللي محتاجة بحث وتجربة أولية (<code>Spikes</code>).</li>
-              <li>سؤال مهم: <em>هل نوقف الـ Architecture Design (<code>AD</code>) لحد ما كل الـ Spikes تخلص؟</em> بنوازن بين استكمال التصميم الأساسي وتشغيل الـ Spikes بالتوازي في الأجزاء الغامضة.</li>
-            </ul>
-          </li>
-          <li><strong>فصل الأدوار (<code>Role Boundaries - Why/What vs. How/When</code>):</strong></li>
-        </ol>
-
-        <div class="callout callout-warning">
-          <div class="callout-title">⚠️ قاعدة ذهبية في التعامل مع البيزنس</div>
+        <!-- Core Abstract Callout -->
+        <div class="callout callout-abstract">
+          <div class="callout-title">💡 مصادر السيشن والفكرة الجوهرية</div>
+          <p style="margin-bottom: 0.6rem;">
+            🎥 <strong>تسجيل السيشن الأولى (YouTube):</strong>
+            <a href="https://www.youtube.com/watch?v=HUWlckeVwbM&t=6211s" target="_blank" style="color: var(--accent); font-weight: 700;">AI Architecture — Session 1 Recording</a>
+          </p>
           <p style="margin-bottom: 0;">
-            <strong>مينفعش تاخد قرار Business من نفسك!</strong><br />
-            البيزنس يملك الـ <strong><code>Why & What</code></strong> (ليه بنعمل ده وإيه المطلوب)، بينما أنت كـ Architect تملك الـ <strong><code>How & When</code></strong> (إزاي هنبنيه تقنياً وإمتى هيتسلم) — فلازم كل طرف يعرف الـ Role بتاعه ويلتزم بيه.
+            <strong>الفكرة الجوهرية للـ Session:</strong>
+            الـ <strong>AI Architecture</strong> مش مجرد اختيار موديل أو كتابة كود، بل هو <strong>الربط بين أهداف البيزنس (Business Goals) والتصميم التقني (Technical Design)</strong> من خلال فهم المشكلة الحالية (<code>As-Is</code>)، وتحديد الشكل المستهدف (<code>To-Be</code>)، ودراسة الـ <code>Trade-offs</code>، وتطبيق معايير الجودة (<code>Quality Attributes / Perspectives</code>) مثل الـ Security والـ Performance على كل زاوية من زوايا النظام (<code>Views</code>).
           </p>
         </div>
-      </section>
 
-      <section id="sec-5">
-        <h2>🏛️ 5. أطر العمل المعمارية (Architecture Frameworks)</h2>
-
-        <h3>أولاً: مدرسة الـ TOGAF (The Open Group Architecture Framework)</h3>
-        <div class="figure-card">
-          <img src="assets/session-1/04-togaf-framework.png" alt="TOGAF Framework" onclick="openLightbox(this.src)" />
-          <div class="figure-caption">إطار عمل TOGAF ومنهجية الـ ADM</div>
+        <!-- PART 1 -->
+        <div id="s1-part-1" class="part-banner">
+          📘 الجزء الأول: الأساس النظري وعقلية الـ Architect (Theoretical Foundation)
         </div>
-        <ul>
-          <li><strong>الفلسفة الأساسية:</strong> أنت بتبدأ <strong>بالبيزنس مش بالتكنولوجيا</strong>!</li>
-          <li><strong>طبقات TOGAF الأربع:</strong>
-            <ol>
-              <li><code>Business Architecture</code> (العمليات، المؤسسة، الأشخاص).</li>
-              <li><code>Data Architecture</code> &amp; <code>Application Architecture</code> (البيانات والخدمات).</li>
-              <li><code>Technology Architecture</code> (الهاردوير، السوفتوير، الشبكات).</li>
-            </ol>
-          </li>
-          <li><strong>منهجية تطوير المعمارية (<code>ADM - Architecture Development Method</code>):</strong> تعتمد على فهم الوضع الحالي (<code>As-Is</code>) والسيستم شغال إزاي دلوقتي، وإيه المشكلة اللي محتاجين عشانها نبني البروجكت الجديد (<code>To-Be</code>).</li>
-        </ul>
 
-        <h3>ثانياً: إطار عمل Zachman Framework</h3>
-        <div class="figure-card">
-          <img src="assets/session-1/05-zachman-framework.png" alt="Zachman Framework" onclick="openLightbox(this.src)" />
-          <div class="figure-caption">إطار عمل Zachman</div>
-        </div>
-        <ul>
-          <li>يركز على <strong>ماذا سننشئ ونسلم (<code>Focuses on what to create and deliver</code>)</strong>.</li>
-          <li>يربط 6 أسئلة أساسية (<strong><code>What, How, Where, Who, When, Why</code></strong>) بـ 6 منظورات للمعنيين (<strong><code>Planner, Owner, Designer, Builder, Implementer, User</code></strong>).</li>
-        </ul>
+        <section id="s1-sec-1">
+          <h2>🛠️ 1. الأدوات الأساسية لأي Software / AI Architect</h2>
+          <p>وأنت بتعمل الـ Architecture لأي سيستم هتحتاج 3 أدوات أساسية تشتغل بيهم بالتوازي:</p>
+          <ol>
+            <li><strong>أداة للرسم المعماري (Diagramming Tool):</strong> مثل <code>draw.io</code>، أو <code>Mermaid</code>، أو <code>Structurizr</code> لرسم الـ System Views.</li>
+            <li><strong>أداة للتوثيق (Wiki / Documentation Tool):</strong> مثل <code>Word</code>، أو <code>Notion</code>، أو <code>Confluence</code>، أو <code>Obsidian</code> لكتابة الـ Architecture Design Document (ADD) والـ Requirements.</li>
+            <li><strong>بيئة التطوير (IDE):</strong> لبناء الـ <code>POC (Proof of Concept)</code> والـ <code>Skeleton System</code> وتجربة القرارات عملياً.</li>
+          </ol>
+        </section>
 
-        <h3>ثالثاً: إطار عمل الـ C4 Framework (Maps of Your Code)</h3>
-        <div class="figure-card">
-          <img src="assets/session-1/06-c4-framework.png" alt="C4 Framework" onclick="openLightbox(this.src)" />
-          <div class="figure-caption">مستويات التقريب الأربع في C4 Model</div>
-        </div>
-        <p>صممه <em>Simon Brown</em> كـ 4 مستويات تقريب (<code>Four zoom levels</code> من الصورة الكبيرة إلى الكود)، بحيث كل مستوى يخاطب فئة معينة من الإدارة (<code>Execs</code>) للمطورين (<code>Devs</code>):</p>
+        <section id="s1-sec-2">
+          <h2>🧠 2. شخصية وثقافة الـ Architect (The Architect Personality &amp; Culture)</h2>
+          <div class="figure-card">
+            <img src="assets/session-1/01-architect-personality.png" alt="The Architect Personality & Culture" onclick="openLightbox(this.src)" />
+            <div class="figure-caption">شخصية وثقافة الـ Architect الناجح (اضغط لتكبير الصورة)</div>
+          </div>
+          <p>عشان تكون Architect ناجح، الموضوع بيبدأ بالـ Mindset وطريقة التفكير والتعامل مع التيم والـ Stakeholders:</p>
+          <ul>
+            <li><strong>متواضع ومتقبل للآراء (<code>Humble</code>):</strong> يضع مصلحة المشروع وأفضل حل فوق فكرته الشخصية؛ لازم تتقبل كل الآراء وتجربها عملياً عشان تعرف <strong>"ليه آه وليه لأ"</strong> بناءً على التجربة العملية والدليل مش مجرد انطباعات.</li>
+            <li><strong>فضولي ودائم التعلم (<code>Curious</code>):</strong> يواكب التقنيات الجديدة ويفهم الـ Domains المختلفة.</li>
+            <li><strong>عملي وواقعي (<code>Pragmatic</code>):</strong> يختار أبسط تصميم يحقق المطلوب في المرحلة الحالية (<code>MVP</code>) بدون تعقيد غير مبرر (<code>Over-engineering</code>).</li>
+            <li><strong>غير متعصب لتكنولوجيا معينة (<code>Technology Agnostic</code>):</strong> منفصل عن تفضيلاته الشخصية؛ يختار الأداة بناءً على مدى ملاءمتها للمشكلة.</li>
+            <li><strong>يفكر بمنطق المقايضات (<code>Trade-off Thinker</code>):</strong> مفيش تصميم مثالي (<code>No design is perfect</code>)، كل اختيار له تكلفة (<code>Cost</code>) ومميزات وعيوب؛ دورك تحدد الـ <strong>Trade-offs</strong> وإيه الـ Tools اللي هتستخدمها <strong>وليه اخترتها تحديداً</strong>.</li>
+            <li><strong>متواصل قوي (<code>Strong Communicator - Viewpoints</code>):</strong> لازم يبقى عندك <strong>Viewpoint</strong> على حسب أنت بتكلم مين فهتكلمه إزاي؛ تشرح نفس الـ Design للمهندسين (<code>Engineers</code>) بتفاصيل تقنية، وللإدارة (<code>Executives</code>) بلغة البيزنس والتكلفة والعائد.</li>
+            <li><strong>تعاوني (<code>Collaborative</code>):</strong> يستمع أولاً، ويؤثر في الفريق بدون فرض سلطة (<code>Influences without authority</code>).</li>
+            <li><strong>مسؤول عن قراراته (<code>Accountable</code>):</strong> يتحمل نتيجة قراراته المعمارية ويثبت صحتها من خلال عمل <code>POC</code> و <code>Skeleton</code>.</li>
+          </ul>
+        </section>
 
-        <div class="diagram-box">
-          <div class="diagram-title">مستويات الـ C4 Model الأربعة</div>
-          <pre class="mermaid">
+        <section id="s1-sec-3">
+          <h2>🎯 3. مشروع عملي: أتمتة التسويق بالذكاء الاصطناعي (Marketing Automation with AI &amp; Agents)</h2>
+          <div class="figure-card">
+            <img src="assets/session-1/02-marketing-automation-usecases.png" alt="Marketing Automation with AI & Agents" onclick="openLightbox(this.src)" />
+            <div class="figure-caption">محاور مشروع أتمتة التسويق بالذكاء الاصطناعي (Functional, KPIs, Non-Functional)</div>
+          </div>
+          <p>كمثال تطبيقي حقيقي، لما بنبص لمشروع <strong>Marketing Automation</strong> مدعوم بالـ AI والـ Agents، بنقسم الرؤية إلى 3 محاور:</p>
+
+          <h3>أ) حالات الاستخدام الوظيفية (<code>Functional Use Cases</code>)</h3>
+          <ul>
+            <li><strong>تخصيص الصفحة الرئيسية والمنتجات (<code>Homepage / Products Page Personalization</code>):</strong> بالاعتماد على الـ <code>Feature Stores</code> لعرض محتوى مخصص لكل شريحة أو مستخدم.</li>
+            <li><strong>أفضل خطوة تالية (<code>Next-Best Action</code>):</strong> توقع وتوجيه العميل للأكشن الأنسب له لحظياً.</li>
+            <li><strong>التعامل مع المستخدمين الجدد (<code>New Users / Cold Start</code>):</strong> إزاي نقدم تجربة ذكية ليوزر لسه معندناش ليه History كافي.</li>
+            <li><strong>التسويق عبر الـ Agents (<code>Agentic Marketing - Campaign Automation</code>):</strong> إزاي تخلي الـ Agent يعمل الـ Campaign ويديرها من البداية للنهاية.</li>
+          </ul>
+
+          <h3>ب) مؤشرات الأداء والأهداف (<code>KPIs / Objectives - L2 connected to goals</code>)</h3>
+          <ul>
+            <li>لازم يكون عندك نوعين من الـ KPIs تتكلم بيهم مع الـ Client وتربطهم بأهدافه:
+              <ol>
+                <li><strong>Business KPIs:</strong> مثل زيادة معدل التحويل والمبيعات (<code>Increase sales take-rate by 80%</code>)، ورفع رضا العملاء (<code>Increase CSAT to 70%</code>).</li>
+                <li><strong>Technical KPIs &amp; Feedback Loop:</strong> مثل تتبع الـ Feedback والـ Quality والـ Latency في أدوات المراقبة زي <strong><code>Langfuse</code></strong> عشان تحسن الموديل باستمرار.</li>
+              </ol>
+            </li>
+          </ul>
+
+          <h3>ج) المتطلبات غير الوظيفية (<code>Non-Functional Use Cases / Quality Attributes</code>)</h3>
+          <ul>
+            <li><strong>سرعة الاستجابة (<code>Latency</code>):</strong> هل الـ Use Case محتاجة <code>Real-time</code> (لحظي وأنت فاتح الصفحة)، ولا <code>Near real-time</code>، ولا <code>Batch</code> (كل فترة في الخلفية)؟</li>
+            <li><strong>قابلية التوسع (<code>Scalability</code>):</strong> استيعاب عدد المستخدمين وأوقات ذروة الحملات (<code>Peak campaigns</code>).</li>
+            <li><strong>قابلية التفسير والتحكم (<code>Explainability &amp; Business Control</code>):</strong> قدرة البيزنس على فهم "ليه الـ AI أخذ القرار ده" والتحكم في القواعد.</li>
+            <li><strong>الأمان والامتثال والقوانين (<code>Security, Compliance &amp; Privacy</code>):</strong> لازم تبقى عارف قوانين البلد اللي هتعمل فيها البروجكت (مثل <strong><code>PDPL</code></strong> في السعودية/مصر أو <strong><code>GDPR</code></strong> في أوروبا)، ولازم يبقى عندك إجابة واضحة لأي سؤال يسأله الـ Client عن السيستم.</li>
+          </ul>
+        </section>
+
+        <section id="s1-sec-4">
+          <h2>📋 4. جمع وتحليل متطلبات البيزنس (The Business Requirements)</h2>
+          <div class="figure-card">
+            <img src="assets/session-1/03-business-requirements.png" alt="The Business Requirements" onclick="openLightbox(this.src)" />
+            <div class="figure-caption">خطوات جمع وتحليل متطلبات البيزنس</div>
+          </div>
+          <p>ما بعد تعريف البروجكت، بنبدأ نحدد الـ <strong>Business Requirements</strong> بدقة:</p>
+          <ol>
+            <li><strong>سيناريو وقصة المشروع (<code>Project Story &amp; Scenario</code>):</strong> إيه القصة الكاملة للمشروع والمشكلة اللي بنحلها؟</li>
+            <li><strong>المعنيون والشخصيات (<code>Stakeholders / Personas</code>):</strong>
+              <ul>
+                <li>السيستم هيشتغل إزاي مع الآخرين؟ هل هيتكامل مع سيستم تاني ولا هيستخدمه أشخاص مختلفين؟</li>
+                <li>تحديد كل <strong><code>Persona</code></strong> والصلاحيات (<code>Permissions / Roles</code>) الخاصة بكل منها.</li>
+              </ul>
+            </li>
+            <li><strong>تقييم حالات الاستخدام وإغلاق الفجوات (<code>Use Cases Assessment &amp; Closing the Gaps</code>):</strong>
+              <ul>
+                <li>لازم تحلل البروجكت وتفكر فيه بعمق وتقفل كل الأسئلة المفتوحة (<code>1–n rounds</code> من الميتينجز في الـ Planning Call) لحد ما الدنيا كلها تكون واضحة.</li>
+              </ul>
+            </li>
+            <li><strong>الجداول الزمنية والـ Spikes (<code>Timelines: Ready for Implementation vs. Spikes</code>):</strong>
+              <ul>
+                <li>هل ندي Timelines دلوقتي؟ لازم نفرق بين المهام الواضحة الجاهزة للتنفيذ (<code>Ready for implementation</code>) والمهام اللي محتاجة بحث وتجربة أولية (<code>Spikes</code>).</li>
+                <li>سؤال مهم: <em>هل نوقف الـ Architecture Design (<code>AD</code>) لحد ما كل الـ Spikes تخلص؟</em> بنوازن بين استكمال التصميم الأساسي وتشغيل الـ Spikes بالتوازي في الأجزاء الغامضة.</li>
+              </ul>
+            </li>
+            <li><strong>فصل الأدوار (<code>Role Boundaries - Why/What vs. How/When</code>):</strong></li>
+          </ol>
+
+          <div class="callout callout-warning">
+            <div class="callout-title">⚠️ قاعدة ذهبية في التعامل مع البيزنس</div>
+            <p style="margin-bottom: 0;">
+              <strong>مينفعش تاخد قرار Business من نفسك!</strong><br />
+              البيزنس يملك الـ <strong><code>Why &amp; What</code></strong> (ليه بنعمل ده وإيه المطلوب)، بينما أنت كـ Architect تملك الـ <strong><code>How &amp; When</code></strong> (إزاي هنبنيه تقنياً وإمتى هيتسلم) — فلازم كل طرف يعرف الـ Role بتاعه ويلتزم بيه.
+            </p>
+          </div>
+        </section>
+
+        <section id="s1-sec-5">
+          <h2>🏛️ 5. أطر العمل المعمارية (Architecture Frameworks)</h2>
+
+          <h3>أولاً: مدرسة الـ TOGAF (The Open Group Architecture Framework)</h3>
+          <div class="figure-card">
+            <img src="assets/session-1/04-togaf-framework.png" alt="TOGAF Framework" onclick="openLightbox(this.src)" />
+            <div class="figure-caption">إطار عمل TOGAF ومنهجية الـ ADM</div>
+          </div>
+          <ul>
+            <li><strong>الفلسفة الأساسية:</strong> أنت بتبدأ <strong>بالبيزنس مش بالتكنولوجيا</strong>!</li>
+            <li><strong>طبقات TOGAF الأربع:</strong>
+              <ol>
+                <li><code>Business Architecture</code> (العمليات، المؤسسة، الأشخاص).</li>
+                <li><code>Data Architecture</code> &amp; <code>Application Architecture</code> (البيانات والخدمات).</li>
+                <li><code>Technology Architecture</code> (الهاردوير، السوفتوير، الشبكات).</li>
+              </ol>
+            </li>
+            <li><strong>منهجية تطوير المعمارية (<code>ADM - Architecture Development Method</code>):</strong> تعتمد على فهم الوضع الحالي (<code>As-Is</code>) والسيستم شغال إزاي دلوقتي، وإيه المشكلة اللي محتاجين عشانها نبني البروجكت الجديد (<code>To-Be</code>).</li>
+          </ul>
+
+          <h3>ثانياً: إطار عمل Zachman Framework</h3>
+          <div class="figure-card">
+            <img src="assets/session-1/05-zachman-framework.png" alt="Zachman Framework" onclick="openLightbox(this.src)" />
+            <div class="figure-caption">إطار عمل Zachman</div>
+          </div>
+          <ul>
+            <li>يركز على <strong>ماذا سننشئ ونسلم (<code>Focuses on what to create and deliver</code>)</strong>.</li>
+            <li>يربط 6 أسئلة أساسية (<strong><code>What, How, Where, Who, When, Why</code></strong>) بـ 6 منظورات للمعنيين (<strong><code>Planner, Owner, Designer, Builder, Implementer, User</code></strong>).</li>
+          </ul>
+
+          <h3>ثالثاً: إطار عمل الـ C4 Framework (Maps of Your Code)</h3>
+          <div class="figure-card">
+            <img src="assets/session-1/06-c4-framework.png" alt="C4 Framework" onclick="openLightbox(this.src)" />
+            <div class="figure-caption">مستويات التقريب الأربع في C4 Model</div>
+          </div>
+          <p>صممه <em>Simon Brown</em> كـ 4 مستويات تقريب (<code>Four zoom levels</code> من الصورة الكبيرة إلى الكود)، بحيث كل مستوى يخاطب فئة معينة من الإدارة (<code>Execs</code>) للمطورين (<code>Devs</code>):</p>
+
+          <div class="diagram-box">
+            <div class="diagram-title">مستويات الـ C4 Model الأربعة</div>
+            <pre class="mermaid">
 flowchart TD
     L1["1. System Context (العقد والـ High-Level)\nPeople, the system, external systems"] --> L2["2. Containers (مستوى التطبيقات والـ APIs)\nApps, APIs, Databases, Queues"]
     L2 --> L3["3. Components (الموديولات الداخلية)\nModules inside one container"]
     L3 --> L4["4. Code - Optional (مستوى الكود)\nClasses, ERD, Sequence diagrams"]
-          </pre>
+            </pre>
+          </div>
+
+          <ul>
+            <li><strong>المستوى 1 (<code>System Context</code>):</strong> ده يعتبر <strong>العقد (<code>Contract</code>)</strong> اللي بيحدد كل شيء هيتعمل على الـ High-level وعلاقة السيستم بالـ Users والأنظمة الخارجية.</li>
+            <li><strong>المستوى 2 (<code>Containers</code>):</strong> بيتكلم بشكل مفصل أكتر شوية (تطبيقات، قواعد بيانات، Queues، APIs) وهتحتاج فيه غالباً ترسم Diagrams واضحة.</li>
+            <li><strong>المستوى 3 و 4 (<code>Components</code> &amp; <code>Code</code>):</strong> تفاصيل الموديولات والكلاسات جوه كل Container.</li>
+          </ul>
+
+          <div class="callout callout-tip">
+            <div class="callout-title">💡 ملاحظة عملية</div>
+            <p style="margin-bottom: 0;">
+              <strong>آخر اتنين (<code>Components</code> &amp; <code>Code</code>)</strong> في الغالب الـ AI يقدر يعملهم أو يولدهم بسهولة، لكن <strong>أول اتنين (<code>System Context</code> &amp; <code>Containers</code>) لازم أنت تفكر فيهم كويس جداً</strong> لأنهم أساس القرار المعماري.
+            </p>
+          </div>
+        </section>
+
+        <section id="s1-sec-6">
+          <h2>🔄 6. عملية تطوير المعمارية وأهمية الـ POC (Architecture Development Process)</h2>
+          <div class="figure-card">
+            <img src="assets/session-1/07-architecture-process-poc.png" alt="Architecture Development Process" onclick="openLightbox(this.src)" />
+            <div class="figure-caption">خطوات تطوير المعمارية وبناء الـ POC / Skeleton System</div>
+          </div>
+          <p>خطوات بناء المعمارية بتمشي في تسلسل واضح:</p>
+          <ol>
+            <li><strong><code>Define Initial Scope and Context</code></strong> (تحديد النطاق المبدئي والسياق).</li>
+            <li><strong><code>Engage Stakeholders</code></strong> (إشراك المعنيين وأصحاب المصلحة).</li>
+            <li><strong><code>Capture First-Cut Concerns</code></strong> (جمع المخاوف والمتطلبات الأولية).</li>
+            <li><strong><code>Define Architecture</code></strong> &rarr; وبيطلع منها مخرجان أساسيان: <code>Architectural Description</code> + <code>Guidelines and Constraints</code>.</li>
+            <li><strong><code>Create Skeleton System / POC</code></strong>:
+              <ul>
+                <li><strong>ليه بنعمل POC (Proof of Concept)؟</strong> الأفضل دايماً تعمل POC أو Skeleton System عشان تشوف وتتأكد عملياً: <em>هل كل الاتفاقات والتصميمات دي تطبيقها صح فعلاً على أرض الواقع ولا لأ؟</em></li>
+                <li>دي خطوة بتخليك <strong>تكتشف الأخطاء بدري جداً (Fail Fast)</strong> أو تتأكد إن الوضع تمام فتكمل وتبدأ البناء بثقة.</li>
+              </ul>
+            </li>
+          </ol>
+        </section>
+
+        <section id="s1-sec-7">
+          <h2>🔍 7. الزوايا المعمارية وخصائص الجودة (Views &amp; Architectural Perspectives)</h2>
+          <div class="figure-card">
+            <img src="assets/session-1/08-views-and-perspectives.png" alt="Views and Architectural Perspectives" onclick="openLightbox(this.src)" />
+            <div class="figure-caption">الفرق بين الـ Views والـ Architectural Perspectives</div>
+          </div>
+          <p>في التصميم المعماري بنفرق بين مفهومين بيكملوا بعض:</p>
+          <ul>
+            <li><strong>الـ Views (زوايا رؤية النظام):</strong> بتمثل السيستم من زوايا مختلفة:
+              <ul>
+                <li><code>Functional View</code> | <code>Information View</code> | <code>Concurrency View</code></li>
+                <li><code>Development View</code> | <code>Deployment View</code> | <code>Operational View</code></li>
+              </ul>
+            </li>
+            <li><strong>الـ Perspectives (Quality Attributes / خصائص الجودة):</strong> الصفات غير الوظيفية اللي لازم تتطبق عبر الـ Views:
+              <ul>
+                <li><code>Security</code> | <code>Performance</code> | <code>Availability</code> | <code>Usability</code> | <code>Accessibility</code> | <code>Location</code> | <code>Regulation</code> | <code>Evolution</code></li>
+              </ul>
+            </li>
+          </ul>
+
+          <h3>إزاي بنطبق الـ Perspectives على الـ Views؟</h3>
+          <div class="figure-card">
+            <img src="assets/session-1/09-applying-perspectives-to-views.png" alt="Applying Perspectives to Views" onclick="openLightbox(this.src)" />
+            <div class="figure-caption">مصفوفة تطبيق الـ Quality Attributes (Perspectives) على الـ Views</div>
+          </div>
+          <ul>
+            <li>القاعدة هي إنك <strong>بتعمل Apply لكل Quality Attribute (Perspective) على كل الـ Views الموجودة</strong>:
+              <ul>
+                <li><strong>مثال 1 (<code>Information View</code> &times; <code>Security Perspective</code>):</strong> ينتج عنه <code>Information Security</code> (مثل الـ Access Control، وتصنيف البيانات، والـ Object-level security).</li>
+                <li><strong>مثال 2 (<code>Concurrency View</code> &times; <code>Performance Perspective</code>):</strong> ينتج عنه <code>Concurrency Performance</code> (إدارة الـ Shared resources، والـ Queuing، ومنع الـ Blocking).</li>
+                <li><strong>مثال 3 (<code>Functional View</code> &times; <code>Evolution Perspective</code>):</strong> ينتج عنه <code>Functional Evolution</code> (تصميم Interfaces مرنة تقبل التوسع مستقبلاً).</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section id="s1-sec-8">
+          <h2>⚡ 8. المعمارية مع منهجية Agile (Architecture &amp; Agile)</h2>
+          <div class="figure-card">
+            <img src="assets/session-1/10-architecture-and-agile.png" alt="Architecture and Agile" onclick="openLightbox(this.src)" />
+            <div class="figure-caption">توزيع القرارات المعمارية عبر مستويات Agile</div>
+          </div>
+          <p>توزيع القرارات المعمارية داخل Agile بيتقسم على 4 مستويات:</p>
+          <ol>
+            <li><strong><code>Project Level</code>:</strong> تقدر تخلي القرارات على مستوى الـ Project <strong>ثابتة ومستقرة</strong> من البداية (زي الـ <code>Deployment</code>، والـ <code>Infrastructure</code>، والـ Cloud، والـ Security Baseline).</li>
+            <li><strong><code>Epic Level</code>:</strong> تصميم التكامل بين المكونات الكبيرة للميزة (<code>Feature / Epic</code>).</li>
+            <li><strong><code>Story Level</code>:</strong> تفاصيل التنفيذ المباشرة داخل الـ Sprint.</li>
+            <li><strong><code>Research / Spike Level</code>:</strong> تجارب بحثية سريعة لحسم أي غموض تقني قبل تحويله إلى Stories.</li>
+          </ol>
+        </section>
+
+        <!-- PART 2 -->
+        <div id="s1-part-2" class="part-banner">
+          🛠️ الجزء الثاني: التطبيق العملي في الـ Session (Practical Workshop)
         </div>
 
-        <ul>
-          <li><strong>المستوى 1 (<code>System Context</code>):</strong> ده يعتبر <strong>العقد (<code>Contract</code>)</strong> اللي بيحدد كل شيء هيتعمل على الـ High-level وعلاقة السيستم بالـ Users والأنظمة الخارجية.</li>
-          <li><strong>المستوى 2 (<code>Containers</code>):</strong> بيتكلم بشكل مفصل أكتر شوية (تطبيقات، قواعد بيانات، Queues، APIs) وهتحتاج فيه غالباً ترسم Diagrams واضحة.</li>
-          <li><strong>المستوى 3 و 4 (<code>Components</code> &amp; <code>Code</code>):</strong> تفاصيل الموديولات والكلاسات جوه كل Container.</li>
-        </ul>
-
-        <div class="callout callout-tip">
-          <div class="callout-title">💡 ملاحظة عملية</div>
-          <p style="margin-bottom: 0;">
-            <strong>آخر اتنين (<code>Components</code> &amp; <code>Code</code>)</strong> في الغالب الـ AI يقدر يعملهم أو يولدهم بسهولة، لكن <strong>أول اتنين (<code>System Context</code> &amp; <code>Containers</code>) لازم أنت تفكر فيهم كويس جداً</strong> لأنهم أساس القرار المعماري.
-          </p>
-        </div>
-      </section>
-
-      <section id="sec-6">
-        <h2>🔄 6. عملية تطوير المعمارية وأهمية الـ POC (Architecture Development Process)</h2>
-        <div class="figure-card">
-          <img src="assets/session-1/07-architecture-process-poc.png" alt="Architecture Development Process" onclick="openLightbox(this.src)" />
-          <div class="figure-caption">خطوات تطوير المعمارية وبناء الـ POC / Skeleton System</div>
-        </div>
-        <p>خطوات بناء المعمارية بتمشي في تسلسل واضح:</p>
-        <ol>
-          <li><strong><code>Define Initial Scope and Context</code></strong> (تحديد النطاق المبدئي والسياق).</li>
-          <li><strong><code>Engage Stakeholders</code></strong> (إشراك المعنيين وأصحاب المصلحة).</li>
-          <li><strong><code>Capture First-Cut Concerns</code></strong> (جمع المخاوف والمتطلبات الأولية).</li>
-          <li><strong><code>Define Architecture</code></strong> &rarr; وبيطلع منها مخرجان أساسيان: <code>Architectural Description</code> + <code>Guidelines and Constraints</code>.</li>
-          <li><strong><code>Create Skeleton System / POC</code></strong>:
-            <ul>
-              <li><strong>ليه بنعمل POC (Proof of Concept)؟</strong> الأفضل دايماً تعمل POC أو Skeleton System عشان تشوف وتتأكد عملياً: <em>هل كل الاتفاقات والتصميمات دي تطبيقها صح فعلاً على أرض الواقع ولا لأ؟</em></li>
-              <li>دي خطوة بتخليك <strong>تكتشف الأخطاء بدري جداً (Fail Fast)</strong> أو تتأكد إن الوضع تمام فتكمل وتبدأ البناء بثقة.</li>
-            </ul>
-          </li>
-        </ol>
-      </section>
-
-      <section id="sec-7">
-        <h2>🔍 7. الزوايا المعمارية وخصائص الجودة (Views &amp; Architectural Perspectives)</h2>
-        <div class="figure-card">
-          <img src="assets/session-1/08-views-and-perspectives.png" alt="Views and Architectural Perspectives" onclick="openLightbox(this.src)" />
-          <div class="figure-caption">الفرق بين الـ Views والـ Architectural Perspectives</div>
-        </div>
-        <p>في التصميم المعماري بنفرق بين مفهومين بيكملوا بعض:</p>
-        <ul>
-          <li><strong>الـ Views (زوايا رؤية النظام):</strong> بتمثل السيستم من زوايا مختلفة:
-            <ul>
-              <li><code>Functional View</code> | <code>Information View</code> | <code>Concurrency View</code></li>
-              <li><code>Development View</code> | <code>Deployment View</code> | <code>Operational View</code></li>
-            </ul>
-          </li>
-          <li><strong>الـ Perspectives (Quality Attributes / خصائص الجودة):</strong> الصفات غير الوظيفية اللي لازم تتطبق عبر الـ Views:
-            <ul>
-              <li><code>Security</code> | <code>Performance</code> | <code>Availability</code> | <code>Usability</code> | <code>Accessibility</code> | <code>Location</code> | <code>Regulation</code> | <code>Evolution</code></li>
-            </ul>
-          </li>
-        </ul>
-
-        <h3>إزاي بنطبق الـ Perspectives على الـ Views؟</h3>
-        <div class="figure-card">
-          <img src="assets/session-1/09-applying-perspectives-to-views.png" alt="Applying Perspectives to Views" onclick="openLightbox(this.src)" />
-          <div class="figure-caption">مصفوفة تطبيق الـ Quality Attributes (Perspectives) على الـ Views</div>
-        </div>
-        <ul>
-          <li>القاعدة هي إنك <strong>بتعمل Apply لكل Quality Attribute (Perspective) على كل الـ Views الموجودة</strong>:
-            <ul>
-              <li><strong>مثال 1 (<code>Information View</code> &times; <code>Security Perspective</code>):</strong> ينتج عنه <code>Information Security</code> (مثل الـ Access Control، وتصنيف البيانات، والـ Object-level security).</li>
-              <li><strong>مثال 2 (<code>Concurrency View</code> &times; <code>Performance Perspective</code>):</strong> ينتج عنه <code>Concurrency Performance</code> (إدارة الـ Shared resources، والـ Queuing، ومنع الـ Blocking).</li>
-              <li><strong>مثال 3 (<code>Functional View</code> &times; <code>Evolution Perspective</code>):</strong> ينتج عنه <code>Functional Evolution</code> (تصميم Interfaces مرنة تقبل التوسع مستقبلاً).</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section id="sec-8">
-        <h2>⚡ 8. المعمارية مع منهجية Agile (Architecture &amp; Agile)</h2>
-        <div class="figure-card">
-          <img src="assets/session-1/10-architecture-and-agile.png" alt="Architecture and Agile" onclick="openLightbox(this.src)" />
-          <div class="figure-caption">توزيع القرارات المعمارية عبر مستويات Agile</div>
-        </div>
-        <p>توزيع القرارات المعمارية داخل Agile بيتقسم على 4 مستويات:</p>
-        <ol>
-          <li><strong><code>Project Level</code>:</strong> تقدر تخلي القرارات على مستوى الـ Project <strong>ثابتة ومستقرة</strong> من البداية (زي الـ <code>Deployment</code>، والـ <code>Infrastructure</code>، والـ Cloud، والـ Security Baseline).</li>
-          <li><strong><code>Epic Level</code>:</strong> تصميم التكامل بين المكونات الكبيرة للميزة (<code>Feature / Epic</code>).</li>
-          <li><strong><code>Story Level</code>:</strong> تفاصيل التنفيذ المباشرة داخل الـ Sprint.</li>
-          <li><strong><code>Research / Spike Level</code>:</strong> تجارب بحثية سريعة لحسم أي غموض تقني قبل تحويله إلى Stories.</li>
-        </ol>
-      </section>
-
-      <!-- PART 2 -->
-      <div id="part-2" class="part-banner">
-        🛠️ الجزء الثاني: التطبيق العملي في الـ Session (Practical Workshop)
-      </div>
-
-      <div class="callout callout-info">
-        <div class="callout-title">📌 خطوات الورشة العملية في السيشن</div>
-        <p>بعد شرح الأساس النظري، طبقنا عملياً خطوة بخطوة على مشروع <strong>Marketing Automation Architecture Design</strong>:</p>
-        <ol style="margin-bottom: 0;">
-          <li>فتح <strong>Document</strong> موحدة لتوثيق المعمارية (<code>Architecture Design Document</code>) ونكتب فيها: الـ <strong>Problem Statement</strong>، الـ <strong>Goals &amp; Non-Goals</strong>، الـ <strong>Requirements</strong>، الـ <strong>Assumptions</strong>، والـ <strong>Viewpoints</strong>.</li>
-          <li>رسم دياجرام النظام الحالي <strong><code>System As-Is</code></strong>، ثم أخذ نسخة منه (<code>Copy</code>) والبناء فوقها لرسم النظام المستهدف <strong><code>System To-Be</code></strong> بعد إضافة طبقات الـ AI.</li>
-        </ol>
-      </div>
-
-      <section id="sec-add">
-        <h2>📄 أولاً: توثيق المعمارية (Architecture Design Document - ADD)</h2>
-
-        <h3>1. تعريف المشروع والمشكلة (<code>Project Overview &amp; Problem Statement / Pain Points</code>)</h3>
-        <p>النظام عبارة عن منصة تجارة إلكترونية / تسويق محتاجة تتحول لـ <strong>AI-Driven Marketing Automation System</strong>. أهم نقاط الألم في النظام الحالي (<strong><code>Pain Points</code></strong>):</p>
-        <ol>
-          <li><strong><code>Static Home Page</code> &rarr; <code>Personalized per Segment</code>:</strong> الصفحة الرئيسية حالياً ثابتة لكل الزوار، والمطلوب تحويلها لصفحة مخصصة ديناميكياً لكل شريحة أو مستخدم (<code>Personalized per segment/user</code>).</li>
-          <li><strong>غياب التخصيص اللحظي (<code>Lack of Real-time Recommendations</code>):</strong> العميل لا يظهر له <code>Next-Best Action</code> أو منتجات مناسبة لاهتماماته الحالية.</li>
-          <li><strong>الحملات التسويقية اليدوية (<code>Manual Campaigns</code>):</strong> إعداد الحملات يتم بشكل يدوي تقليدي وبطيء بدون استغلال الـ <code>AI Agents</code>.</li>
-          <li><strong>مشكلة المستخدم الجديد (<code>Cold Start Problem</code>):</strong> الزوار الجدد بيحصلوا على تجربة عامة غير جذابة لعدم وجود سجل تصفح سابق لهم.</li>
-        </ol>
-
-        <h3>2. الأهداف وما خارج النطاق (<code>Goals</code> vs. <code>Non-Goals</code>)</h3>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>🎯 الأهداف (<code>Goals</code> - ما سنحققه)</th>
-                <th>🚫 خارج النطاق (<code>Non-Goals</code> - ما لن نفعله حالياً)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>تحويل الـ Static Homepage إلى صفحة مخصصة لكل شريحة (<code>Personalized per Segment</code>).</td>
-                <td>عدم إعادة بناء نظام الـ Core E-Commerce أو الـ Checkout من الصفر.</td>
-              </tr>
-              <tr>
-                <td>بناء <strong><code>Segmentation Model</code></strong> لتقسيم العملاء ديناميكياً بناءً على سلوكهم.</td>
-                <td>عدم تدريب Foundation LLM خاص من الصفر (سنعتمد على موديلز جاهزة / Fine-tuned / APIs).</td>
-              </tr>
-              <tr>
-                <td>بناء <strong><code>Recommendation System</code></strong> يقترح أفضل المنتجات والـ <code>Next-Best Action</code>.</td>
-                <td>عدم استبدال أنظمة الـ ERP أو الـ Inventory الحالية، بل التكامل معها فقط.</td>
-              </tr>
-              <tr>
-                <td>أتمتة الحملات التسويقية عبر <strong><code>AI Agents</code></strong> مع تطبيق حوكمة وأمان كامل (<code>AI Guardrails</code>).</td>
-                <td>أي Features إضافية خارج نطاق التسويق والتخصيص في هذه المرحلة (لمنع الـ <code>Scope Creep</code>).</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="callout callout-info">
+          <div class="callout-title">📌 خطوات الورشة العملية في السيشن</div>
+          <p>بعد شرح الأساس النظري، طبقنا عملياً خطوة بخطوة على مشروع <strong>Marketing Automation Architecture Design</strong>:</p>
+          <ol style="margin-bottom: 0;">
+            <li>فتح <strong>Document</strong> موحدة لتوثيق المعمارية (<code>Architecture Design Document</code>) ونكتب فيها: الـ <strong>Problem Statement</strong>، الـ <strong>Goals &amp; Non-Goals</strong>، الـ <strong>Requirements</strong>، الـ <strong>Assumptions</strong>، والـ <strong>Viewpoints</strong>.</li>
+            <li>رسم دياجرام النظام الحالي <strong><code>System As-Is</code></strong>، ثم أخذ نسخة منه (<code>Copy</code>) والبناء فوقها لرسم النظام المستهدف <strong><code>System To-Be</code></strong> بعد إضافة طبقات الـ AI.</li>
+          </ol>
         </div>
 
-        <div class="callout callout-tip">
-          <div class="callout-title">💡 ليه بنكتب الـ Non-Goals في الـ Document؟</div>
-          <p style="margin-bottom: 0;">
-            كتابة الـ <strong>Non-Goals</strong> بوضوح من أول يوم بتحمي المشروع من تمدد النطاق (<code>Scope Creep</code>)، وبتخلي التيم والـ Client متفقين تماماً على حدود المشروع والجدول الزمني.
-          </p>
-        </div>
+        <section id="s1-sec-add">
+          <h2>📄 أولاً: توثيق المعمارية (Architecture Design Document - ADD)</h2>
 
-        <h3>3. الافتراضات وتخطيط السعة والأداء (<code>Assumptions &amp; Capacity Planning</code>)</h3>
-        <p>من أهم الأجزاء في الـ Document هي <strong>الافتراضات المبنية على أرقام البيزنس (<code>Assumptions</code>)</strong> لأنها اللي بتحدد حجم الـ Infrastructure والـ Concurrency:</p>
-        <ul>
-          <li><strong>الأداء والتزامن في أوقات الذروة المعتادة (<code>Performance &amp; Concurrency in Peak Hours</code>):</strong>
-            <ul>
-              <li>بالرجوع لأرقام التشغيل في <strong>آخر 6 شهور</strong>، أقصى عدد مستخدمين متزامنين (<code>Concurrent Users</code>) في ساعات الذروة اليومية (<code>Peak Hours</code>) بيوصل إلى حوالي <strong><code>50 Concurrent Users</code></strong>.</li>
-            </ul>
-          </li>
-          <li><strong>المواسم والأعياد (<code>Seasonality - Ramadan &amp; Holidays</code>):</strong>
-            <ul>
-              <li>في فترات المواسم مثل <strong>شهر رمضان، الأعياد (<code>Holidays</code>)، ومواسم العروض الكبرى</strong>، الترافيك بيزيد بشكل ملحوظ وبيوصل التزامن إلى حوالي <strong><code>100 Concurrent Users</code></strong> (الضعف تقريباً).</li>
-            </ul>
-          </li>
-          <li><strong>أثر هذه الـ Assumptions على التصميم المعماري:</strong>
-            <ul>
-              <li>تصميم الـ APIs والـ Model Inference بحيث تستوعب <code>50–100 Concurrent Users</code> بأمان بدون <code>Bottlenecks</code>.</li>
-              <li>تفعيل الـ <strong>Auto-scaling</strong> والـ <strong>Caching</strong> (مثل <code>Redis</code> / <code>Feature Store</code>) في مواسم رمضان والـ Holidays بدل حجز سيرفرات ضخمة طوال السنة بدون داعي.</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+          <h3>1. تعريف المشروع والمشكلة (<code>Project Overview &amp; Problem Statement / Pain Points</code>)</h3>
+          <p>النظام عبارة عن منصة تجارة إلكترونية / تسويق محتاجة تتحول لـ <strong>AI-Driven Marketing Automation System</strong>. أهم نقاط الألم في النظام الحالي (<strong><code>Pain Points</code></strong>):</p>
+          <ol>
+            <li><strong><code>Static Home Page</code> &rarr; <code>Personalized per Segment</code>:</strong> الصفحة الرئيسية حالياً ثابتة لكل الزوار، والمطلوب تحويلها لصفحة مخصصة ديناميكياً لكل شريحة أو مستخدم (<code>Personalized per segment/user</code>).</li>
+            <li><strong>غياب التخصيص اللحظي (<code>Lack of Real-time Recommendations</code>):</strong> العميل لا يظهر له <code>Next-Best Action</code> أو منتجات مناسبة لاهتماماته الحالية.</li>
+            <li><strong>الحملات التسويقية اليدوية (<code>Manual Campaigns</code>):</strong> إعداد الحملات يتم بشكل يدوي تقليدي وبطيء بدون استغلال الـ <code>AI Agents</code>.</li>
+            <li><strong>مشكلة المستخدم الجديد (<code>Cold Start Problem</code>):</strong> الزوار الجدد بيحصلوا على تجربة عامة غير جذابة لعدم وجود سجل تصفح سابق لهم.</li>
+          </ol>
 
-      <section id="sec-views">
-        <h2>👁️ ثانياً: تطبيق الـ Viewpoints &amp; Perspectives على المشروع</h2>
-        <p>في الـ Document، بدأنا نطبق الـ <strong>Views</strong> ونربطها بالـ <strong>Quality Attributes (Perspectives)</strong>، ومن أهم الأمثلة اللي طبقناها:</p>
+          <h3>2. الأهداف وما خارج النطاق (<code>Goals</code> vs. <code>Non-Goals</code>)</h3>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>🎯 الأهداف (<code>Goals</code> - ما سنحققه)</th>
+                  <th>🚫 خارج النطاق (<code>Non-Goals</code> - ما لن نفعله حالياً)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>تحويل الـ Static Homepage إلى صفحة مخصصة لكل شريحة (<code>Personalized per Segment</code>).</td>
+                  <td>عدم إعادة بناء نظام الـ Core E-Commerce أو الـ Checkout من الصفر.</td>
+                </tr>
+                <tr>
+                  <td>بناء <strong><code>Segmentation Model</code></strong> لتقسيم العملاء ديناميكياً بناءً على سلوكهم.</td>
+                  <td>عدم تدريب Foundation LLM خاص من الصفر (سنعتمد على موديلز جاهزة / Fine-tuned / APIs).</td>
+                </tr>
+                <tr>
+                  <td>بناء <strong><code>Recommendation System</code></strong> يقترح أفضل المنتجات والـ <code>Next-Best Action</code>.</td>
+                  <td>عدم استبدال أنظمة الـ ERP أو الـ Inventory الحالية، بل التكامل معها فقط.</td>
+                </tr>
+                <tr>
+                  <td>أتمتة الحملات التسويقية عبر <strong><code>AI Agents</code></strong> مع تطبيق حوكمة وأمان كامل (<code>AI Guardrails</code>).</td>
+                  <td>أي Features إضافية خارج نطاق التسويق والتخصيص في هذه المرحلة (لمنع الـ <code>Scope Creep</code>).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-        <h3>1. زاوية الأمان والامتثال (<code>Security View / Perspective</code>) 🔒</h3>
-        <p>لما بنبص للسيستم من زاوية الـ <strong>Security</strong>، بنغطي 3 طبقات أساسية:</p>
+          <div class="callout callout-tip">
+            <div class="callout-title">💡 ليه بنكتب الـ Non-Goals في الـ Document؟</div>
+            <p style="margin-bottom: 0;">
+              كتابة الـ <strong>Non-Goals</strong> بوضوح من أول يوم بتحمي المشروع من تمدد النطاق (<code>Scope Creep</code>)، وبتخلي التيم والـ Client متفقين تماماً على حدود المشروع والجدول الزمني.
+            </p>
+          </div>
 
-        <div class="diagram-box">
-          <div class="diagram-title">طبقات الأمان والحوكمة الثلاث في الـ Security View</div>
-          <pre class="mermaid">
+          <h3>3. الافتراضات وتخطيط السعة والأداء (<code>Assumptions &amp; Capacity Planning</code>)</h3>
+          <p>من أهم الأجزاء في الـ Document هي <strong>الافتراضات المبنية على أرقام البيزنس (<code>Assumptions</code>)</strong> لأنها اللي بتحدد حجم الـ Infrastructure والـ Concurrency:</p>
+          <ul>
+            <li><strong>الأداء والتزامن في أوقات الذروة المعتادة (<code>Performance &amp; Concurrency in Peak Hours</code>):</strong>
+              <ul>
+                <li>بالرجوع لأرقام التشغيل في <strong>آخر 6 شهور</strong>، أقصى عدد مستخدمين متزامنين (<code>Concurrent Users</code>) في ساعات الذروة اليومية (<code>Peak Hours</code>) بيوصل إلى حوالي <strong><code>50 Concurrent Users</code></strong>.</li>
+              </ul>
+            </li>
+            <li><strong>المواسم والأعياد (<code>Seasonality - Ramadan &amp; Holidays</code>):</strong>
+              <ul>
+                <li>في فترات المواسم مثل <strong>شهر رمضان، الأعياد (<code>Holidays</code>)، ومواسم العروض الكبرى</strong>، الترافيك بيزيد بشكل ملحوظ وبيوصل التزامن إلى حوالي <strong><code>100 Concurrent Users</code></strong> (الضعف تقريباً).</li>
+              </ul>
+            </li>
+            <li><strong>أثر هذه الـ Assumptions على التصميم المعماري:</strong>
+              <ul>
+                <li>تصميم الـ APIs والـ Model Inference بحيث تستوعب <code>50–100 Concurrent Users</code> بأمان بدون <code>Bottlenecks</code>.</li>
+                <li>تفعيل الـ <strong>Auto-scaling</strong> والـ <strong>Caching</strong> (مثل <code>Redis</code> / <code>Feature Store</code>) في مواسم رمضان والـ Holidays بدل حجز سيرفرات ضخمة طوال السنة بدون داعي.</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section id="s1-sec-views">
+          <h2>👁️ ثانياً: تطبيق الـ Viewpoints &amp; Perspectives على المشروع</h2>
+          <p>في الـ Document، بدأنا نطبق الـ <strong>Views</strong> ونربطها بالـ <strong>Quality Attributes (Perspectives)</strong>، ومن أهم الأمثلة اللي طبقناها:</p>
+
+          <h3>1. زاوية الأمان والامتثال (<code>Security View / Perspective</code>) 🔒</h3>
+          <p>لما بنبص للسيستم من زاوية الـ <strong>Security</strong>، بنغطي 3 طبقات أساسية:</p>
+
+          <div class="diagram-box">
+            <div class="diagram-title">طبقات الأمان والحوكمة الثلاث في الـ Security View</div>
+            <pre class="mermaid">
 flowchart LR
     subgraph DataSecurity["1. حماية البيانات (Data Protection)"]
         D1["Data in Transit\nتشفير النقل (TLS / HTTPS / mTLS)"]
@@ -948,78 +1109,78 @@ flowchart LR
     end
 
     DataSecurity --> Compliance --> AISecurity
-          </pre>
-        </div>
+            </pre>
+          </div>
 
-        <ol>
-          <li><strong>حماية البيانات في حالتيها (<code>Data in Transit</code> &amp; <code>Data Stored / At Rest</code>):</strong>
-            <ul>
-              <li><strong><code>Data in Transit</code> (أثناء النقل):</strong> تأمين وتشفير كل حركة البيانات بين الـ Frontend، والـ Backend، والـ AI Models عبر بروتوكولات التشفير (<code>HTTPS / TLS / mTLS</code>).</li>
-              <li><strong><code>Data Stored / At Rest</code> (أثناء التخزين):</strong> تشفير قواعد البيانات، الـ Data Warehouse، والـ Feature Stores، مع تحديد صلاحيات الوصول بدقة (<code>Role-Based Access Control - RBAC</code>).</li>
-            </ul>
-          </li>
-          <li><strong>الخصوصية والامتثال القانوني (<code>PII</code>, <code>PDPL</code>, <code>GDPR</code>):</strong>
-            <ul>
-              <li>التعامل الحذر جداً مع <strong>البيانات الشخصية (<code>PII - Personally Identifiable Information</code>)</strong> مثل اسم العميل، رقمه، إيميله، وعمل <code>Masking / Anonymization</code> لها قبل ما تروح لأي موديل AI.</li>
-              <li>التوافق الكامل مع قوانين حماية البيانات مثل <strong><code>PDPL</code></strong> (قانون حماية البيانات الشخصية) و <strong><code>GDPR</code></strong>.</li>
-            </ul>
-          </li>
-          <li><strong>حماية نماذج الذكاء الاصطناعي (<code>AI Guardians &amp; Prompt Injection Defense</code>):</strong>
-            <ul>
-              <li>وجود طبقة <strong><code>AI Guardians / Guardrails</code></strong> قبل وبعد الموديل.</li>
-              <li>الحماية من هجمات <strong><code>Prompt Injection</code></strong> و <code>Jailbreaking</code> عشان مفيش مستخدم يتلاعب بالـ Agent أو يخليه يطلع بيانات عملاء تانيين أو يخرج عن سياق البيزنس.</li>
-            </ul>
-          </li>
-        </ol>
+          <ol>
+            <li><strong>حماية البيانات في حالتيها (<code>Data in Transit</code> &amp; <code>Data Stored / At Rest</code>):</strong>
+              <ul>
+                <li><strong><code>Data in Transit</code> (أثناء النقل):</strong> تأمين وتشفير كل حركة البيانات بين الـ Frontend، والـ Backend، والـ AI Models عبر بروتوكولات التشفير (<code>HTTPS / TLS / mTLS</code>).</li>
+                <li><strong><code>Data Stored / At Rest</code> (أثناء التخزين):</strong> تشفير قواعد البيانات، الـ Data Warehouse، والـ Feature Stores، مع تحديد صلاحيات الوصول بدقة (<code>Role-Based Access Control - RBAC</code>).</li>
+              </ul>
+            </li>
+            <li><strong>الخصوصية والامتثال القانوني (<code>PII</code>, <code>PDPL</code>, <code>GDPR</code>):</strong>
+              <ul>
+                <li>التعامل الحذر جداً مع <strong>البيانات الشخصية (<code>PII - Personally Identifiable Information</code>)</strong> مثل اسم العميل، رقمه، إيميله، وعمل <code>Masking / Anonymization</code> لها قبل ما تروح لأي موديل AI.</li>
+                <li>التوافق الكامل مع قوانين حماية البيانات مثل <strong><code>PDPL</code></strong> (قانون حماية البيانات الشخصية) و <strong><code>GDPR</code></strong>.</li>
+              </ul>
+            </li>
+            <li><strong>حماية نماذج الذكاء الاصطناعي (<code>AI Guardians &amp; Prompt Injection Defense</code>):</strong>
+              <ul>
+                <li>وجود طبقة <strong><code>AI Guardians / Guardrails</code></strong> قبل وبعد الموديل.</li>
+                <li>الحماية من هجمات <strong><code>Prompt Injection</code></strong> و <code>Jailbreaking</code> عشان مفيش مستخدم يتلاعب بالـ Agent أو يخليه يطلع بيانات عملاء تانيين أو يخرج عن سياق البيزنس.</li>
+              </ul>
+            </li>
+          </ol>
 
-        <h3>2. زاوية النشر والبنية التحتية (<code>Deployment View</code>) 🚀</h3>
-        <p>بتوضح إزاي المكونات البرمجية والموديلز هتتنشر وتشتغل على الهاردوير أو الكلاود:</p>
-        <ul>
-          <li><strong>بيئة الاستضافة (<code>Hosting &amp; Residency</code>):</strong> تحديد هل الـ Deployment هيكون على <strong>Cloud</strong> (مثل AWS / GCP / Azure) ولا <strong>On-Premise / Local Cloud Region</strong> داخل نفس البلد لتحقيق شروط الـ <code>PDPL</code>.</li>
-          <li><strong>الحاويات والتشغيل (<code>Containerization &amp; Orchestration</code>):</strong> تشغيل الـ Services والـ AI Models داخل <code>Docker Containers</code> وإدارتها بـ <code>Kubernetes / Cloud Run</code> مع <code>Load Balancer</code>.</li>
-          <li><strong>التوسع في المواسم (<code>Scaling for Seasonality</code>):</strong> ضبط الـ Auto-scaling ليتعامل مع الـ <code>50 Concurrent Users</code> في الأيام العادية، ويتمدد تلقائياً لـ <code>100+ Concurrent Users</code> في رمضان والـ Holidays.</li>
-          <li><strong>فصل البيئات (<code>Environments</code>):</strong> عزل بيئات <code>Development</code>، و <code>Staging</code>، و <code>Production</code> مع خطوط <code>CI/CD &amp; MLOps</code>.</li>
-        </ul>
+          <h3>2. زاوية النشر والبنية التحتية (<code>Deployment View</code>) 🚀</h3>
+          <p>بتوضح إزاي المكونات البرمجية والموديلز هتتنشر وتشتغل على الهاردوير أو الكلاود:</p>
+          <ul>
+            <li><strong>بيئة الاستضافة (<code>Hosting &amp; Residency</code>):</strong> تحديد هل الـ Deployment هيكون على <strong>Cloud</strong> (مثل AWS / GCP / Azure) ولا <strong>On-Premise / Local Cloud Region</strong> داخل نفس البلد لتحقيق شروط الـ <code>PDPL</code>.</li>
+            <li><strong>الحاويات والتشغيل (<code>Containerization &amp; Orchestration</code>):</strong> تشغيل الـ Services والـ AI Models داخل <code>Docker Containers</code> وإدارتها بـ <code>Kubernetes / Cloud Run</code> مع <code>Load Balancer</code>.</li>
+            <li><strong>التوسع في المواسم (<code>Scaling for Seasonality</code>):</strong> ضبط الـ Auto-scaling ليتعامل مع الـ <code>50 Concurrent Users</code> في الأيام العادية، ويتمدد تلقائياً لـ <code>100+ Concurrent Users</code> في رمضان والـ Holidays.</li>
+            <li><strong>فصل البيئات (<code>Environments</code>):</strong> عزل بيئات <code>Development</code>، و <code>Staging</code>، و <code>Production</code> مع خطوط <code>CI/CD &amp; MLOps</code>.</li>
+          </ul>
 
-        <h3>3. زوايا معمارية أخرى (<code>Other Views</code>) 🧩</h3>
-        <ul>
-          <li><strong><code>Information / Data View</code>:</strong> إدارة مصادر البيانات، الـ Feature Store، تدفق البيانات للـ Segmentation والـ Recommendation، والـ Data Governance.</li>
-          <li><strong><code>Concurrency View</code>:</strong> إدارة الطلبات المتزامنة، الـ Async Queues في حملات الـ Marketing، ومنع الـ Bottlenecks وقت الذروة.</li>
-          <li><strong><code>Operational &amp; Monitoring View</code>:</strong> متابعة الـ Logs، والـ Traces، والـ Model Drift، والـ Feedback Loop عبر أدوات مثل <code>Langfuse</code> و <code>Prometheus/Grafana</code>.</li>
-        </ul>
-      </section>
+          <h3>3. زوايا معمارية أخرى (<code>Other Views</code>) 🧩</h3>
+          <ul>
+            <li><strong><code>Information / Data View</code>:</strong> إدارة مصادر البيانات، الـ Feature Store، تدفق البيانات للـ Segmentation والـ Recommendation، والـ Data Governance.</li>
+            <li><strong><code>Concurrency View</code>:</strong> إدارة الطلبات المتزامنة، الـ Async Queues في حملات الـ Marketing، ومنع الـ Bottlenecks وقت الذروة.</li>
+            <li><strong><code>Operational &amp; Monitoring View</code>:</strong> متابعة الـ Logs، والـ Traces، والـ Model Drift، والـ Feedback Loop عبر أدوات مثل <code>Langfuse</code> و <code>Prometheus/Grafana</code>.</li>
+          </ul>
+        </section>
 
-      <section id="sec-diagrams">
-        <h2>🗺️ ثالثاً: الرسم المعماري للنظام — من الـ <code>As-Is</code> إلى الـ <code>To-Be</code></h2>
-        <p>في الجزء الأخير من السيشن، طبق الـ Instructor منهجية رسم الوضع الحالي ثم التعديل عليه لبناء الوضع المستهدف:</p>
+        <section id="s1-sec-diagrams">
+          <h2>🗺️ ثالثاً: الرسم المعماري للنظام — من الـ <code>As-Is</code> إلى الـ <code>To-Be</code></h2>
+          <p>في الجزء الأخير من السيشن، طبق الـ Instructor منهجية رسم الوضع الحالي ثم التعديل عليه لبناء الوضع المستهدف:</p>
 
-        <h3>1. النظام الحالي قبل التطوير (<code>System As-Is Diagram</code>)</h3>
-        <p>يعبر عن السيستم الموجود حالياً: المستخدم بيدخل على ويب سايت أو أبلكيشن بيعرض <strong><code>Static Homepage</code></strong>، بيتواصل مع الباك إند التقليدي وقواعد البيانات بدون وجود تخصيص ذكي أو طبقات AI.</p>
+          <h3>1. النظام الحالي قبل التطوير (<code>System As-Is Diagram</code>)</h3>
+          <p>يعبر عن السيستم الموجود حالياً: المستخدم بيدخل على ويب سايت أو أبلكيشن بيعرض <strong><code>Static Homepage</code></strong>، بيتواصل مع الباك إند التقليدي وقواعد البيانات بدون وجود تخصيص ذكي أو طبقات AI.</p>
 
-        <div class="diagram-box">
-          <div class="diagram-title">مخطط النظام الحالي (System As-Is Architecture)</div>
-          <pre class="mermaid">
+          <div class="diagram-box">
+            <div class="diagram-title">مخطط النظام الحالي (System As-Is Architecture)</div>
+            <pre class="mermaid">
 flowchart LR
     User(["👤 User / Customer"]) --> Web["🖥️ Web / Mobile App\n(Static Homepage)"]
     Web --> API["⚙️ Core Backend API"]
     API --> DB[("🗄️ Core Database\n(Users, Products, Orders)")]
     Marketer(["👩‍💼 Marketing Team"]) --> ManualCamp["📢 Manual Campaign Tool\n(Static Rules & Bulk Emails)"]
     ManualCamp --> API
-          </pre>
-        </div>
+            </pre>
+          </div>
 
-        <h3>2. النظام المستهدف بعد إضافة الذكاء الاصطناعي (<code>System To-Be Diagram</code>)</h3>
-        <p>أخذنا نسخة (<code>Copy</code>) من دياجرام الـ <strong><code>As-Is</code></strong> وبدأنا نضيف عليه مكونات وطبقات الـ AI الجديدة عشان يتحول إلى <strong><code>To-Be</code></strong>:</p>
-        <ol>
-          <li><strong><code>AI for Security (AI Guardrails / Guardians)</code>:</strong> طبقة أمان ذكية في الواجهة لفحص المدخلات والمخرجات، منع الـ <code>Prompt Injection</code>، وحماية الـ <code>PII</code> وفقاً للـ <code>PDPL / GDPR</code>.</li>
-          <li><strong><code>Segmentation Model</code>:</strong> موديل لتقسيم العملاء إلى شرائح ديناميكية (<code>Dynamic User Segments</code>) بناءً على تفاعلاتهم وبياناتهم في الـ <code>Feature Store</code>.</li>
-          <li><strong><code>Recommendation System</code>:</strong> محرك توصيات يعتمد على شريحة العميل وسلوكه ليقدم <strong><code>Personalized Homepage / Products</code></strong> و <strong><code>Next-Best Action</code></strong> (مع معالجة الـ <code>Cold Start</code> للمستخدمين الجدد).</li>
-          <li><strong><code>Agentic Marketing / Campaign Automation</code>:</strong> نظام Agents ذكي يساعد فريق التسويق في تصميم وإطلاق وتخصيص الحملات أوتوماتيكياً مع وجود <strong><code>Feedback Loop</code></strong> (مثل <code>Langfuse</code>) لقياس الـ KPIs.</li>
-        </ol>
+          <h3>2. النظام المستهدف بعد إضافة الذكاء الاصطناعي (<code>System To-Be Diagram</code>)</h3>
+          <p>أخذنا نسخة (<code>Copy</code>) من دياجرام الـ <strong><code>As-Is</code></strong> وبدأنا نضيف عليه مكونات وطبقات الـ AI الجديدة عشان يتحول إلى <strong><code>To-Be</code></strong>:</p>
+          <ol>
+            <li><strong><code>AI for Security (AI Guardrails / Guardians)</code>:</strong> طبقة أمان ذكية في الواجهة لفحص المدخلات والمخرجات، منع الـ <code>Prompt Injection</code>، وحماية الـ <code>PII</code> وفقاً للـ <code>PDPL / GDPR</code>.</li>
+            <li><strong><code>Segmentation Model</code>:</strong> موديل لتقسيم العملاء إلى شرائح ديناميكية (<code>Dynamic User Segments</code>) بناءً على تفاعلاتهم وبياناتهم في الـ <code>Feature Store</code>.</li>
+            <li><strong><code>Recommendation System</code>:</strong> محرك توصيات يعتمد على شريحة العميل وسلوكه ليقدم <strong><code>Personalized Homepage / Products</code></strong> و <strong><code>Next-Best Action</code></strong> (مع معالجة الـ <code>Cold Start</code> للمستخدمين الجدد).</li>
+            <li><strong><code>Agentic Marketing / Campaign Automation</code>:</strong> نظام Agents ذكي يساعد فريق التسويق في تصميم وإطلاق وتخصيص الحملات أوتوماتيكياً مع وجود <strong><code>Feedback Loop</code></strong> (مثل <code>Langfuse</code>) لقياس الـ KPIs.</li>
+          </ol>
 
-        <div class="diagram-box">
-          <div class="diagram-title">المخطط المعماري المتكامل للنظام المستهدف (System To-Be AI Architecture)</div>
-          <pre class="mermaid">
+          <div class="diagram-box">
+            <div class="diagram-title">المخطط المعماري المتكامل للنظام المستهدف (System To-Be AI Architecture)</div>
+            <pre class="mermaid">
 flowchart TB
     User(["👤 User / Customer\n(50 Peak / 100 Seasonality)"]) --> Guardrails
 
@@ -1054,20 +1215,481 @@ flowchart TB
     RecSys -.-> Langfuse
     AgentCamp -.-> Langfuse
     Web -.->|User Feedback & Clicks| FS
-          </pre>
-        </div>
-      </section>
+            </pre>
+          </div>
+        </section>
 
-      <section id="sec-summary">
-        <h2>✅ ملخص سريع لخطوات العمل العملي لأي مشروع AI Architecture</h2>
-        <ol>
-          <li><strong>افهم البيزنس أولاً (<code>TOGAF</code>):</strong> اسأل عن الـ Story، الـ Personas، والـ Pain Points، وتذكر أن البيزنس يملك الـ <code>Why &amp; What</code> وأنت تملك الـ <code>How &amp; When</code>.</li>
-          <li><strong>اكتب الـ <code>Architecture Design Document</code>:</strong> وثّق الـ <code>Goals</code>، والـ <code>Non-Goals</code>، والـ <code>Requirements</code>، والـ <code>Assumptions</code> بالأرقام (مثل الـ <code>Peak Concurrency = 50</code> والـ <code>Seasonality = 100</code>).</li>
-          <li><strong>طبّق الـ <code>Perspectives</code> على الـ <code>Views</code>:</strong> ركز بشكل خاص على الـ <strong><code>Security View</code></strong> (<code>Data in Transit &amp; Stored</code>، <code>PII</code>، <code>PDPL/GDPR</code>، <code>AI Guardians</code>، <code>Prompt Injection</code>) والـ <strong><code>Deployment View</code></strong>.</li>
-          <li><strong>ارسم الـ <code>As-Is</code> ثم ابني عليه الـ <code>To-Be</code>:</strong> ابدأ بالنظام الحالي، ثم انسخه وضيف عليه طبقات الـ AI (<code>AI Security</code>، <code>Segmentation Model</code>، <code>Recommendation System</code>، <code>Marketing Agents</code>).</li>
-          <li><strong>اختبر قراراتك بـ <code>POC / Skeleton</code>:</strong> للتأكد من صحة التصميم عملياً واكتشاف الأخطاء مبكراً.</li>
-        </ol>
-      </section>
+        <section id="s1-sec-summary">
+          <h2>✅ ملخص سريع لخطوات العمل العملي لأي مشروع AI Architecture</h2>
+          <ol>
+            <li><strong>افهم البيزنس أولاً (<code>TOGAF</code>):</strong> اسأل عن الـ Story، الـ Personas، والـ Pain Points، وتذكر أن البيزنس يملك الـ <code>Why &amp; What</code> وأنت تملك الـ <code>How &amp; When</code>.</li>
+            <li><strong>اكتب الـ <code>Architecture Design Document</code>:</strong> وثّق الـ <code>Goals</code>، والـ <code>Non-Goals</code>، والـ <code>Requirements</code>، والـ <code>Assumptions</code> بالأرقام (مثل الـ <code>Peak Concurrency = 50</code> والـ <code>Seasonality = 100</code>).</li>
+            <li><strong>طبّق الـ <code>Perspectives</code> على الـ <code>Views</code>:</strong> ركز بشكل خاص على الـ <strong><code>Security View</code></strong> (<code>Data in Transit &amp; Stored</code>، <code>PII</code>، <code>PDPL/GDPR</code>، <code>AI Guardians</code>، <code>Prompt Injection</code>) والـ <strong><code>Deployment View</code></strong>.</li>
+            <li><strong>ارسم الـ <code>As-Is</code> ثم ابني عليه الـ <code>To-Be</code>:</strong> ابدأ بالنظام الحالي، ثم انسخه وضيف عليه طبقات الـ AI (<code>AI Security</code>، <code>Segmentation Model</code>، <code>Recommendation System</code>، <code>Marketing Agents</code>).</li>
+            <li><strong>اختبر قراراتك بـ <code>POC / Skeleton</code>:</strong> للتأكد من صحة التصميم عملياً واكتشاف الأخطاء مبكراً.</li>
+          </ol>
+        </section>
+
+      </article>
+
+      <!-- ========================================================= -->
+      <!-- SESSION 2 PANE                                            -->
+      <!-- ========================================================= -->
+      <article id="pane-session-2" class="session-pane">
+
+        <!-- Hero Header -->
+        <header class="hero-header">
+          <div class="tags-row">
+            <span class="tag-pill">#ai-architecture</span>
+            <span class="tag-pill">#event-driven</span>
+            <span class="tag-pill">#kafka</span>
+            <span class="tag-pill">#cdp</span>
+            <span class="tag-pill">#airflow</span>
+            <span class="tag-pill">#qdrant</span>
+            <span class="tag-pill">#observability</span>
+          </div>
+          <h1>🏗️ AI Architecture — Session 2: Viewpoints, Event-Driven Data Platform (CDC, Kafka, CDP) &amp; Production AI Stack</h1>
+          <div class="meta-info">
+            <span>✍️ إعداد وتلخيص: <strong>Aya Aboulwafa</strong></span>
+            <span>📅 التاريخ: أكتوبر 2026</span>
+          </div>
+        </header>
+
+        <!-- Core Abstract Callout -->
+        <div class="callout callout-abstract">
+          <div class="callout-title">💡 الفكرة الجوهرية للـ Session الثانية</div>
+          <p style="margin-bottom: 0;">
+            الانتقال من التخطيط المعماري العام إلى <strong>التصميم الهندسي التفصيلي لمنصة ذكاء اصطناعي مبنية على الأحداث (<code>Event-Driven AI Architecture</code>)</strong>؛ من خلال استكمال الزوايا المعمارية (<code>Context</code>, <code>Deployment</code>, <code>Information</code>, <code>Operational Viewpoints</code>)، وتحديد عقود البيانات (<code>API &amp; Data Contracts</code>)، وفصل قاعدة بيانات الـ <code>Application</code> عن منصة بيانات العملاء (<code>CDP</code>)، وبناء خط أنابيب بيانات متكامل (<code>CDC</code> &rarr; <code>Kafka</code> &rarr; <code>CDP</code> &rarr; <code>Airflow</code> &rarr; <code>Feature Store</code> &amp; <code>Qdrant Vector DB</code>)، مع مراقبة شاملة في الـ <code>Production</code> (<code>Grafana</code>, <code>Langfuse</code>, <code>Loki</code>, <code>Prometheus</code>).
+          </p>
+        </div>
+
+        <!-- PART 1 -->
+        <div id="s2-part-1" class="part-banner">
+          📘 الجزء الأول: الزوايا المعمارية، السياسات، والعقود (Architectural Viewpoints, Policies &amp; Contracts)
+        </div>
+
+        <section id="s2-sec-1">
+          <h2>🌐 1. زاوية السياق وبوابة النظام (<code>Context Viewpoint &amp; API Gateway</code>)</h2>
+          <p>لما بنبص للـ <code>System</code> من زاوية الـ <strong><code>Context Viewpoint</code></strong> (علاقة النظام بالـ <code>Users</code> والقنوات الخارجية):</p>
+          <ul>
+            <li><strong>دور الـ <code>API Gateway / VPN Gateway</code>:</strong>
+              <ul>
+                <li>أي <code>API Request</code> داخل للـ <code>System</code> (سواء من <code>Mobile App</code> أو <code>Website</code> أو <code>WhatsApp Channel</code>) لازم يمر أولاً عبر <strong><code>API Gateway</code></strong>.</li>
+                <li>كل <code>API</code> لازم يكون مطبق عليه <strong><code>Authentication &amp; Authorization</code></strong> (مثل التحقق من هويات الـ <code>Users</code> باستخدام <code>JWT Tokens</code> وتأمين الاتصال عبر <code>TLS 1.2+</code>).</li>
+              </ul>
+            </li>
+            <li><strong>التمثيل المعماري (<code>Context Diagram</code>):</strong>
+              <ul>
+                <li>يفضل رسم <code>Diagram</code> خاص بالـ <code>Context Viewpoint</code> يوضح حدود النظام (<code>System Boundary</code>)، والـ <code>Channels</code> الخارجية، ونقطة الدخول الموحدة عبر الـ <code>API Gateway</code>.</li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="diagram-box">
+            <div class="diagram-title">مخطط زاوية السياق وبوابة الـ API Gateway (Context Viewpoint)</div>
+            <pre class="mermaid">
+flowchart LR
+    User(["👤 Online User"]) --> Channels["📱 Channels\n(Mobile App / Website / WhatsApp)"]
+    Channels -->|"HTTPS (Port 443)\nJWT + TLS 1.2+"| Gateway["🛡️ API / VPN Gateway\n(Authentication & Authorization)"]
+    Gateway --> CoreSys["⚙️ Core E-Commerce & AI Platform\n(Internal Services)"]
+            </pre>
+          </div>
+        </section>
+
+        <section id="s2-sec-2">
+          <h2>🚀 2. زاوية النشر وتخطيط السعة (<code>Deployment Viewpoint &amp; Capacity Planning</code>)</h2>
+          <p>في الـ <strong><code>Deployment Viewpoint</code></strong> بنترجم التصميم البرمجي إلى بنية تحتية وهاردوير فعلي:</p>
+          <ul>
+            <li><strong>تخطيط السعة (<code>Capacity Planning</code>):</strong> حساب حجم الترافيك المتوقع، وعدد الـ <code>Concurrent Requests</code>، وحجم البيانات لتحديد الموارد المطلوبة بدقة.</li>
+            <li><strong>الحد الأدنى لمكونات الهاردوير (<code>Minimum Hardware Components</code>):</strong> تحديد الـ <code>Minimum Specs</code> اللازمة لتشغيل كل <code>Service</code> (عدد الـ <code>vCPUs</code>، حجم الـ <code>RAM</code>، مساحة الـ <code>Storage / NVMe</code>، ووحدات الـ <code>GPU</code> المطلوبة لعمليات الـ <code>Model Inference</code> والـ <code>Embedding</code>).</li>
+          </ul>
+        </section>
+
+        <section id="s2-sec-3">
+          <h2>🔗 3. جدول الاتصالات والشبكات (<code>Connections Table</code>)</h2>
+          <div class="figure-card">
+            <img src="assets/session-2/01-connections-table.png" alt="Connections Table" onclick="openLightbox(this.src)" />
+            <div class="figure-caption">نموذج جدول الاتصالات (Connections Table) من المحاضرة (اضغط لتكبير الصورة)</div>
+          </div>
+          <ul>
+            <li><strong>أهمية الـ <code>Connections Table</code>:</strong> بيبقى مفيد وأساسي جداً خصوصاً في الشرح والتنسيق مع الـ <strong><code>DevOps Team</code></strong> والـ <strong><code>Security Team</code></strong> عشان الكل يبقى عارف كل <code>Connection</code> جوه الـ <code>System</code> ماشي إزاي، وعلى أي <code>Port</code>، وإيه نوع الـ <code>Authentication</code>، وهل هو <code>Public</code> ولا <code>Private VPN</code>.</li>
+          </ul>
+
+          <h3>نموذج تطبيقي لـ <code>Connections Table</code>:</h3>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Source (<code>المصدر</code>)</th>
+                  <th>Destination (<code>الوجهة</code>)</th>
+                  <th>Protocol (<code>البروتوكول</code>)</th>
+                  <th>Port(s) (<code>المنفذ</code>)</th>
+                  <th>Authentication (<code>التوثيق</code>)</th>
+                  <th>Exposure (<code>Public / Private VPN</code>)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong><code>Mobile App / Website</code></strong></td>
+                  <td><code>E-commerce Service</code></td>
+                  <td><code>HTTPS (TCP)</code> through Gateway</td>
+                  <td><code>443</code></td>
+                  <td><code>JWT</code>, <code>TLS 1.2+</code></td>
+                  <td><strong>Public</strong> with Gateway Auth</td>
+                </tr>
+                <tr>
+                  <td><strong><code>E-commerce DB</code></strong></td>
+                  <td><code>Debezium (CDC)</code></td>
+                  <td><code>TCP (MySQL/Postgres Binlog)</code></td>
+                  <td><code>3306</code> / <code>5432</code></td>
+                  <td><code>DB Service Account + TLS</code></td>
+                  <td><strong>Private</strong> (Internal Network / VPN)</td>
+                </tr>
+                <tr>
+                  <td><strong><code>Debezium / Services</code></strong></td>
+                  <td><code>Kafka Event Backbone</code></td>
+                  <td><code>TCP (Kafka Protocol)</code></td>
+                  <td><code>9092</code> / <code>9093</code></td>
+                  <td><code>SASL/SCRAM</code> or <code>mTLS</code></td>
+                  <td><strong>Private</strong> (Internal Cluster)</td>
+                </tr>
+                <tr>
+                  <td><strong><code>Recommendation Engine</code></strong></td>
+                  <td><code>Vector DB (Qdrant)</code></td>
+                  <td><code>gRPC</code> / <code>HTTP</code></td>
+                  <td><code>6333</code> / <code>6334</code></td>
+                  <td><code>API Key + Internal TLS</code></td>
+                  <td><strong>Private</strong> (Internal AI Subnet)</td>
+                </tr>
+                <tr>
+                  <td><strong><code>AI/ML Layer</code></strong></td>
+                  <td><code>Groq Cloud / External LLM</code></td>
+                  <td><code>HTTPS (TCP)</code></td>
+                  <td><code>443</code></td>
+                  <td><code>Bearer API Key + TLS 1.3</code></td>
+                  <td><strong>Outbound Egress</strong> (Encrypted)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="s2-sec-4">
+          <h2>📜 4. سياسة البيانات وعقود الـ API (<code>Data Policy &amp; API / Data Contracts</code>)</h2>
+
+          <h3>أ) سياسة الاحتفاظ بالبيانات (<code>Data Retention Policy</code>)</h3>
+          <ul>
+            <li><strong>قاعدة حفظ البيانات (<code>5-Year Retention</code>):</strong> كل الـ <code>Data</code> الخاصة بالـ <code>Users</code> وتفاعلاتهم هتكون متخزنة لمدة <strong>5 سنوات على الأقل (<code>Minimum 5 Years</code>)</strong>.</li>
+            <li>يخدم ذلك الالتزام بالقوانين والتدقيق (<code>Compliance &amp; Auditing</code>)، وتوفير سجل تاريخي غني (<code>Historical Data</code>) لتدريب نماذج الذكاء الاصطناعي (<code>ML Models</code> مثل الـ <code>CLV</code> والـ <code>Churn</code> والـ <code>Seasonality</code>).</li>
+          </ul>
+
+          <h3>ب) عقود الـ API والبيانات (<code>API &amp; Data Contracts</code>)</h3>
+          <ul>
+            <li><strong>دور الـ <code>API &amp; Data Contract</code>:</strong> يوضح بالتفصيل كل الـ <code>API Endpoints</code> اللي الـ <code>System</code> محتاجها، وشكل الـ <code>Request / Response Payload</code>، والـ <code>Data Schemas</code>.</li>
+          </ul>
+
+          <div class="callout callout-tip">
+            <div class="callout-title">💡 نصيحة معمارية مهمة: فصل عقود الـ API في Docs مستقلة</div>
+            <p style="margin-bottom: 0;">
+              يفضل دايماً إن الـ <strong><code>API &amp; Data Contracts</code></strong> تكون موجودة في <strong><code>Docs</code> منفصلة</strong> ومستقلة عن وثيقة التصميم المعماري الأساسية (<code>ADD</code>)، لأن الـ <code>Endpoints</code> والـ <code>Contracts</code> بطبيعتها <strong>متغيرة باستمرار أثناء العمل والتطوير (<code>Iterative Development</code>)</strong>.
+            </p>
+          </div>
+        </section>
+
+        <section id="s2-sec-5">
+          <h2>🗄️ 5. زاوية البيانات: الفرق بين <code>Application DB</code> ومنصة <code>CDP</code> (<code>Information Viewpoint</code>)</h2>
+          <p>في الـ <strong><code>Information Viewpoint</code></strong>، من أهم القرارات المعمارية هو الفصل التام بين قاعدة بيانات التطبيق الأساسية (<strong><code>Application Database</code></strong>) ومنصة بيانات العملاء (<strong><code>CDP - Customer Data Platform</code></strong>):</p>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>وجه المقارنة</th>
+                  <th>🏢 <code>Application Database</code> (<code>E-commerce DB</code>)</th>
+                  <th>📊 <code>CDP (Customer Data Platform)</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>الغرض الأساسي</strong></td>
+                  <td>شايلة الحاجات الأساسية اللي بتشغل الـ <code>Application</code> لحظياً (<code>OLTP</code>).</td>
+                  <td>تجميع وتتبع (<code>Track</code>) كل ما يخص الـ <code>User Behavior</code> وبناء ملف موحد للعميل (<code>Unified Customer Profile</code>).</td>
+                </tr>
+                <tr>
+                  <td><strong>نوع الـ <code>Data</code> المخزنة</strong></td>
+                  <td>تحتوي على الـ <code>Schema</code> والـ <code>Functions</code> والبيانات التشغيلية الأساسية فقط (<code>Users</code>, <code>Products</code>, <code>Orders</code>).</td>
+                  <td>
+                    • <code>User Behavior</code>: الـ <code>Clicks</code>، الوقت المقضي في كل <code>Page</code> (<code>Dwell Time</code>)، والـ <code>Actions</code> اللي عملها على الـ <code>System</code> (<code>Carts</code>, <code>Orders</code>, <code>Logins</code>, <code>Feedback</code>).<br />
+                    • <code>User Info</code>: <code>Name</code>, <code>Phone Number</code>, <code>IP Address</code>, إلخ.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>علاقتها بـ <code>ML Models</code></strong></td>
+                  <td>⚠️ <strong>لا يُنصح أبداً بتخزين <code>Data</code> خاصة بالـ <code>ML Models</code> هنا</strong> عشان منعملش حمل (<code>Load</code>) يبطئ الـ <code>Application</code>.</td>
+                  <td>المصدر الرئيسي والآمن لتغذية الـ <code>Airflow DAGs</code>، والـ <code>Feature Store</code>، وتدريب الـ <code>ML Models</code>.</td>
+                </tr>
+                <tr>
+                  <td><strong>طريقة انتقال الـ <code>Data</code></strong></td>
+                  <td>أي تعديل فيها بيتسحب لحظياً ويروح إلى <strong><code>Kafka</code></strong> عن طريق <strong><code>CDC</code></strong>.</td>
+                  <td>الـ <code>Data</code> بتتخزن فيها عن طريق <strong><code>ETL Job</code></strong> أو <code>Stream Sink</code> بعد ما يتعمل عليها <strong><code>Preprocessing</code></strong> وتنظيف.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="s2-sec-6">
+          <h2>⚙️ 6. زاوية التشغيل، المراقبة، والتصريح الأمني (<code>Operational Viewpoint, Observability &amp; Security Clearance</code>)</h2>
+
+          <h3>أ) زاوية التشغيل وأرقام الأداء القياسية (<code>Operational Viewpoint &amp; Release SLAs</code>)</h3>
+          <p>الـ <strong><code>Operational Viewpoint</code></strong> بيحدد القواعد والأرقام القياسية (<code>Performance SLAs / Quality Gates</code>) اللي <strong>مينفعش يقل عنها أي <code>Release</code> جديد</strong>. بالتالي، الـ <strong><code>Testing / QA Team</code></strong> بيحتاج مع كل <code>Release</code> يختبر الأرقام دي أو يعمل لها <strong><code>Automation</code></strong> داخل الـ <code>CI/CD Pipeline</code>:</p>
+          <ol>
+            <li><strong><code>P50 Latency</code>:</strong> تكون <strong>أقل من <code>100ms</code></strong> (أي أن 50% من الـ <code>Requests</code> ترد في أقل من 100 ملي ثانية).</li>
+            <li><strong><code>P95 Latency</code>:</strong> تكون في حدود <strong><code>500ms</code></strong> كحد أقصى (أي أن 95% من الـ <code>Requests</code> ترد في أقل من نصف ثانية).</li>
+            <li><strong><code>Throughput</code>:</strong> قدرة الـ <code>System</code> على استيعاب <strong><code>1000 RPS</code> (<code>Requests Per Second</code>)</strong>.</li>
+          </ol>
+
+          <h3>ب) منظومة المراقبة في بيئة الإنتاج (<code>Observability Stack in Production</code>)</h3>
+          <p>الـ <strong><code>Observability</code></strong> هي اللي بتساعدنا نتأكد إن الـ <code>Application</code> وموديلز الـ <code>AI</code> شغالين كويس وبكفاءة في الـ <strong><code>Production</code></strong>، وتتكون من 4 أدوات متكاملة:</p>
+
+          <div class="diagram-box">
+            <div class="diagram-title">منظومة المراقبة المتكاملة في بيئة الإنتاج (Production Observability &amp; AI Eval Stack)</div>
+            <pre class="mermaid">
+flowchart TB
+    Prod["🚀 Production Environment\n(Microservices, Kafka, AI/ML Models)"] --> Metrics["📈 Prometheus\n(Metrics Collection & Alert Rules)"]
+    Prod --> Logs["📜 Loki\n(Multi-Service Log Aggregation)"]
+    Prod --> Traces["🧠 Langfuse\n(LLM Tracing, Tokens & RAG Evaluation)"]
+
+    Metrics --> Grafana["📊 Grafana Dashboard\n(Server Utilization, Latency, RPS & Logs View)"]
+    Logs --> Grafana
+    Metrics --> Alerts["🔔 Alert Channels\n(Slack, Telegram, Emails)"]
+    Traces --> Eval["⚖️ AI Quality Evals\n(LLM-as-a-Judge, RAGAS, F1 Score)"]
+            </pre>
+          </div>
+
+          <ol>
+            <li><strong><code>Grafana</code> (لوحة المراقبة الموحدة):</strong> عبارة عن <code>Dashboard</code> تفاعلية بتوضح الـ <strong><code>Resource Utilization</code></strong> (استهلاك الـ <code>CPU</code>, <code>RAM</code>, <code>GPU</code>)، وبتراقب حالة الـ <code>Servers</code> والـ <code>Logs</code> والـ <code>Latency</code> في مكان واحد.</li>
+            <li><strong><code>Langfuse</code> (مراقبة وتقييم الـ <code>LLMs</code> والـ <code>AI Agents</code>):</strong>
+              <ul>
+                <li>الـ <strong><code>Tracing</code></strong> الكامل لكل خطوة في الـ <code>AI Pipeline</code>.</li>
+                <li>الـ <strong><code>Chunks Retrieved</code></strong> من الـ <code>Vector DB</code> والـ <strong><code>Model Output</code></strong> النهائي.</li>
+                <li>المقاييس مثل <strong><code>F1 Score</code></strong>، وعدد الـ <strong><code>Tokens</code></strong> (<code>Input Tokens</code> &amp; <code>Output Tokens</code>)، والـ <strong><code>Metadata</code></strong>.</li>
+                <li>التقييم الأوتوماتيكي المستمر باستخدام <strong><code>LLM-as-a-Judge</code></strong> وإطار عمل <strong><code>RAGAS</code></strong> لعمل <code>Evaluation</code> لجودة الـ <code>Retrieval</code> والـ <code>Generation</code>.</li>
+              </ul>
+            </li>
+            <li><strong><code>Loki</code> (تجميع السجلات المركزي):</strong> بيظهر ويجمع الـ <strong><code>Logs</code></strong> الخاصة بأكتر من <code>Service</code> مع بعض في نفس الوقت لتتبع <code>Events</code> أو أخطاء معينة عبر الـ <code>System</code> كله.</li>
+            <li><strong><code>Prometheus</code> (المقاييس والتنبيهات الفورية):</strong> يجمع الـ <code>Time-series Metrics</code> ويبعت <strong><code>Alerts</code></strong> فورية على <code>Channels</code> مختلفة مثل <strong><code>Slack</code></strong>، و <strong><code>Telegram</code></strong>، و <strong><code>Emails</code></strong>.</li>
+          </ol>
+
+          <h3>ج) التصريح والفحص الأمني (<code>Security Clearance</code>)</h3>
+          <ul>
+            <li><strong>متى وأين يتم الـ <code>Security Clearance</code>؟</strong> بيتعمل على بيئة ما قبل الإنتاج (<strong><code>Pre-prod / Staging Environment</code></strong>) أو من خلال <strong><code>Security Survey / Audit</code></strong> شامل للتأكد من إغلاق كافة الثغرات وصلاحية الـ <code>Guardrails</code> قبل السماح بالـ <code>Deployment</code> على الـ <code>Production</code>.</li>
+          </ul>
+        </section>
+
+        <!-- PART 2 -->
+        <div id="s2-part-2" class="part-banner">
+          🧠 الجزء الثاني: اللبنات الأساسية لأنظمة الـ AI وتدفق البيانات (AI System Building Blocks &amp; Data Pipeline)
+        </div>
+
+        <section id="s2-sec-blocks">
+          <h2>🧱 1. اللبنات الخمس الأساسية لأي نظام ذكاء اصطناعي (<code>AI System Building Blocks</code>)</h2>
+          <div class="figure-card">
+            <img src="assets/session-2/02-ai-system-building-blocks.png" alt="AI System Building Blocks" onclick="openLightbox(this.src)" />
+            <div class="figure-caption">اللبنات الخمس الأساسية لأي نظام AI (اضغط لتكبير الصورة)</div>
+          </div>
+          <p>أي <code>System</code> في الـ <code>Production</code> بيستخدم <code>AI Feature</code> لازم يغطي النقاط والمكونات الـ 5 الأساسية دي:</p>
+          <ol>
+            <li><strong><code>Data pipelines and feature stores</code>:</strong> خطوط أنابيب نقل ومعالجة الـ <code>Data</code> (<code>Kafka</code>, <code>CDC</code>, <code>Airflow</code>) ومخازن الـ <code>Features</code> (<code>Feast</code>).</li>
+            <li><strong><code>Model layer (Foundation, Fine-tuned, Classical ML)</code>:</strong> طبقة النماذج سواء كانت <code>Foundation LLMs</code>، أو موديلز معمول لها <code>Fine-tuning</code>، أو <code>Classical ML Models</code> (مثل <code>RFM</code>, <code>CLV</code>, <code>Churn</code>, <code>Two-Tower Ranking</code>).</li>
+            <li><strong><code>Training vs. Inference Infrastructure</code>:</strong> الفصل بين البنية التحتية المخصصة للـ <code>Training</code> (اللي بتحتاج <code>Batch GPU Jobs</code>) والبنية المخصصة للـ <code>Inference</code> اللحظي (<code>Groq Cloud</code> أو <code>vLLM</code> على <code>GCP GPU Hyperscaler</code>).</li>
+            <li><strong><code>Serving, APIs and Orchestration</code>:</strong> طريقة تقديم الموديل كـ <code>API</code> وتنسيق العمل بين الموديلز والـ <code>Data</code> (<code>Airflow</code>, <code>FastAPI / gRPC</code>).</li>
+            <li><strong><code>MLOps / LLMOps and Observability</code>:</strong> أتمتة دورة حياة الموديل ومراقبته المستمرة (<code>Langfuse</code>, <code>Prometheus</code>, <code>Grafana</code>).</li>
+          </ol>
+        </section>
+
+        <section id="s2-sec-models">
+          <h2>🎯 2. كيف تختار الـ <code>AI Model</code> المناسب وتعمل له <code>Benchmarking</code>؟</h2>
+          <p>عند اختيار أي <code>Model</code> في الـ <code>AI Layer</code>، بنمشي على القواعد العملية التالية:</p>
+          <ul>
+            <li><strong>البحث في خلفية تدريب الموديل (<code>Model Pre-training Research</code>):</strong> لازم تعمل <code>Search</code> كويس عشان تعرف الـ <code>Model</code> ده متدرب على إيه أكتر، وإيه نقاط قوته وضعفه.</li>
+            <li><strong>الحاجة للـ <code>Fine-Tuning</code> حسب المجال (<code>Domain-Specific Fine-Tuning</code>):</strong> بعض الـ <code>Business Domains</code> المتخصصة بتحتاج <strong><code>Fine-tuning</code></strong> لأن الموديل العام مش هيفهم تفاصيل الـ <code>Domain</code> لوحده.</li>
+          </ul>
+
+          <div class="callout callout-warning">
+            <div class="callout-title">⚠️ قاعدة مهمة في تقييم الموديلز (Domain Benchmarking)</div>
+            <p style="margin-bottom: 0;">
+              الـ <strong><code>Benchmarking</code></strong> الصح بيبقى <strong>على حسب احتياجاتك وتجربتك والـ <code>Business Domain</code> بتاعك</strong> (باستخدام <code>Evaluation Dataset</code> من داتا المشروع نفسه)، <strong>مش مجرد الاعتماد على <code>Global Benchmark</code> عالمي أو عام!</strong>
+            </p>
+          </div>
+
+          <h3>الأبعاد الثلاثة لاختيار الموديل (<code>The 3 Dimensions of Model Selection</code>):</h3>
+          <ol>
+            <li><strong>اللغة (<code>Language</code>):</strong> هل الـ <code>Model</code> بيدعم اللغة المطلوبة (مثلاً العربية واللهجات المحلية بجانب الإنجليزية) بدقة عالية؟</li>
+            <li><strong>مجال العمل وبيئة التشغيل (<code>Business Domain &amp; Operating Environment</code>):</strong> الـ <code>Model</code> هيشتغل وهيعمل <code>Operate</code> فين؟ في <strong>جهة حكومية (<code>Government</code>)</strong>، ولا <strong>بنك (<code>Bank</code>)</strong>، ولا <strong><code>E-commerce</code></strong>؟ (لأن ده بيفرض قيود صارمة على الـ <code>Data Privacy</code>، وهل مسموح نستخدم <code>Cloud API</code> ولا لازم <code>On-Premise / Private GPU</code>).</li>
+            <li><strong>المهمة المطلوبة (<code>Target Task</code>):</strong> إيه الـ <code>Task</code> المطلوبة منه تحديداً؟ (<code>Segmentation</code>، <code>Churn Prediction</code>، <code>Sentiment Analysis</code>، <code>Embedding</code>، أو <code>Text Generation</code>).</li>
+          </ol>
+
+          <div class="callout callout-tip">
+            <div class="callout-title">💡 نصيحة عند رسم الـ Architecture Diagrams بمساعدة الـ AI</div>
+            <p style="margin-bottom: 0;">
+              الـ <code>Diagram</code> المعماري ممكن تستعين بالـ <code>AI</code> عشان يساعدك في رسمه بسرعة، <strong>ولكن أنت كـ <code>Architect</code> لازم تعمل <code>Guide</code> وتوجيه دقيق للـ <code>AI</code></strong> وتراجع كل سهم وكل مكون بنفسك، لأن القرار المعماري مسؤوليتك أنت.
+            </p>
+          </div>
+        </section>
+
+        <section id="s2-sec-pipeline">
+          <h2>🔄 3. رحلة الـ <code>Data</code> والـ <code>Embeddings</code> والـ <code>Vector DB</code> (<code>CDC</code> &rarr; <code>Kafka</code> &rarr; <code>CDP</code> &rarr; <code>Qdrant</code>)</h2>
+          <p>عشان نبني <code>Real-time &amp; Batch AI Pipeline</code> قوي، الـ <code>Data</code> بتمشي في الخطوات المتسلسلة دي:</p>
+
+          <div class="diagram-box">
+            <div class="diagram-title">مسار تدفق البيانات من الـ Application DB إلى الـ CDP و Qdrant Vector DB</div>
+            <pre class="mermaid">
+flowchart LR
+    AppDB[("🗄️ Application DB\n(E-commerce DB)")] -->|"binlog\n(Record by Record)"| CDC["🔄 CDC Tool\n(Debezium)"]
+    CDC -->|"CDC Events"| Kafka["⚡ Apache Kafka\n(Event Backbone)"]
+    Services["🧩 Services & Feedback\n(Cart, Checkout, Login, CSAT)"] -->|"Domain Events"| Kafka
+    Kafka -->|"Stream / ETL\n+ Preprocessing"| CDP[("📊 CDP\n(Customer Data Platform)")]
+    CDP --> Airflow["⏱️ Apache Airflow\n(DAG Orchestrator)"]
+    Airflow -->|"Hourly / Batch\nEmbedding DAG"| Embed["🧬 Embedding Model\n(+ Preprocessing & Reranker)"]
+    Embed -->|"Upsert Vectors"| Qdrant[("🎯 Vector DB (Qdrant)\nCosine / ANN Search -> Top-K")]
+            </pre>
+          </div>
+
+          <ol>
+            <li><strong>أداة الـ <code>CDC (Change Data Capture)</code> مثل <code>Debezium</code>:</strong> بتراقب الـ <code>binlog</code> بتاع الـ <code>Database</code> وتسحب التغييرات <strong><code>Record by Record</code></strong> وتوديها مباشرة إلى <code>Kafka</code> بدون ما تبطئ الـ <code>Application Database</code>.</li>
+            <li><strong>منصة <code>Apache Kafka (Event Backbone)</code>:</strong> بتجمع الـ <code>Data</code> من الـ <code>Database</code> (عن طريق <code>CDC</code>)، ومن الـ <code>Services</code> المختلفة، والـ <code>Domain Events</code> (<code>Cart</code>, <code>Checkout</code>, <code>Login</code>)، والـ <code>User Feedbacks</code>.</li>
+            <li><strong>منصة بيانات العملاء <code>CDP (Customer Data Platform)</code>:</strong> بتستقبل الـ <code>Data</code> المجمعة عشان تكون كلها في مكان موحد، ومن الـ <code>CDP</code> نقدر ناخد الـ <code>Data</code> ونوديها للـ <strong><code>Airflow</code></strong> أو نستخدمها في الـ <code>Model Training</code>.</li>
+            <li><strong>مرحلة الـ <code>Embedding Model</code> والـ <code>Reranker</code>:</strong>
+              <ul>
+                <li>لازم نختار <strong><code>Embedding Model</code></strong> مناسب لطبيعة النصوص والمنتجات.</li>
+                <li>ممكن نعمل <strong><code>Preprocessing</code></strong> قبل مرحلة الـ <code>Embedding</code>، ونستخدم <strong><code>Reranker</code></strong> لترتيب النتائج بعد الاسترجاع.</li>
+                <li>وممكن نولد الـ <code>Embedding</code> باستخدام <strong><code>Generative Model</code></strong> لو بنتعامل مع <code>Complex Context Text</code>.</li>
+              </ul>
+            </li>
+            <li><strong>قاعدة البيانات المتجهة <code>Vector DB (Qdrant)</code>:</strong> الـ <code>Data</code> بعد ما يتعمل لها <code>Embedding</code> بتتخزن كـ <code>Vectors</code> جوه <strong><code>Qdrant</code></strong>، والـ <code>Qdrant</code> بتقدر تعمل جواها <strong><code>Cosine Similarity / ANN Search</code></strong> بسرعة فائقة وترجع لنا الـ <strong><code>Top-K Candidates</code></strong>.</li>
+          </ol>
+        </section>
+
+        <!-- PART 3 -->
+        <div id="s2-part-3" class="part-banner">
+          🗺️ الجزء الثالث: شرح المعمارية الكاملة للنظام المستهدف (To-Be Event-Driven Architecture &amp; Use Cases)
+        </div>
+
+        <section id="s2-sec-tobe">
+          <h2>🏗️ 1. قراءة تفصيلية في مخطط الـ <code>To-Be Architecture Diagram</code></h2>
+          <div class="figure-card">
+            <img src="assets/session-2/03-to-be-event-driven-architecture.png" alt="To-Be Event-Driven AI Architecture" onclick="openLightbox(this.src)" />
+            <div class="figure-caption">المخطط المعماري المتكامل للنظام المستهدف (To-Be Event-Driven AI Architecture — اضغط لتكبير الصورة)</div>
+          </div>
+
+          <div class="callout callout-info">
+            <div class="callout-title">📌 مفتاح قراءة المخطط المعماري (To-Be Diagram Legend)</div>
+            <ul style="margin-bottom: 0;">
+              <li><strong>المكونات باللون الأبيض/الرمادي:</strong> تمثل مكونات النظام الأساسي (<code>Core E-Commerce, Channels, Gateway, Databases</code>).</li>
+              <li><strong>المكونات والأسهم باللون البرتقالي (<code>Orange</code>):</strong> تمثل الإضافات الجديدة في الـ <strong><code>To-Be Architecture</code></strong> الخاصة بمنصة البيانات المبنية على الأحداث (<code>Event-Driven Data Platform</code>) وربطها بطبقات الـ <code>AI/ML</code>.</li>
+            </ul>
+          </div>
+
+          <h3>تفصيل المكونات والتدفقات داخل الـ <code>Diagram</code>:</h3>
+          <ol>
+            <li><strong>القنوات، الـ <code>Dashboards</code>، وقواعد البيانات التشغيلية (الجانب الأيسر):</strong>
+              <ul>
+                <li><strong><code>Online User</code></strong> يتفاعل عبر قناتين: <strong><code>Mobile / Website</code></strong> و <strong><code>WhatsApp Channel</code></strong>، ويمر الاتصال عبر <strong><code>API VPN Gateway</code></strong> مؤمناً بـ <code>JWT</code>.</li>
+                <li><strong><code>Customer Insights Dashboard</code></strong> تتصل بـ <strong><code>Analytics Engine</code></strong> التي تقرأ من الـ <code>CDP</code>.</li>
+                <li><strong><code>E-commerce Service</code></strong> يتعامل مع 3 قواعد بيانات أساسية: <strong><code>E-commerce DB</code></strong>، و <strong><code>Products DB</code></strong>، و <strong><code>Campaigns DB</code></strong>.</li>
+              </ul>
+            </li>
+            <li><strong>خط أنابيب الأحداث والـ <code>CDP</code> (<code>CDC</code> &rarr; <code>Kafka</code> &rarr; <code>Preprocessing</code> &rarr; <code>CDP</code>):</strong>
+              <ul>
+                <li>مسار التغييرات: <code>E-commerce DB</code> &rarr; <code>Debezium (CDC)</code> &rarr; <code>Kafka Event Backbone</code> (<code>topics: cart, checkout, login, feedback, cdc.*</code>).</li>
+                <li>يرسل <strong><code>Feedback Service</code></strong> تقييمات العملاء وتحليل المشاعر (<code>Ratings + Text CSAT Sentiment</code>) إلى <code>Kafka</code>.</li>
+                <li>تصب هذه الأحداث في <strong><code>Customer Interactions and Profiles (CDP)</code></strong> الذي يجمع الـ <code>Data</code> من عدة مصادر في مكان واحد، مما يتيح لنا عمل <code>Model Training</code> أو استخراج الـ <code>Features</code>.</li>
+              </ul>
+            </li>
+            <li><strong>معالجة السلة المتروكة لحظياً عبر <code>Apache Flink</code> (<code>Real-Time Stream Processing</code>):</strong>
+              <ul>
+                <li>يقرأ <strong><code>Flink</code></strong> الأحداث لحظياً من <code>Kafka</code> لاكتشاف سلة المشتريات المتروكة (<strong><code>Abandoned-cart detection</code></strong> عبر <code>Timer</code>: إذا لم يتم الـ <code>Checkout</code> بعد فترة محددة).</li>
+                <li>يرسل إشارة فورية (<code>Abandoned Cart</code> &rarr; <code>NBA</code>) إلى الـ <strong><code>Recommendation Engine</code></strong> الذي يرسل بدوره <strong><code>Abandon Cart Notification</code></strong> للـ <code>User</code> عبر <strong><code>WhatsApp</code></strong>.</li>
+              </ul>
+            </li>
+            <li><strong>التنسيق والجدولة عبر <code>Apache Airflow</code> ومخزن السمات <code>Feature Store (Feast)</code>:</strong>
+              <ul>
+                <li><strong><code>Airflow (DAG Orchestrator)</code>:</strong> يأخذ الـ <code>Data</code> من الـ <code>CDP</code>، ويشغل الـ <code>Models</code>، ويأخذ الـ <code>Output</code> من الـ <code>Model</code> ليوديه إلى الـ <strong><code>Feature Store (Feast)</code></strong>.</li>
+                <li>الـ <code>DAG</code> ممكن يشتغل <strong><code>Near Real-time</code></strong> أو <strong><code>Batch</code></strong> (كل دقيقة، أو كل ساعة، أو كل يوم)، وممكن نعمل <code>DAG</code> كل ساعة يعمل <strong><code>Embedding Refresh</code></strong> في <code>Qdrant</code>.</li>
+                <li><strong><code>Feature Store (Feast)</code>:</strong> يخزن الـ <code>RFM / CLV / Churn Features</code> في طبقتين: <strong><code>Offline (Batch)</code></strong> للتدريب، و <strong><code>Online (Real-time)</code></strong> لخدمة الـ <code>Recommendation Engine</code> لحظياً.</li>
+              </ul>
+            </li>
+            <li><strong>طبقة الذكاء الاصطناعي والبنية التحتية للحوسبة (<code>AI/ML Layer</code>, <code>Groq Cloud</code>, <code>GCP GPU Hyperscaler</code>):</strong>
+              <ul>
+                <li><strong><code>AI/ML Layer</code>:</strong> تضم <code>AI for Security and Guardrails</code>، و <code>RFM, CLV, Segmentation Models</code>، و <code>Two-Tower Retrieval + Ranking Model</code>، و <code>Churn Detection Model (Domain-specific)</code>، و <code>Sentiment Analysis Service</code>.</li>
+                <li><strong><code>Groq Cloud</code>:</strong> يُستخدم لتشغيل موديلز <code>GPT-OSS 20B</code>، و <code>GPT-OSS 120B</code>، بالإضافة إلى <strong><code>Embedding Models (Transformer-based)</code></strong>.</li>
+                <li><strong><code>GCP GPU Hyperscaler</code>:</strong> يشغل محرك <strong><code>vLLM</code></strong> لخدمة النماذج المفتوحة مثل <strong><code>Qwen 7B</code></strong> و <strong><code>Llama 70B</code></strong>.</li>
+              </ul>
+            </li>
+          </ol>
+        </section>
+
+        <section id="s2-sec-usecase">
+          <h2>🎯 2. تطبيق عملي على <code>Functional Use Case</code>: تخصيص الصفحة الرئيسية (<code>Homepage Personalization</code>)</h2>
+          <p>إزاي المعمارية دي بتشتغل فعلياً لما نطبقها على <code>Use Case</code> الـ <strong><code>Homepage Personalization</code></strong>؟</p>
+
+          <div class="diagram-box">
+            <div class="diagram-title">مخطط التفاعل الزمني لسيناريو تخصيص الصفحة الرئيسية (Homepage Personalization Sequence)</div>
+            <pre class="mermaid">
+sequenceDiagram
+    autonumber
+    actor User as 👤 User
+    participant App as 🖥️ E-commerce Service
+    participant Kafka as ⚡ CDC & Kafka
+    participant CDP as 📊 CDP & Airflow DAG
+    participant AI as 🧠 AI Layer & Feast
+    participant Qdrant as 🎯 Qdrant (Vector DB)
+    participant Rec as 🚀 Recommendation Engine
+
+    Note over User,AI: أ) ما يحدث في الـ Background (تجميع السلوك وتحديث الـ Embeddings)
+    User->>App: يسجل حساب / يبحث (Search) / يتصفح (Clicks & Dwell Time) / يشتري منتج
+    App->>Kafka: إرسال التفاعلات والـ Transactions عبر CDC & Domain Events
+    Kafka->>CDP: تجميع السلوك في الـ CDP وتشغيل Airflow DAGs
+    CDP->>AI: تحديث الـ Segmentation & User Vectors والـ Online Features (Feast)
+    AI->>Qdrant: Upsert User & Item Embeddings
+
+    Note over User,Rec: ب) عند فتح الـ Homepage (Real-Time / Batch Personalization)
+    User->>App: يفتح الـ Homepage
+    App->>Rec: طلب توصيات مخصصة للـ User
+    Rec->>Qdrant: Query User Vector -> ANN Search (Top-K)
+    Qdrant-->>Rec: إرجاع ~500 Candidates
+    Rec->>AI: قراءة Online Features من Feast + ترتيب النتائج (Ranking Model)
+    Rec-->>App: إرجاع Personalized Products + "Frequently Bought Together"
+    App-->>User: عرض Homepage مخصصة لحظياً (أقل من 100ms–500ms)
+            </pre>
+          </div>
+
+          <h3>تفاصيل مسارات العمل في <code>Homepage Personalization</code>:</h3>
+          <ol>
+            <li><strong>المسار المجدول (<code>Batch / Scheduled via Airflow DAG</code>):</strong>
+              <ul>
+                <li>ممكن نعملها بـ <strong><code>Airflow DAG</code></strong> يشتغل دورياً ويشغل الـ <code>Recommendation System</code> والـ <code>Segmentation Models</code>، فيرجع النتائج الجاهزة إلى الـ <code>E-commerce Database</code> أو الـ <code>Feature Store</code> لعرضها فوراً.</li>
+              </ul>
+            </li>
+            <li><strong>المسار اللحظي (<code>Real-time via AI Layer &amp; Qdrant</code>):</strong>
+              <ul>
+                <li>يروح الطلب مباشرة للـ <strong><code>Recommendation Engine</code></strong> والـ <strong><code>AI Layer</code></strong>:</li>
+                <li>لو الـ <code>User</code> جديد تماماً (<code>Cold Start</code>)، بيطبق <code>Fixed Rules</code> مبدئية.</li>
+                <li>لو الـ <code>User</code> له بصمة وتفاعلات، بيبعت الـ <code>User Vector</code> إلى <strong><code>Qdrant</code></strong> ليعمل <code>ANN Search (Top-K)</code> ويرجع حوالي <strong><code>~500 Candidates</code></strong>، ثم يرتبهم (<code>Rank</code>) باستخدام الـ <strong><code>Online Features</code></strong> من <code>Feast</code>.</li>
+              </ul>
+            </li>
+            <li><strong>ماذا يحدث في الـ <code>Background</code> أثناء تصفح الـ <code>User</code>؟</strong>
+              <ul>
+                <li>لما الـ <code>User</code> بيسجل في الموقع، أو بيكتب بعض المعلومات عن اهتماماته، أو بيروح يعمل <strong><code>Search</code></strong> على منتجات معينة، أو بيقعد في كل <code>Page</code> وقت معين (<code>Dwell Time</code> &amp; <code>Clicks</code>):</li>
+                <li>كل الداتا دي بتروح في الـ <strong><code>Background</code></strong> إلى <strong><code>Kafka</code></strong> (عبر الـ <code>CDC</code> والـ <code>Domain Events</code>) &rarr; ومنها إلى الـ <strong><code>CDP</code></strong> &rarr; ثم يسحبها <strong><code>Airflow</code></strong> &rarr; ويدخلها على الـ <strong><code>AI Layer</code></strong>.</li>
+                <li><strong>مثال تطبيقي (<code>Cross-Selling / Collaborative Filtering</code>):</strong> لو الـ <code>User</code> اشترى منتج معين، النظام يقترح له تلقائياً: <em>"الناس اللي اشترت المنتج ده غالباً اشترت معاه كذا وكذا"</em> (<code>Frequently Bought Together / Next-Best Action</code>).</li>
+              </ul>
+            </li>
+          </ol>
+        </section>
+
+      </article>
 
       <footer>
         تم إعداد هذه الصفحة بواسطة <strong>Aya Aboulwafa</strong> — كورس <strong>AI Architecture</strong> ✨
@@ -1082,11 +1704,97 @@ flowchart TB
   </div>
 
   <script>
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: 'dark',
-      securityLevel: 'loose',
-      fontFamily: 'Cairo, sans-serif'
+    let currentSession = 'session-1';
+
+    function switchSession(sessionId, skipScrollTop) {
+      currentSession = sessionId;
+
+      // Toggle panes
+      document.querySelectorAll('.session-pane').forEach((pane) => {
+        if (pane.id === 'pane-' + sessionId) {
+          pane.classList.remove('hidden-pane');
+        } else {
+          pane.classList.add('hidden-pane');
+        }
+      });
+
+      // Toggle top pills
+      document.querySelectorAll('.session-tab-pill').forEach((pill) => {
+        if (pill.id === 'tab-btn-' + sessionId) {
+          pill.classList.add('active');
+        } else {
+          pill.classList.remove('active');
+        }
+      });
+
+      // Toggle sidebar groups active state & ensure clicked session TOC is open
+      document.querySelectorAll('.session-group').forEach((grp) => {
+        if (grp.id === 'menu-group-' + sessionId) {
+          grp.classList.add('active');
+          grp.classList.add('open');
+        } else {
+          grp.classList.remove('active');
+        }
+      });
+
+      if (!skipScrollTop) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function handleSessionMenuClick(sessionId) {
+      const grp = document.getElementById('menu-group-' + sessionId);
+      if (currentSession === sessionId) {
+        // Toggle accordion open/close if already on this session
+        grp.classList.toggle('open');
+      } else {
+        switchSession(sessionId);
+      }
+    }
+
+    function goToSection(sessionId, elementId) {
+      if (currentSession !== sessionId) {
+        switchSession(sessionId, true);
+      }
+      const target = document.getElementById(elementId);
+      if (target) {
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 30);
+      }
+    }
+
+    // Initialize Mermaid while both panes are visible so all SVGs compute proper bounding boxes,
+    // then hide the non-active session pane.
+    document.addEventListener('DOMContentLoaded', async () => {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'dark',
+        securityLevel: 'loose',
+        fontFamily: 'Cairo, sans-serif'
+      });
+
+      try {
+        await mermaid.run({
+          querySelector: '.mermaid'
+        });
+      } catch (e) {
+        console.error('Mermaid render error:', e);
+      }
+
+      // Check URL hash if user linked directly to #session-2 or #s2-...
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'session-2' || hash.startsWith('s2-')) {
+        switchSession('session-2', true);
+        if (hash.startsWith('s2-')) {
+          goToSection('session-2', hash);
+        }
+      } else {
+        switchSession('session-1', true);
+        if (hash.startsWith('s1-')) {
+          goToSection('session-1', hash);
+        }
+      }
     });
 
     function toggleTheme() {
