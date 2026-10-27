@@ -24,10 +24,12 @@ ai-architecture-portfolio/
 │   ├── marketing-automation-architecture.drawio  # Editable Draw.io System Model
 │   └── marketing-automation-architecture.png     # Rendered High-Resolution System Diagram
 ├── study/
-│   └── session-1-notes.md           # Theoretical Foundations, Frameworks (TOGAF, C4, Zachman)
+│   ├── session-1-notes.md           # Session 1: Theoretical Foundations, Frameworks (TOGAF, C4, Zachman)
+│   └── session-2-notes.md           # Session 2: Viewpoints, Event-Driven Data Platform (CDC, Kafka, CDP) & Production AI Stack
 ├── assets/
-│   └── session-1/                   # Session diagrams and architectural reference visuals
-├── index.html                       # Interactive RTL Web Presentation (GitHub Pages)
+│   ├── session-1/                   # Session 1 diagrams and architectural reference visuals
+│   └── session-2/                   # Session 2 diagrams (Connections Table, Building Blocks, To-Be Architecture)
+├── index.html                       # Interactive RTL Web Presentation — All Sessions (GitHub Pages)
 └── README.md                        # Portfolio documentation and repository roadmap
 ```
 
@@ -80,7 +82,11 @@ The foundational project in this portfolio models an **AI-Powered Marketing Auto
 
 ## Interactive Study Materials
 
-An interactive Arabic RTL reference guide covering theoretical foundations (TOGAF ADM, Zachman taxonomy, C4 model hierarchy, viewpoints vs. perspectives) is published via GitHub Pages:
+Interactive Arabic RTL reference guides covering theoretical foundations, architectural viewpoints, event-driven data pipelines, and production AI stacks are published via GitHub Pages:
 
-* Web Guide: [Aya-Aboulwafa.github.io/ai-architecture-portfolio](https://aya-aboulwafa.github.io/ai-architecture-portfolio/)
-* Local Markdown Notes: [study/session-1-notes.md](study/session-1-notes.md)
+* **Session 1 (Fundamentals, Frameworks & Case Study):**
+  * Web Guide: [Aya-Aboulwafa.github.io/ai-architecture-portfolio](https://aya-aboulwafa.github.io/ai-architecture-portfolio/)
+  * Local Markdown Notes: [study/session-1-notes.md](study/session-1-notes.md)
+* **Session 2 (Viewpoints, Event-Driven Data Platform & Production AI Stack):**
+  * Web Guide: [Aya-Aboulwafa.github.io/ai-architecture-portfolio/#session-2](https://aya-aboulwafa.github.io/ai-architecture-portfolio/#session-2)
+  * Local Markdown Notes: [study/session-2-notes.md](study/session-2-notes.md)
