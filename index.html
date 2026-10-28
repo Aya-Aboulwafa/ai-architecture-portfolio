@@ -809,24 +809,24 @@
       <!-- SESSION 2 MENU GROUP -->
       <div class="session-group open" id="menu-group-session-2">
         <button class="session-header-btn" onclick="handleSessionMenuClick('session-2')">
-          <span>📌 المحاضرة 2: الزوايا المعمارية ومنصة الأحداث (CDC, Kafka, CDP)</span>
+          <span>📌 Session 2: Viewpoints, Event-Driven Data &amp; Production AI</span>
           <span class="session-chevron" onclick="event.stopPropagation(); toggleSessionAccordion('session-2')" title="فتح / طي فهرس المحاضرة">▼</span>
         </button>
         <ul class="toc-list">
-          <li><a href="#s2-part-1" class="toc-part" onclick="goToSection('session-2', 's2-part-1'); return false;">📘 الجزء الأول: الزوايا والعقود</a></li>
+          <li><a href="#s2-part-1" class="toc-part" onclick="goToSection('session-2', 's2-part-1'); return false;">📘 الجزء الأول: Viewpoints, Policies &amp; Contracts</a></li>
           <li><a href="#s2-sec-1" onclick="goToSection('session-2', 's2-sec-1'); return false;">1. Context Viewpoint &amp; API Gateway</a></li>
-          <li><a href="#s2-sec-2" onclick="goToSection('session-2', 's2-sec-2'); return false;">2. Deployment &amp; Capacity Planning</a></li>
-          <li><a href="#s2-sec-3" onclick="goToSection('session-2', 's2-sec-3'); return false;">3. جدول الاتصالات (Connections Table)</a></li>
-          <li><a href="#s2-sec-4" onclick="goToSection('session-2', 's2-sec-4'); return false;">4. Data Policy &amp; API Contracts</a></li>
-          <li><a href="#s2-sec-5" onclick="goToSection('session-2', 's2-sec-5'); return false;">5. Information View: App DB vs. CDP</a></li>
+          <li><a href="#s2-sec-2" onclick="goToSection('session-2', 's2-sec-2'); return false;">2. Deployment Viewpoint &amp; Capacity Planning</a></li>
+          <li><a href="#s2-sec-3" onclick="goToSection('session-2', 's2-sec-3'); return false;">3. Connections Table (TBD)</a></li>
+          <li><a href="#s2-sec-4" onclick="goToSection('session-2', 's2-sec-4'); return false;">4. Data Policy &amp; API / Data Contract</a></li>
+          <li><a href="#s2-sec-5" onclick="goToSection('session-2', 's2-sec-5'); return false;">5. Information Viewpoint (App DB vs. CDP)</a></li>
           <li><a href="#s2-sec-6" onclick="goToSection('session-2', 's2-sec-6'); return false;">6. Operational, Observability &amp; Security</a></li>
-          <li><a href="#s2-part-2" class="toc-part" onclick="goToSection('session-2', 's2-part-2'); return false;">🧠 الجزء الثاني: لبنات الـ AI والداتا</a></li>
+          <li><a href="#s2-part-2" class="toc-part" onclick="goToSection('session-2', 's2-part-2'); return false;">🧠 الجزء الثاني: AI Building Blocks &amp; Data Pipeline</a></li>
           <li><a href="#s2-sec-blocks" onclick="goToSection('session-2', 's2-sec-blocks'); return false;">1. AI System Building Blocks</a></li>
-          <li><a href="#s2-sec-models" onclick="goToSection('session-2', 's2-sec-models'); return false;">2. اختيار الموديل والـ Benchmarking</a></li>
-          <li><a href="#s2-sec-pipeline" onclick="goToSection('session-2', 's2-sec-pipeline'); return false;">3. رحلة الداتا (CDC &rarr; Kafka &rarr; Qdrant)</a></li>
-          <li><a href="#s2-part-3" class="toc-part" onclick="goToSection('session-2', 's2-part-3'); return false;">🗺️ الجزء الثالث: المعمارية الكاملة</a></li>
-          <li><a href="#s2-sec-tobe" onclick="goToSection('session-2', 's2-sec-tobe'); return false;">1. شرح مخطط الـ To-Be Architecture</a></li>
-          <li><a href="#s2-sec-usecase" onclick="goToSection('session-2', 's2-sec-usecase'); return false;">2. تطبيق: Homepage Personalization</a></li>
+          <li><a href="#s2-sec-models" onclick="goToSection('session-2', 's2-sec-models'); return false;">2. Model Selection, Fine-Tuning &amp; Benchmarking</a></li>
+          <li><a href="#s2-sec-pipeline" onclick="goToSection('session-2', 's2-sec-pipeline'); return false;">3. Data Pipeline (CDC &rarr; Kafka &rarr; CDP &rarr; Qdrant)</a></li>
+          <li><a href="#s2-part-3" class="toc-part" onclick="goToSection('session-2', 's2-part-3'); return false;">🗺️ الجزء الثالث: To-Be Architecture &amp; Use Cases</a></li>
+          <li><a href="#s2-sec-tobe" onclick="goToSection('session-2', 's2-sec-tobe'); return false;">1. To-Be Architecture Diagram</a></li>
+          <li><a href="#s2-sec-usecase" onclick="goToSection('session-2', 's2-sec-usecase'); return false;">2. Functional Use Case: Homepage Personalization</a></li>
         </ul>
       </div>
 
@@ -842,7 +842,7 @@
           <span class="badge-tag">Session 1</span>
         </button>
         <button class="session-tab-pill" id="tab-btn-session-2" onclick="switchSession('session-2')">
-          <span>⚡ المحاضرة الثانية (Session 2): منصة الأحداث والـ Production AI</span>
+          <span>⚡ المحاضرة الثانية (Session 2): Viewpoints, Event-Driven Data &amp; Production AI</span>
           <span class="badge-tag">Session 2</span>
         </button>
       </div>
@@ -1392,11 +1392,11 @@ flowchart TB
 
         <!-- PART 1 -->
         <div id="s2-part-1" class="part-banner">
-          📘 الجزء الأول: تكملة الـ Viewpoints والـ Policies والـ Contracts
+          📘 الجزء الأول: Viewpoints, Policies &amp; Contracts
         </div>
 
         <section id="s2-sec-1">
-          <h2>🌐 1. زاوية السياق وبوابة النظام (<code>Context Viewpoint &amp; API Gateway</code>)</h2>
+          <h2>🌐 1. <code>Context Viewpoint &amp; API Gateway</code></h2>
           <p>لما بنبص للـ <code>System</code> من زاوية الـ <strong><code>Context Viewpoint</code></strong>:</p>
           <ul>
             <li><strong>الـ <code>API Gateway</code>:</strong>
@@ -1412,7 +1412,7 @@ flowchart TB
           </ul>
 
           <div class="diagram-box">
-            <div class="diagram-title">مخطط الـ Context Viewpoint والـ API Gateway</div>
+            <div class="diagram-title">Context Viewpoint &amp; API Gateway Diagram</div>
             <pre class="mermaid">
 flowchart LR
     User(["👤 Online User"]) --> Channels["📱 Channels\n(Mobile App / Website / WhatsApp)"]
@@ -1423,16 +1423,16 @@ flowchart LR
         </section>
 
         <section id="s2-sec-2">
-          <h2>🚀 2. زاوية النشر وتخطيط السعة (<code>Deployment Viewpoint &amp; Capacity Planning</code>)</h2>
+          <h2>🚀 2. <code>Deployment Viewpoint &amp; Capacity Planning</code></h2>
           <p>في الـ <strong><code>Deployment Viewpoint</code></strong> بنركّز على نقطتين أساسيتين:</p>
           <ul>
-            <li><strong><code>Capacity Planning</code>:</strong> تخطيط السعة وحساب الـ <code>System</code> هيحتاج Resources قد إيه بناءً على حجم الترافيك والشغل.</li>
+            <li><strong><code>Capacity Planning</code>:</strong> حساب الـ <code>System</code> هيحتاج <code>Resources</code> قد إيه بناءً على حجم الـ <code>Traffic</code> والشغل.</li>
             <li><strong><code>Minimum Hardware Components</code>:</strong> بنحدد إيه أقل مكونات <code>Hardware</code> مطلوبة عشان تشغّل الـ <code>System</code> والـ <code>AI Models</code> بتاعتنا من غير مشاكل (<code>CPU</code>, <code>RAM</code>, <code>Storage</code>, <code>GPUs</code>).</li>
           </ul>
         </section>
 
         <section id="s2-sec-3">
-          <h2>🔗 3. جدول الاتصالات (<code>Connections Table - TBD</code>)</h2>
+          <h2>🔗 3. <code>Connections Table (TBD)</code></h2>
           <div class="figure-card">
             <img src="assets/session-2/01-connections-table.png" alt="Connections Table" onclick="openLightbox(this.src)" />
             <div class="figure-caption">شكل الـ Connections Table من المحاضرة (اضغط لتكبير الصورة)</div>
@@ -1493,7 +1493,7 @@ flowchart LR
         </section>
 
         <section id="s2-sec-4">
-          <h2>📜 4. سياسة البيانات وعقود الـ API (<code>Data Policy &amp; API / Data Contract</code>)</h2>
+          <h2>📜 4. <code>Data Policy &amp; API / Data Contract</code></h2>
 
           <h3>أ) الـ <code>Data Policy</code></h3>
           <ul>
@@ -1506,7 +1506,7 @@ flowchart LR
           </ul>
 
           <div class="callout callout-tip">
-            <div class="callout-title">💡 نصيحة عملية في التوثيق</div>
+            <div class="callout-title">💡 نصيحة عملية في الـ Documentation</div>
             <p style="margin-bottom: 0;">
               بيبقى كويس جداً لو الـ <strong><code>API &amp; Data Contract</code></strong> موجود في <strong><code>Docs</code> منفصلة</strong> عن دوكيومنت الـ Architecture الأساسية، لأنها بطبيعتها <strong>متغيرة باستمرار أثناء العمل (<code>Iterative Work</code>)</strong>.
             </p>
@@ -1514,7 +1514,7 @@ flowchart LR
         </section>
 
         <section id="s2-sec-5">
-          <h2>🗄️ 5. زاوية البيانات: الـ <code>Application Database</code> مقابل الـ <code>CDP</code> (<code>Information Viewpoint</code>)</h2>
+          <h2>🗄️ 5. <code>Information Viewpoint (Application Database vs. CDP)</code></h2>
           <p>في الـ <strong><code>Information Viewpoint</code></strong>، مهم جداً نفرّق بين الـ <code>Application Database</code> العادية وبين الـ <strong><code>CDP (Customer Data Platform)</code></strong>:</p>
 
           <div class="table-wrapper">
@@ -1536,7 +1536,7 @@ flowchart LR
                   <td><strong>بتخزن إيه بالظبط؟</strong></td>
                   <td>بيبقى فيها الـ <strong><code>Schema</code></strong> والـ <strong><code>Functions</code></strong> الأساسية وبس.</td>
                   <td>
-                    • <strong>تراك <code>User Behavior</code>:</strong> معرفة الـ <code>Clicks</code> بتاعته، ووقته على كل <code>Page</code> قد إيه (<code>Dwell Time</code>)، والـ <code>Actions</code> بتاعته وعمل إيه على الـ <code>System</code> (<code>Carts</code>, <code>Orders</code>, <code>Logins</code>, <code>Feedback</code>).<br />
+                    • <strong><code>Track User Behavior</code>:</strong> معرفة الـ <code>Clicks</code> بتاعته، ووقته على كل <code>Page</code> قد إيه (<code>Dwell Time</code>)، والـ <code>Actions</code> بتاعته وعمل إيه على الـ <code>System</code> (<code>Carts</code>, <code>Orders</code>, <code>Logins</code>, <code>Feedback</code>).<br />
                     • <strong><code>Fetch User Info</code>:</strong> زي الـ <code>Name</code> - <code>Phone Number</code> - <code>IP</code> - <code>etc.</code>
                   </td>
                 </tr>
@@ -1556,7 +1556,7 @@ flowchart LR
         </section>
 
         <section id="s2-sec-6">
-          <h2>⚙️ 6. زاوية التشغيل، والـ <code>Observability</code>، والـ <code>Security Clearance</code></h2>
+          <h2>⚙️ 6. <code>Operational Viewpoint, Observability &amp; Security Clearance</code></h2>
 
           <h3>أ) الـ <code>Operational Viewpoint</code></h3>
           <p>هنا بنحط <strong>القواعد أو الأرقام القياسية اللي مينفعش يقل عنها كل <code>Release</code></strong>؛ فالـ <strong><code>Testing Team</code></strong> هيحتاج في كل <code>Release</code> يختبر الكلام ده أو يعمله <strong><code>Automation</code></strong> عشان يتأكد إن الـ <code>System</code> محافظ على كفاءته:</p>
@@ -1570,7 +1570,7 @@ flowchart LR
           <p>الـ <strong><code>Observability</code></strong> هي اللي بتساعدني أتأكد إن الـ <code>Application</code> والـ <code>Models</code> شغالين كويس في الـ <strong><code>Production</code></strong>، وبنستخدم فيها 4 أدوات أساسية:</p>
 
           <div class="diagram-box">
-            <div class="diagram-title">أدوات الـ Observability في الـ Production</div>
+            <div class="diagram-title">Production Observability Stack</div>
             <pre class="mermaid">
 flowchart TB
     Prod["🚀 Production Application & AI Models"] --> Prometheus["📈 Prometheus\nبيبعت Alerts لـ Channels مختلفة"]
@@ -1603,11 +1603,11 @@ flowchart TB
 
         <!-- PART 2 -->
         <div id="s2-part-2" class="part-banner">
-          🧠 الجزء الثاني: الـ AI System Building Blocks ورحلة الـ Data
+          🧠 الجزء الثاني: AI System Building Blocks &amp; Data Pipeline
         </div>
 
         <section id="s2-sec-blocks">
-          <h2>🧱 1. إيه الحاجات اللي لازم تكون موجودة في أي سيستم بيستخدم <code>AI Feature</code>؟ (<code>AI System Building Blocks</code>)</h2>
+          <h2>🧱 1. <code>AI System Building Blocks</code></h2>
           <div class="figure-card">
             <img src="assets/session-2/02-ai-system-building-blocks.png" alt="AI System Building Blocks" onclick="openLightbox(this.src)" />
             <div class="figure-caption">AI System Building Blocks (اضغط لتكبير الصورة)</div>
@@ -1623,7 +1623,7 @@ flowchart TB
         </section>
 
         <section id="s2-sec-models">
-          <h2>🎯 2. إزاي بنختار الـ <code>Model</code> ونعمل له <code>Benchmarking</code>؟</h2>
+          <h2>🎯 2. <code>Model Selection, Fine-Tuning &amp; Benchmarking</code></h2>
           <ul>
             <li><strong>اعمل <code>Search</code> على الـ <code>Model</code> متدرب على إيه أكتر:</strong> شوف الداتا اللي الموديل اتدرب عليها ونقاط قوته قبل ما تختاره.</li>
             <li><strong>الـ <code>Fine-tuning</code>:</strong> بعض الـ <strong><code>Business Domains</code></strong> بتكون متخصصة وممكن تحتاج <strong><code>Fine-tuning</code></strong> عشان تفهم مصطلحات وسياق الشغل ده.</li>
@@ -1638,9 +1638,9 @@ flowchart TB
 
           <h3>الـ <code>Dimensions</code> اللي بتحدد على أساسها الـ <code>Model</code>:</h3>
           <ol>
-            <li><strong>اللغة (<code>Language</code>):</strong> الموديل هيتعامل مع عربي ولا إنجليزي ولا لهجات معينة؟</li>
-            <li><strong>الـ <code>Business Domain</code> وبيئة التشغيل:</strong> هو هيشتغل أو هيـ <strong><code>Operate</code></strong> فين؟ في <strong>جهة حكومية (<code>Government</code>)</strong> ولا <strong>بنك (<code>Bank</code>)</strong> ولا إيه؟ (عشان ده بيحكم الـ <code>Security</code> والـ <code>Hosting</code>).</li>
-            <li><strong>الـ <code>Task</code> المطلوبة منه إيه:</strong> إيه المهمة اللي هينفذها بالظبط؟</li>
+            <li><strong><code>Language</code> (اللغة):</strong> الموديل هيتعامل مع عربي ولا إنجليزي ولا لهجات معينة؟</li>
+            <li><strong><code>Business Domain &amp; Environment</code>:</strong> هو هيشتغل أو هيـ <strong><code>Operate</code></strong> فين؟ في <strong>جهة حكومية (<code>Government</code>)</strong> ولا <strong>بنك (<code>Bank</code>)</strong> ولا إيه؟ (عشان ده بيحكم الـ <code>Security</code> والـ <code>Hosting</code>).</li>
+            <li><strong><code>Task</code>:</strong> إيه الـ <code>Task</code> المطلوبة منه بالظبط؟</li>
           </ol>
 
           <div class="callout callout-tip">
@@ -1652,10 +1652,10 @@ flowchart TB
         </section>
 
         <section id="s2-sec-pipeline">
-          <h2>🔄 3. رحلة الـ <code>Data</code> والـ <code>Embeddings</code> والـ <code>Vector DB</code> (<code>CDC</code> &rarr; <code>Kafka</code> &rarr; <code>CDP</code> &rarr; <code>Qdrant</code>)</h2>
+          <h2>🔄 3. <code>Data Pipeline: CDC, Kafka, CDP, Embedding Model &amp; Vector DB (Qdrant)</code></h2>
 
           <div class="diagram-box">
-            <div class="diagram-title">رحلة الـ Data من الـ Database لحد الـ CDP والـ Qdrant Vector DB</div>
+            <div class="diagram-title">Data Pipeline (CDC &rarr; Kafka &rarr; CDP &rarr; Airflow &rarr; Qdrant)</div>
             <pre class="mermaid">
 flowchart LR
     DB[("🗄️ Database\n(Application DB)")] -->|"Record by Record"| CDC["🔄 CDC Tool\n(Debezium)"]
@@ -1684,14 +1684,14 @@ flowchart LR
 
         <!-- PART 3 -->
         <div id="s2-part-3" class="part-banner">
-          🗺️ الجزء الثالث: شرح الـ To-Be Diagram وتطبيق الـ Functional Use Cases
+          🗺️ الجزء الثالث: To-Be Architecture &amp; Functional Use Cases
         </div>
 
         <section id="s2-sec-tobe">
-          <h2>🏗️ 1. شرح الـ <code>To-Be Architecture Diagram</code></h2>
+          <h2>🏗️ 1. <code>To-Be Architecture Diagram</code></h2>
           <div class="figure-card">
             <img src="assets/session-2/03-to-be-event-driven-architecture.png" alt="To-Be Event-Driven AI Architecture" onclick="openLightbox(this.src)" />
-            <div class="figure-caption">الـ To-Be Architecture Diagram (اضغط لتكبير الصورة)</div>
+            <div class="figure-caption">To-Be Architecture Diagram (اضغط لتكبير الصورة)</div>
           </div>
 
           <div class="callout callout-info">
@@ -1703,19 +1703,19 @@ flowchart LR
 
           <h3>تفاصيل المكونات اللي في الـ <code>Diagram</code>:</h3>
           <ul>
-            <li><strong>الواجهات والـ <code>Databases</code> الأساسية:</strong>
+            <li><strong><code>Channels &amp; Core Databases</code>:</strong>
               <ul>
                 <li>فيها الـ <code>Channels</code> بتاعة الـ <code>User</code> (<code>Mobile / Website</code> و <code>WhatsApp</code>)، وفيها الـ <strong><code>Dashboard</code></strong> بتاعة الـ <code>Customer Insights</code> مع الـ <code>Analytics Engine</code>.</li>
                 <li>وفيها الـ <code>E-commerce DB</code>، و <strong><code>Database Products</code></strong>، و <strong><code>Database Campaign</code></strong>.</li>
               </ul>
             </li>
-            <li><strong>مسار الـ <code>CDC &gt;&gt; Kafka &gt;&gt; Preprocessing &gt;&gt; CDP</code>:</strong>
+            <li><strong><code>CDC &gt;&gt; Kafka &gt;&gt; Preprocessing &gt;&gt; CDP</code>:</strong>
               <ul>
                 <li>الداتا بتخرج من الـ <code>E-commerce DB</code> بـ <code>Debezium (CDC)</code> وتروح على <strong><code>Kafka</code></strong>، وبعدما يتعمل لها <strong><code>Preprocessing</code></strong> بتروح على الـ <strong><code>CDP</code></strong>.</li>
                 <li>الـ <strong><code>CDP</code></strong> بياخد <code>Data</code> من كذا مكان (وكمان الـ <strong><code>Campaign</code></strong> بتودّي على الـ <code>CDP</code> كذلك)، فبالتالي أقدر أعمل منه <strong><code>Train</code></strong> للـ <code>Models</code> أو أياً كان اللي هحتاجه منه.</li>
               </ul>
             </li>
-            <li><strong>الـ <code>Airflow</code> والـ <code>Feature Store (Feast)</code> والـ <code>Flink</code>:</strong>
+            <li><strong><code>Airflow, Feature Store (Feast) &amp; Flink</code>:</strong>
               <ul>
                 <li>الـ <strong><code>Airflow</code></strong> هو <strong><code>DAG Orchestrator</code></strong>: بياخد الـ <code>Data</code> من الـ <strong><code>CDP</code></strong>، وبياخد الـ <strong><code>Output</code></strong> من الـ <strong><code>Model</code></strong> ويوديها للـ <strong><code>Feature Store (Feast)</code></strong>.</li>
                 <li>الـ <strong><code>DAG</code></strong> ممكن يشتغل في الـ <strong><code>Real-time</code> أو <code>Batch</code></strong> (كل دقيقة، أو كل ساعة، أو كذا).</li>
@@ -1723,7 +1723,7 @@ flowchart LR
                 <li>وفيه <strong><code>Flink</code></strong> بيراقب الـ <code>Abandoned Cart</code> (لو الـ <code>User</code> حط حاجة في الـ Cart ومعملش <code>Checkout</code> بعد كام دقيقة) فيبعت للـ <code>Recommendation Engine</code> عشان يبعت له <code>Notification</code> على الـ <code>WhatsApp</code>.</li>
               </ul>
             </li>
-            <li><strong>الـ <code>Vector DB (Qdrant)</code> والـ <code>AI/ML Layer</code> والـ <code>Cloud GPUs</code>:</strong>
+            <li><strong><code>Vector DB (Qdrant), AI/ML Layer &amp; Cloud GPUs</code>:</strong>
               <ul>
                 <li>الـ <code>Data</code> بتروح على الـ <strong><code>Vector DB (Qdrant)</code></strong> بعد ما يتعمل لها <strong><code>Embedding</code></strong>.</li>
                 <li>والـ <strong><code>Vector DB</code></strong> بتعمل <strong><code>Search</code></strong> وتدينا الـ <strong><code>Top-K</code></strong> (<code>~500 Candidates</code> يترتبوا بالـ <code>Online Features</code> اللي في الـ <code>Feature Store</code>).</li>
@@ -1734,11 +1734,11 @@ flowchart LR
         </section>
 
         <section id="s2-sec-usecase">
-          <h2>🎯 2. تطبيق على <code>Functional Use Case</code>: الـ <code>Homepage Personalization</code></h2>
+          <h2>🎯 2. <code>Functional Use Case: Homepage Personalization</code></h2>
           <p>إزاي بننفّذ الـ <strong><code>Homepage Personalization</code></strong> جوه الـ <code>Architecture</code> دي؟</p>
 
           <div class="diagram-box">
-            <div class="diagram-title">مخطط خطوات الـ Homepage Personalization</div>
+            <div class="diagram-title">Homepage Personalization Flow</div>
             <pre class="mermaid">
 sequenceDiagram
     autonumber
